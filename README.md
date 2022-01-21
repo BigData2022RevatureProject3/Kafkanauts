@@ -1,5 +1,5 @@
 # Kafkanauts
-###Requirements:
+### Requirements:
 We represent one of two teams of Scala developers. Both teams will create data, send it to their other team, and analyze what they receive.
 This requires us to:
 - Produce data representing orders on an E-Commerce application by using Kafka
