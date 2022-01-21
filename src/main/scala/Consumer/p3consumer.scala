@@ -4,7 +4,7 @@ import java.util.{Collections, Properties}
 import java.util.regex.Pattern
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import scala.collection.JavaConverters._
-object KafkaConsumerSubscribeApp extends App {
+object p3consumer extends App {
 
   val props:Properties = new Properties()
   props.put("group.id", "test")
