@@ -16,5 +16,5 @@ case class ProductOrder(
    ecommerce_website_name: String,
    payment_txn_id: Long,
    payment_txn_success: String,
-   failure_Reason: String
+   failure_reason: String
    )
