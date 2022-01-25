@@ -1,4 +1,4 @@
-package Consumer
+package com.Consumer
 
 import java.util.{Collections, Properties}
 import java.util.regex.Pattern
