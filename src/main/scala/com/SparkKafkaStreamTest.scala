@@ -25,7 +25,7 @@ object SparkKafkaStreamTest extends App {
     "org.apache.kafka.common.serialization.StringSerializer")
   props.put("acks","all")
   val producer = new KafkaProducer[String, String](props)
-  val topic = "testParallelization"
+  val topic = "text_topic"
   try {
     val collStrings = coll.collect.map(_.getInt(2)).mkString(" ")
     val record = new ProducerRecord[String, String](topic, collStrings, collStrings)
