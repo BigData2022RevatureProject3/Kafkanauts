@@ -32,7 +32,6 @@ Calloway
 Robertson
 Tishomingo
 Merrimack
-Out of NH
 Ulster
 Georgetown
 McMinn
@@ -54,7 +53,6 @@ Goochland
 Braxton
 Monroe
 Litchfield
-Out of DE
 Dent
 Keith
 Venango
@@ -92,7 +90,6 @@ McCook
 Deaf Smith
 Millard
 Dane
-Out of CT
 Walton
 Ohio
 Lares
@@ -144,7 +141,6 @@ Garvin
 Piute
 Dallas
 Concordia
-Out of MN
 Dawes
 Grand Isle
 Yavapai
@@ -182,7 +178,6 @@ Muskingum
 Clatsop
 Sequatchie
 Jim Hogg
-Out of MD
 Huron
 Fillmore
 Granite
@@ -209,7 +204,6 @@ Owyhee
 Christian
 Grayson
 Houghton
-Out of MI
 Ray
 Yancey
 Prince George
@@ -246,7 +240,6 @@ Falls
 Accomack
 Orange
 Dearborn
-Out of LA
 Ste. Genevieve
 Luna
 Hocking
@@ -267,7 +260,6 @@ Juana Diaz
 Hampton
 Goliad
 Gregg
-Out of TX
 Covington
 Los Angeles
 Peach
@@ -319,7 +311,6 @@ Emanuel
 Haralson
 Boundary
 Doniphan
-Out of KS
 Dukes
 Wallowa
 Cayey
@@ -371,7 +362,6 @@ Kaufman
 Radford
 Mohave
 Calaveras
-Out of CA
 Gilmer
 Webster
 Pendleton
@@ -423,7 +413,6 @@ Pipestone
 Naguabo
 Coryell
 Chesapeake
-Out of DC
 Dubois
 Starke
 Tunica
@@ -537,7 +526,6 @@ Susquehanna
 Catano
 Codington
 Live Oak
-Out of VT
 Sullivan
 Winneshiek
 Itasca
@@ -581,8 +569,6 @@ Fannin
 Heard
 Finney
 Kennebec
-Out of NM
-Out of NC
 Stokes
 Sargent
 Klamath
@@ -616,7 +602,6 @@ Brule
 Chugach
 Logan
 Martin
-Out of MA
 Newaygo
 Yellowstone
 Brazoria
@@ -636,7 +621,6 @@ Roane
 Nolan
 Elmore
 Kusilvak
-Out of AK
 Dolores
 Rabun
 Jerome
@@ -671,7 +655,6 @@ Licking
 El Paso
 Habersham
 Iberia
-Out of MO
 Ritchie
 Talbot
 Wolfe
@@ -692,7 +675,6 @@ Pennington
 Ashtabula
 Highland
 Newport News
-Out of WI
 Natrona
 Kalawao
 Gogebic
@@ -768,7 +750,6 @@ Canovanas
 Bosque
 Lubbock
 Scurry
-Out of IN
 Lyon
 Riley
 Pontotoc
@@ -817,14 +798,12 @@ Piatt
 Gibson
 Gentry
 Toole
-Out of NE
 Deschutes
 Dyer
 Buckingham
 Colusa
 Dawson
 Jasper
-Out of IA
 Stafford
 Mecklenburg
 New Hanover
@@ -865,7 +844,6 @@ Colleton
 Borden
 Nome
 Judith Basin
-Out of MT
 Lancaster
 Newberry
 St. Johns
@@ -900,7 +878,6 @@ Mineral
 Piscataquis
 Burt
 Bernalillo
-Out of OH
 Blair
 San Lorenzo
 Newport
@@ -917,7 +894,6 @@ Ballard
 Green
 Dorchester
 Jayuya
-Out of RI
 Barnwell
 Albemarle
 Yakima
@@ -930,11 +906,9 @@ Charles City
 Grand
 Las Animas
 Hendricks
-Out of KY
 Kalamazoo
 Luquillo
 Childress
-Out of UT
 Burnett
 Pickens
 Lonoke
@@ -966,7 +940,6 @@ Wibaux
 Bergen
 Rogers
 Culebra
-Out of SC
 Llano
 Maricopa
 Summit
@@ -978,7 +951,6 @@ Benzie
 Goodhue
 Dona Ana
 Kingfisher
-Out of OR
 Caledonia
 Whitman
 Cleburne
@@ -991,7 +963,6 @@ Hot Springs
 Etowah
 Macon
 Baxter
-Out of FL
 Bulloch
 Effingham
 Cassia
@@ -1031,7 +1002,6 @@ Onondaga
 Dunn
 Kimble
 Arlington
-Out of AL
 Hot Spring
 Little River
 Pope
@@ -1083,7 +1053,6 @@ Issaquena
 Maricao
 Orocovis
 Travis
-Out of AR
 Hinsdale
 Honolulu
 Vernon
@@ -1147,7 +1116,6 @@ Schoharie
 Wasco
 Moca
 Bastrop
-Out of WV
 Kent
 Wabash
 Bourbon
@@ -1229,7 +1197,6 @@ Gem
 Grenada
 Benson
 Hays
-Out of VA
 Mono
 Otero
 San Miguel
@@ -1280,7 +1247,6 @@ Will
 Assumption
 Jefferson Davis
 Norfolk
-Out of MS
 Yalobusha
 Reynolds
 Wyoming
@@ -1306,7 +1272,6 @@ Cortland
 Augusta
 Conecuh
 Cross
-Out of CO
 Wakulla
 Red Lake
 Noxubee
@@ -1321,7 +1286,6 @@ Humphreys
 Broadwater
 Lander
 Mora
-Out of PA
 Dickenson
 Outagamie
 New Haven
@@ -1416,9 +1380,7 @@ Pettis
 Lewis and Clark
 Missoula
 Churchill
-Out of NV
 Pamlico
-Out of OK
 Patillas
 Hanson
 Bledsoe
@@ -1462,7 +1424,6 @@ Lemhi
 Marquette
 Menominee
 Mayaguez
-Out of TN
 Rhea
 Refugio
 Crowley
@@ -1540,7 +1501,6 @@ Boone
 Mariposa
 Park
 Merrick
-Out of SD
 Crane
 Lamb
 Central Utah
@@ -1594,12 +1554,10 @@ Des Moines
 Lafourche
 Bolivar
 Frontier
-Out of NY
 Catawba
 Crook
 Dimmit
 Kinney
-Out of WA
 Geneva
 Carroll
 Mississippi
@@ -1621,7 +1579,6 @@ Ector
 Gaines
 Spotsylvania
 Virginia Beach
-Out of ID
 Jo Daviess
 Baltimore City
 Schenectady
@@ -1686,7 +1643,6 @@ Currituck
 Roger Mills
 Indiana
 Florida
-Out of PR
 Fairfax
 Flagler
 Buena Vista
@@ -1701,7 +1657,6 @@ Obion
 King and Queen
 Saguache
 Liberty
-Out of GA
 Kankakee
 Pocahontas
 Chase
@@ -1710,7 +1665,6 @@ Orleans
 St. Martin
 Tyrrell
 Griggs
-Out of IL
 De Soto
 Prentiss
 Clearfield
@@ -1720,14 +1674,12 @@ Shenandoah
 Manitowoc
 Sheboygan
 Washburn
-Out of WY
 Shasta
 Charlton
 Stark
 Labette
 Evangeline
 Aroostook
-Out of ME
 Mille Lacs
 Arroyo
 Abbeville
@@ -1766,7 +1718,6 @@ Seminole
 Chatham
 Livingston
 Oswego
-Out of ND
 Major
 Lajas
 Providence
@@ -1846,7 +1797,6 @@ Rooks
 Hillsdale
 Ogemaw
 Scotland
-Out of NJ
 Jefferson
 Lee
 Decatur
@@ -1930,7 +1880,6 @@ Oglala Lakota
 Bandera
 Price
 Uinta
-Out of AZ
 Placer
 Osage
 Carter
@@ -1967,7 +1916,6 @@ Lycoming
 Cabo Rojo
 Ozaukee
 Hart
-Out of HI
 Pointe Coupee
 Berkshire
 McKenzie
