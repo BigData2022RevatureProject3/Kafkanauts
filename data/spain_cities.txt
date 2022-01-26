@@ -3,44 +3,42 @@ Barcelona
 Valencia
 Seville
 Bilbao
-Málaga
-Oviedo–Gijón–Avilés
-
-Alicante–Elche
+MÃ¡laga
+Oviedoâ€“GijÃ³nâ€“AvilÃ©s
+Alicanteâ€“Elche
 Las Palmas
 Zaragoza
-Murcia–Orihuela
-Santa Cruz de Tenerife–La Laguna
+Murciaâ€“Orihuela
+Santa Cruz de Tenerifeâ€“La Laguna
 Granada
 Palma
 Vigo
 Cartagena
-
-Cádiz
-San Sebastián
-A Coruña–Oleiros–Arteixo
+CÃ¡diz
+San SebastiÃ¡n
+A CoruÃ±aâ€“Oleirosâ€“Arteixo
 Valladolid
 Tarragona
-Córdoba
+CÃ³rdoba
 Pamplona
-Castellón de la Plana
-Santander–Torrelavega
-Alzira–Xàtiva
+CastellÃ³n de la Plana
+Santanderâ€“Torrelavega
+Alziraâ€“XÃ tiva
 Vitoria-Gasteiz
-Algeciras–La Línea
+Algecirasâ€“La LÃ­nea
 Huelva
-Almería
+AlmerÃ­a
 Salamanca
 Jerez de la Frontera
-León
+LeÃ³n
 Albacete
-Jaén–Martos
+JaÃ©nâ€“Martos
 Burgos
-Logroño
-Ferrol–Narón
+LogroÃ±o
+Ferrolâ€“NarÃ³n
 Lleida
-Girona–Salt
-Pontevedra–Marín
+Gironaâ€“Salt
+Pontevedraâ€“MarÃ­n
 Badajoz
 La Orotava
 Santiago de Compostela
@@ -51,7 +49,7 @@ Blanes
 Manresa
 Marbella
 Torrelavega
-Vic–Manlleu
+Vicâ€“Manlleu
 Guadalajara
 Lugo
 Palencia

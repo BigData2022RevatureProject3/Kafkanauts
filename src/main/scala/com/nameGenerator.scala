@@ -8,6 +8,7 @@ class nameGenerator{
   private final val fCnFile = "data/first_name_chinese(given names).txt"
   private final val lCnFile = "data/last_name_chinese(family name).txt"
   private final val fEuFile = "data/first_name_european.txt"
+  private final val ran = scala.util.Random
 
   protected def genAmericanName():String ={
     val firstNameList = new ListBuffer[String]
@@ -18,7 +19,6 @@ class nameGenerator{
     for (line <- Source.fromFile(lUsFile).getLines) {
       val name = line.toLowerCase().split(",")
       lastNameList += name(1).capitalize}
-    val ran = scala.util.Random
     val fName = firstNameList(ran.nextInt(firstNameList.length))
     val lName = lastNameList(ran.nextInt(lastNameList.length))
     val name = fName + " " + lName
@@ -30,7 +30,6 @@ class nameGenerator{
     val lastNameList = new ListBuffer[String]
     for (line <- Source.fromFile(fCnFile).getLines) {firstNameList += line}
     for (line <- Source.fromFile(lCnFile).getLines) {lastNameList += line}
-    val ran = scala.util.Random
     val fName = firstNameList(ran.nextInt(firstNameList.length))
     val lName = lastNameList(ran.nextInt(lastNameList.length))
     val name = fName + lName
@@ -44,11 +43,10 @@ class nameGenerator{
     for (line <- Source.fromFile(lUsFile).getLines) {
       val name = line.toLowerCase().split(",")
       lastNameList += name(1).capitalize}
-    val ran = scala.util.Random
     val fName = firstNameList(ran.nextInt(firstNameList.length))
     val lName = lastNameList(ran.nextInt(lastNameList.length))
     val name = fName +" " + lName
     name
   }
-
+ println(genEuropeanName())
 }
