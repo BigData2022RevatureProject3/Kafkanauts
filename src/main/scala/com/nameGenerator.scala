@@ -2,8 +2,8 @@ package com
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
 object nameGenerator extends App{
-  val firstFile = "data/american_common_female_first_name.txt"
-  val lastFile = "data/american_common_surnames.txt"
+  val firstFile = "data/first_name_american_common_female.txt"
+  val lastFile = "data/last_name_american_common.txt"
   val firstNameList = new ListBuffer[String]
   val lastNameList = new ListBuffer[String]
   for (line <- Source.fromFile(firstFile).getLines) {
