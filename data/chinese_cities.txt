@@ -549,7 +549,7 @@ Jiexiu
 Jincheng
 Jinzhong
 Linfen
-Lüliang
+LÃ¼liang
 Shuozhou
 Taiyuan
 Xiaoyi
@@ -600,7 +600,7 @@ Nagqu
 Nyingchi
 Qamdo
 Shannan
-Xigazê
+XigazÃª
 Aksu
 Alashankou
 Altay
@@ -627,7 +627,7 @@ Tacheng
 Tiemenguan
 Tumxuk
 Turpan
-Ürümqi
+ÃœrÃ¼mqi
 Wujiaqu
 Wusu
 Yining
