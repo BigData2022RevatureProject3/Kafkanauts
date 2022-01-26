@@ -2,16 +2,20 @@ package com
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
 class nameGenerator{
+  
+  private final val fUsFile = "data/first_name_american_common_female.txt"
+  private final val lUsFile = "data/last_name_american_common.txt"
+  private final val fCnFile = "data/first_name_chinese(given names).txt"
+  private final val lCnFile = "data/last_name_chinese(family name).txt"
+  private final val fEuFile = "data/first_name_european.txt"
 
-  def genAmericanName():String ={
-    val firstFile = "data/first_name_american_common_female.txt"
-    val lastFile = "data/last_name_american_common.txt"
+  protected def genAmericanName():String ={
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
-    for (line <- Source.fromFile(firstFile).getLines) {
+    for (line <- Source.fromFile(fUsFile).getLines) {
       val name = line.toLowerCase().split(",")
       firstNameList += name(1).capitalize}
-    for (line <- Source.fromFile(lastFile).getLines) {
+    for (line <- Source.fromFile(lUsFile).getLines) {
       val name = line.toLowerCase().split(",")
       lastNameList += name(1).capitalize}
     val ran = scala.util.Random
@@ -21,13 +25,11 @@ class nameGenerator{
     name
   }
 
-  def genChineseName():String={
-    val firstFile = "data/first_name_chinese(given names).txt"
-    val lastFile = "data/last_name_chinese(family name).txt"
+  protected def genChineseName():String={
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
-    for (line <- Source.fromFile(firstFile).getLines) {firstNameList += line}
-    for (line <- Source.fromFile(lastFile).getLines) {lastNameList += line}
+    for (line <- Source.fromFile(fCnFile).getLines) {firstNameList += line}
+    for (line <- Source.fromFile(lCnFile).getLines) {lastNameList += line}
     val ran = scala.util.Random
     val fName = firstNameList(ran.nextInt(firstNameList.length))
     val lName = lastNameList(ran.nextInt(lastNameList.length))
@@ -35,13 +37,11 @@ class nameGenerator{
     name
   }
 
-  def genEuropeanName():String={
-    val firstFile = "data/first_name_european.txt"
-    val lastFile = "data/last_name_american_common.txt"
+  protected def genEuropeanName():String={
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
-    for (line <- Source.fromFile(firstFile).getLines) {firstNameList += line}
-    for (line <- Source.fromFile(lastFile).getLines) {
+    for (line <- Source.fromFile(fEuFile).getLines) {firstNameList += line}
+    for (line <- Source.fromFile(lUsFile).getLines) {
       val name = line.toLowerCase().split(",")
       lastNameList += name(1).capitalize}
     val ran = scala.util.Random
