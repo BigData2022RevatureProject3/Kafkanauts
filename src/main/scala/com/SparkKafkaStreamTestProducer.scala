@@ -62,7 +62,9 @@ object SparkKafkaStreamTestProducer extends App {
   try {
     //val collStrings = col1.collect.map(_.getInt(1)).mkString(" ")
     for (i <- 0 to 999) {
-      val col3 = spark.sparkContext.parallelize(List((firstNameList(i) + " " + lastNameList(i)))).toDF()
+      val orderString = i.toString + "," + i.toString + "," + firstNameList(i) + " " + lastNameList(i) + "," + "5," + "Tacos," + "Food," + "card," + "10," + "4.99," + "2022-01-26 11:44," + "USA," +
+        "San Jose," + "welovetacos.com," + i.toString + "," + "Y," + "null"
+      val col3 = spark.sparkContext.parallelize(List((orderString))).toDF()
       val collStrings = col3.collect.map(_.getString(0)).mkString(" ")
       val record = new ProducerRecord[String, String](topic, collStrings, collStrings)
       val metadata = producer.send(record)
