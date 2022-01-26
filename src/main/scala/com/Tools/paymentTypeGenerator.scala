@@ -1,4 +1,4 @@
-package com
+package com.Tools
 
 class paymentTypeGenerator{
   def genPaymentType():String={

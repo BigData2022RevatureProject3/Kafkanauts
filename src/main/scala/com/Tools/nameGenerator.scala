@@ -1,4 +1,4 @@
-package com
+package com.Tools
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
 class nameGenerator{
@@ -48,5 +48,5 @@ class nameGenerator{
     val name = fName +" " + lName
     name
   }
- println(genEuropeanName())
+
 }
