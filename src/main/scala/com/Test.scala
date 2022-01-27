@@ -1,7 +1,9 @@
 package com
 
+import com.Tools.POCityGenerator
+
 object Test {
   def main(args: Array[String]): Unit = {
-    println("Hello world")
+    print(POCityGenerator.genCity("123","Spain"))
   }
 }
