@@ -35,7 +35,7 @@ object trashMaker5000 extends App {
 //  makeTrash("first_name_american_common_male.txt",100)
 //  makeTrash("ecommerce_cleaned_teddy.txt",500)
 //  DON'T WORK:
-//  makeTrash("ecommerce_cleaned.csv",500) Problem: seems to be a problem with the formatting of the CSV itself. Teddy's cleaned version works.
+//  makeTrash("ecommerce_data.csv",500) Problem: seems to be a problem with the formatting of the CSV itself. Teddy's cleaned version works.
   
 
 }
