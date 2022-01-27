@@ -16,7 +16,7 @@ class cityCountryGenerator{
     val country = countries(0)
     for (line <- Source.fromFile(usCityFile).getLines) {
       cities += line }
-    val result = cities(ran.nextInt(cities.length+1)) +","+ country
+    val result = cities(ran.nextInt(cities.length)) +","+ country
     result
   }
 
@@ -25,7 +25,7 @@ class cityCountryGenerator{
     val country = countries(1)
     for (line <- Source.fromFile(cnCityFile).getLines) {
       cities += line }
-    val result = cities(ran.nextInt(cities.length+1)) +","+ country
+    val result = cities(ran.nextInt(cities.length)) +","+ country
     result
   }
 
@@ -34,7 +34,7 @@ class cityCountryGenerator{
     val country = countries(2)
     for (line <- Source.fromFile(spCityFile).getLines) {
       cities += line }
-    val result = cities(ran.nextInt(cities.length)+1) +","+ country
+    val result = cities(ran.nextInt(cities.length)) +","+ country
     result
   }
 

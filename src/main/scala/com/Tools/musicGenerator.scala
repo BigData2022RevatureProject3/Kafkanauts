@@ -8,7 +8,7 @@ class musicGenerator{
   def genMusic():String={
     val lb = new ListBuffer[String]
     for(line <- Source.fromFile(musicFile).getLines.drop(1)){lb += line}
-    val music = lb(ran.nextInt(lb.length+1)).split("""\|""")
+    val music = lb(ran.nextInt(lb.length)).split("""\|""")
     val price = Math.floor(music(2).toDouble/10000*100)/100
     music(0)+"*"+music(1)+"*"+price
   }
