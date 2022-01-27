@@ -1,7 +1,7 @@
 package com.Tools
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
-class nameGenerator{
+class idNameGenerator{
   
   private final val fUsFile = "data/first_name_american_common_female.txt"
   private final val lUsFile = "data/last_name_american_common.txt"
@@ -22,7 +22,7 @@ class nameGenerator{
     val fName = firstNameList(ran.nextInt(firstNameList.length))
     val lName = lastNameList(ran.nextInt(lastNameList.length))
     val name = fName + " " + lName
-    name
+    name.hashCode()+","+name
   }
 
   protected def genChineseName():String={
@@ -33,7 +33,7 @@ class nameGenerator{
     val fName = firstNameList(ran.nextInt(firstNameList.length))
     val lName = lastNameList(ran.nextInt(lastNameList.length))
     val name = fName + lName
-    name
+    name.hashCode()+","+name
   }
 
   protected def genEuropeanName():String={
@@ -46,7 +46,6 @@ class nameGenerator{
     val fName = firstNameList(ran.nextInt(firstNameList.length))
     val lName = lastNameList(ran.nextInt(lastNameList.length))
     val name = fName +" " + lName
-    name
+    name.hashCode()+","+name
   }
-
 }
