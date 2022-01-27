@@ -2,6 +2,7 @@ package com.Producer
 
 import java.time.{LocalDate, LocalDateTime}
 import java.time.temporal.ChronoUnit
+import scala.io.StdIn
 
 /**
  * This object deals with creating a burst of orders for blocks of time,
@@ -11,15 +12,23 @@ import java.time.temporal.ChronoUnit
  */
 object ProducerPipeline {
   def main(args: Array[String]): Unit = {
-//    val date: LocalDateTime = LocalDateTime.parse(LocalDate.now().toString)
-//    println(date)
-//
-//    val newDate = date.plus(20, ChronoUnit.MINUTES)
-//
-//    println(newDate)
+    //TODO: For David to look at
+    print("Insert desired date: ")
+    val input = StdIn.readLine()
+    val Date = """^(\d{4})-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])""".r
 
-    val nowTime = LocalDate.now()
-    nowTime.plus(15L, ChronoUnit.MINUTES)
+    val startDay = input match {
+      case Date(year, month, day) => LocalDate.of(year.toInt, month.toInt, day.toInt).atStartOfDay()
+      case _ => println("Invalid Input, Please follow format YYYY-MM-DD")
+    }
+
+    println("start datetime is: " + startDay)
+
+
+    val nowTime = LocalDate.now().atTime(0,0,0)
+    val nowTime1 = LocalDate.now().atStartOfDay()
+    println(nowTime.plus(15, ChronoUnit.MINUTES))
+    println(nowTime1.plus(15, ChronoUnit.MINUTES))
 
     val dateTime = LocalDateTime.now()
     val datePlus = dateTime.plus(15, ChronoUnit.MINUTES)
