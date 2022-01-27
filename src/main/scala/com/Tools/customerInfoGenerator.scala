@@ -1,7 +1,7 @@
 package com.Tools
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
-class customerInfoGenerator{
+object customerInfoGenerator{
   private final val fUsFile = "data/first_name_american_common_female.txt"
   private final val lUsFile = "data/last_name_american_common.txt"
   private final val fCnFile = "data/first_name_chinese(given names).txt"
@@ -31,7 +31,7 @@ class customerInfoGenerator{
     val country = countries(0)
     for (line <- Source.fromFile(usCityFile).getLines) {
       cities += line }
-    Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length+1)) +","+ country
+    Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
   }
 
   protected def genCNCustomer():String={
@@ -46,7 +46,7 @@ class customerInfoGenerator{
     val country = countries(1)
     for (line <- Source.fromFile(cnCityFile).getLines) {
       cities += line }
-    Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length+1)) +","+ country
+    Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
   }
 
   protected def genEUCustomer():String={
@@ -63,6 +63,6 @@ class customerInfoGenerator{
     val country = countries(2)
     for (line <- Source.fromFile(spCityFile).getLines) {
       cities += line }
-    Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)+1) +","+ country
+    Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
   }
 }

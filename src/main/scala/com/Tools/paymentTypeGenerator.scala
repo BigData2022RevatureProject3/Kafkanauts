@@ -1,10 +1,9 @@
 package com.Tools
 
-class paymentTypeGenerator{
+object paymentTypeGenerator{
   def genPaymentType():String={
-    val pTypes = List("card","Internet Banking","UPI","Wallet")
+    val pTypes = List("Card","Internet Banking","UPI","Wallet")
     val ran = scala.util.Random.nextInt(4)
     pTypes(ran)
   }
-
 }
