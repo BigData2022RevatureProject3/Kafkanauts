@@ -1,7 +1,7 @@
 package com.Tools
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
-class failureReasonGenerator{
+object failureReasonGenerator{
   private final val reasoncard = "clean_data/transaction_failure_reasons_card.txt"
   private final val reasonother = "clean_data/transaction_failure_reasons_other.txt"
   private final val lbcard = new ListBuffer[String]
@@ -11,9 +11,8 @@ class failureReasonGenerator{
   for(line <- Source.fromFile(reasonother).getLines()){lbother += line}
   def genFailReason(payType:String,isFailed:String):String= {
     if (isFailed == "Y") {
-      if (payType == "card") {lbcard(ran.nextInt(lbcard.length))
+      if (payType == "Card") {lbcard(ran.nextInt(lbcard.length))
       }else{lbother(ran.nextInt(lbother.length))}}
     else {"Payment Was Success"}
   }
-
 }

@@ -1,7 +1,7 @@
 package com.Tools
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
-class customerInfoGenerator{
+object customerInfoGenerator{
   private final val fUsFile = "data/first_name_american_common_female.txt"
   private final val lUsFile = "data/last_name_american_common.txt"
   private final val fCnFile = "data/first_name_chinese(given names).txt"
@@ -65,5 +65,4 @@ class customerInfoGenerator{
       cities += line }
     Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
   }
-
 }

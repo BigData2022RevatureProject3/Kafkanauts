@@ -2,7 +2,7 @@ package com.Tools
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
 
-class cityCountryGenerator{
+object cityCountryGenerator{
   private final val usCityFile = "data/american_cities.txt"
   private final val cnCityFile = "data/chinese_cities.txt"
   private final val spCityFile = "data/spain_cities.txt"
