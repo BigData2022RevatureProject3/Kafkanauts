@@ -1,7 +1,7 @@
 package com.Tools
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
-object customerInfoGenerator extends App{
+object customerInfoGenerator{
 
   //Each function return a string separated by commas
   //In the follow respective order:
@@ -70,6 +70,4 @@ object customerInfoGenerator extends App{
       cities += line }
     orderId +","+Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
   }
-
-  print(genEUCustomer("12345"))
 }
