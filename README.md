@@ -1,5 +1,5 @@
 # Capstone Project
-In this document, all rules,and requirements on how to proceed with defining and implementing the Revature capstone project are defined.In this project the Cohort will be divided into two teams. Each team will begin by creating a data producer that will generate real time data simulating orders from an E-Commerce application.Each team will then consume the output data from the other team through Kafka and run additional processing through Spark.The finalgoal will be to decipher the algorithms used to generate data from the other team based on the output.
+In this document, all rules,and requirements on how to proceed with defining and implementing the Revature capstone project are defined. In this project the Cohort will be divided into two teams. Each team will begin by creating a data producer that will generate real time data simulating orders from an E-Commerce application. Each team will then consume the output data from the other team through Kafka and run additional processing through Spark.The finalgoal will be to decipher the algorithms used to generate data from the other team based on the output.
 
 ## Tasks
 - Create a producer program that will ingest data to a Kafka Topic.
@@ -16,7 +16,7 @@ In this document, all rules,and requirements on how to proceed with defining and
   - Apply the above-mentioned schemato the dataframesand print the schema.
   - Apply Exception Handling wherever applicable for a stable application.
   - From the consumer program:
-    - Collect the data and manipulate/aggregateit to best allow you to predict what logic is being used to produce the data.
+    - Collect the data and manipulate/aggregate it to best allow you to predict what logic is being used to produce the data.
   - Display a visualization of all above outputs in Zeppelin
   
 ## Fields(Schema)
