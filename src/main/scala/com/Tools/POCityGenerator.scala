@@ -2,7 +2,7 @@ package com.Tools
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
 
-object cityCountryGenerator{
+object POCityGenerator{
   private final val usCityFile = "data/american_cities.txt"
   private final val cnCityFile = "data/chinese_cities.txt"
   private final val spCityFile = "data/spain_cities.txt"
@@ -10,32 +10,31 @@ object cityCountryGenerator{
   private final val ran = scala.util.Random
   for (line <- Source.fromFile("data/countries.txt").getLines) {
     countries += line }
-
-  protected def genUS():String={
+  private def genUS():String={
     val cities = new ListBuffer[String]
-    val country = countries(0)
     for (line <- Source.fromFile(usCityFile).getLines) {
       cities += line }
-    val result = cities(ran.nextInt(cities.length)) +","+ country
-    result
+    cities(ran.nextInt(cities.length))
   }
-
-  protected def genCN():String={
+  private def genCN():String={
     val cities = new ListBuffer[String]
-    val country = countries(1)
     for (line <- Source.fromFile(cnCityFile).getLines) {
       cities += line }
-    val result = cities(ran.nextInt(cities.length)) +","+ country
-    result
+    cities(ran.nextInt(cities.length))
   }
-
-  protected def genSP():String={
+  private def genSP():String={
     val cities = new ListBuffer[String]
-    val country = countries(2)
     for (line <- Source.fromFile(spCityFile).getLines) {
       cities += line }
-    val result = cities(ran.nextInt(cities.length)) +","+ country
-    result
+    cities(ran.nextInt(cities.length))
   }
 
+  def genCity(productOrder:String, country:String):String={
+    country match{
+      case "United States" => return productOrder +","+genUS()
+      case "China" => return productOrder +","+genCN()
+      case "Spain" => return productOrder +","+genSP()
+      case _ => return "Data For This Country Does Not Exist"
+    }
+  }
 }
