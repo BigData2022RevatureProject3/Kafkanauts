@@ -1,0 +1,4 @@
+card rejected
+card expired
+transaction rejected by card issuer
+exceeded card credit limits

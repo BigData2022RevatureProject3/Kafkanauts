@@ -1,0 +1,8 @@
+server or network failure
+insufficient funds
+other
+insufficient security guarantees
+unknown
+fraud suspected
+payment method not supported
+
