@@ -1,4 +1,4 @@
-# Capstone Project
+# Project 3
 In this document, all rules,and requirements on how to proceed with defining and implementing the Revature capstone project are defined. In this project the Cohort will be divided into two teams. Each team will begin by creating a data producer that will generate real time data simulating orders from an E-Commerce application. Each team will then consume the output data from the other team through Kafka and run additional processing through Spark.The finalgoal will be to decipher the algorithms used to generate data from the other team based on the output.
 
 ## Tasks
