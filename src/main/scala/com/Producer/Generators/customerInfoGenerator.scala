@@ -24,6 +24,7 @@ object customerInfoGenerator {
   for (line <- Source.fromFile("data/countries.txt").getLines) {
     countries += line
   }
+
   def generateCustomer(po:ProductOrder):ProductOrder={
     if(po.product_category == "gas"){
       //Gas to be added
