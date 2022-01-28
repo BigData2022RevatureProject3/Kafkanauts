@@ -43,6 +43,15 @@ object DateHelper {
     localDateTime.toInstant(ZoneOffset.UTC).toEpochMilli
   }
 
+  def getDayOfWeek(localDateTime: LocalDateTime): Int = {
+    localDateTime.getDayOfWeek.getValue
+  }
+
+
+  def print(localDateTime: LocalDateTime): String = {
+    localDateTime.format(DateTimeFormatter.ISO_DATE_TIME)
+  }
+
   //Main method used to test Proof of Concept
   def main(args: Array[String]): Unit = {
     val pass1: String = "2021-02-19 11:12:12"
