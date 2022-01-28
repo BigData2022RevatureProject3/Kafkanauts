@@ -10,7 +10,7 @@ import scala.util.Random
  * This object helps store the rate of production of various goods organized by country, day of week and product category
  */
 object GenHelper {
-  val countries = List("China", "U.S", "Spain")
+  val countries = List("China", "United States", "Spain")
   // TODO: Finish and make canonical
   val categories = List("Gas", "Medicine", "Music", "Produce")
   val corruptionChance: Double = 0.03
