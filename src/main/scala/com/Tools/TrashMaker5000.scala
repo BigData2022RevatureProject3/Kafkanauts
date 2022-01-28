@@ -8,7 +8,13 @@ import scala.collection.mutable.ArrayBuffer
 object TrashMaker5000 {
 
   def makeTrash(PO: ProductOrder, easterEgg: Option[String] = None): String = {
-//    val str = ProductOrder.toString(PO)
+    /**
+     * Purpose: Takes a PO and returns it as a string with random "corruptions."
+     * @param PO to be parsed and modified.
+     * @param easterEgg is an optional string that has a 5% of being introduced into the PO.
+     * @return PO as string, with "corruptions."
+     */
+
     val str = PO.toString.replaceAll("ProductOrder","")
     val str2 = str.slice(1, str.length - 1)
     var aB = new ArrayBuffer[String]()
@@ -43,9 +49,10 @@ object TrashMaker5000 {
   def makeTrashes(file: String, x: Int, easterEgg: Option[String] = None): ArrayBuffer[Array[String]] = {
 
     /**
-     * Purpose: Takes a date as an argument and returns the real day of the week on that date.
+     * Purpose: takes a text file, stored it in an ArrayBuffer, and modifies it at random points, creating "corrupted data".
      * @param file is the name of the CSV or other text file to be parsed.
      * @param x is the number of modifications (corruptions) to be performed on the data.
+     * @param easterEgg is an optional string that has a 5% of being introduced into the PO.
      * @return An ArrayBuffer containing the lines from the original file with the modifications.
      */
 
