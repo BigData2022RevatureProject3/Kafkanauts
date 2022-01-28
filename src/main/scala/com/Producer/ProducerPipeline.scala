@@ -33,15 +33,7 @@ object ProducerPipeline {
   }
 
   def startProducing(startDateStr: String, minuteIncrements: Long = 60, processDelay: Long = 5000): Unit = {
-    val startDate = strToLocalDate(startDateStr).atStartOfDay()//.plus(2, ChronoUnit.HOURS)
-//    println(startDate)
-//    println(getPercentThroughDay(startDate))
-
-//    val po = ProductOrder.getInitialOrder(startDate)
-//    println(po)
-//    println(ProductOrder.toString(po))
-//    println(ProductOrder.toString(ProductOrder.getSampleOrder()))
-//    println()
+    val startDate = strToLocalDate(startDateStr).atStartOfDay()
 
     println(s"Starting Production at ${DateHelper.print(startDate)} with $minuteIncrements minute increments, delayed by $processDelay")
     Stream
