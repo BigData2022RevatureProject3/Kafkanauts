@@ -1,11 +1,46 @@
 package com.Tools
 
+import com.ProductOrder
+
 import scala.util.Random
 import scala.collection.mutable.ArrayBuffer
 
 object TrashMaker5000 {
 
-  def makeTrash(file: String, x: Int, easterEgg: Option[String] = None): ArrayBuffer[Array[String]] = {
+  def makeTrash(PO: ProductOrder, easterEgg: Option[String] = None): String = {
+//    val str = ProductOrder.toString(PO)
+    val str = PO.toString.replaceAll("ProductOrder","")
+    val str2 = str.slice(1, str.length - 1)
+    var aB = new ArrayBuffer[String]()
+    val arr = str2.split(",").foreach(aB += _)
+
+    val r = new Random()
+    val randomTrash = r.nextInt(21)
+    val randomIndex1 = r.nextInt(aB.size)
+
+    randomTrash match {
+      case 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 => aB(randomIndex1) = ""
+      case 10 | 11 | 12 | 13 | 14 | 15 => aB(randomIndex1) = r.nextString(aB(randomIndex1).length)
+      case 16 | 17 | 18 => aB(randomIndex1) = r.nextPrintableChar().toString.concat(r.nextPrintableChar().toString).concat(r.nextPrintableChar().toString).concat(r.nextPrintableChar().toString).concat(r.nextPrintableChar().toString).concat(r.nextPrintableChar().toString)
+      case 19 => aB(randomIndex1) = easterEgg.toString.slice(4,easterEgg.toString.length)
+      case 20 => aB -= aB(aB.size)
+      case _ =>
+    }
+
+    val str3 = new StringBuilder(aB.mkString("|"))
+    val randomTrash2 = r.nextInt(20)
+    val randomIndex2 = r.nextInt(str3.length)
+    randomTrash2 match {
+      case 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11| 12 | 13 | 14 | 15 | 16 | 17 | 18 =>
+      case 19 => str3(randomIndex2) = '|'
+    }
+
+    println(str3)
+    return str3.toString()
+
+  }
+
+  def makeTrashes(file: String, x: Int, easterEgg: Option[String] = None): ArrayBuffer[Array[String]] = {
 
     /**
      * Purpose: Takes a date as an argument and returns the real day of the week on that date.
@@ -39,7 +74,9 @@ object TrashMaker5000 {
   }
 
   def main (args: Array[String]): Unit = {
-    makeTrash("taco_master.csv",50,Option("This is an Easter Egg. Merry Christmas to Thor."))
+    val POTest = ProductOrder.getSampleOrder()
+    makeTrash(POTest)
+//    makeTrashes("taco_master.csv",50,Option("This is an Easter Egg. Merry Christmas to Thor."))
   }
 
 }
