@@ -1,7 +1,7 @@
 package com.Producer
 
 import com.ProductOrder
-import com.Tools.MathHelper
+import com.Tools.{MathHelper, customerInfoGenerator}
 
 import java.time.LocalDateTime
 import scala.util.Random
@@ -76,6 +76,26 @@ object GenHelper {
   }
 
   def addCustomerInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
+    po.country match{
+      case "United States" =>
+        val cSplit = customerInfoGenerator.genUSCustomer().split(",")
+        po.customer_id = cSplit(0).toLong
+        po.customer_name = cSplit(1)
+        po.city = cSplit(2)
+        po.country = cSplit(3)
+      case "China" =>
+        val cSplit = customerInfoGenerator.genCNCustomer().split(",")
+        po.customer_id = cSplit(0).toLong
+        po.customer_name = cSplit(1)
+        po.city = cSplit(2)
+        po.country = cSplit(3)
+      case "Spain" =>
+        val cSplit = customerInfoGenerator.genEUCustomer().split(",")
+        po.customer_id = cSplit(0).toLong
+        po.customer_name = cSplit(1)
+        po.city = cSplit(2)
+        po.country = cSplit(3)
+    }
     po
   }
 
