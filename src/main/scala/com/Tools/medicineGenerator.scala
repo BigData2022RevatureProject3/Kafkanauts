@@ -6,27 +6,29 @@ import scala.collection.mutable.ListBuffer
 import scala.io.Source
 import scala.math.Fractional.Implicits.infixFractionalOps
 import scala.util.Random
+import com.ProductOrder
 
 class medicineGenerator {
   private final var medicineFile = "data/medicine/medicine_2021.txt"
-  def getMedicine():String = {
+  def getMedicine(po: ProductOrder):ProductOrder = {
     var medicineList:ListBuffer[String] = ListBuffer()
     for (lines <- Source.fromFile(medicineFile).getLines()) {
       medicineList += lines
     }
     val ran = new Random()
-    val rownum = ran.nextInt(5)
+    val rownum = ran.nextInt()
     val row = medicineList(rownum).split(",")
-    val result1 = row(0) + ","
+    val product = row(0)
     val price = row(2).toDouble
-    val result2 = (math floor price * 100) / 100
-    val result = result1 + result2
+    val quantity = ran.nextInt()
+    val totalPrice = (math floor price * quantity * 100) / 100
+    val result = product + totalPrice
+    po.product_name = product
+    po.product_category = "Medicine"
+    po.price = totalPrice
+    po.qty = quantity
+    po
     //medicineList.foreach(println)
-    return result
+    return po
   }
-}
-
-object test extends App {
-  val test1 = new medicineGenerator
-  println(test1.getMedicine)
 }
