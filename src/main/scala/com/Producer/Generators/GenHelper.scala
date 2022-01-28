@@ -72,13 +72,13 @@ object GenHelper {
 
   def addProduct(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
     po.country match {
-      case "China" => {
+      case "United States" => {
         po
       }
       case "China" => {
         po
       }
-      case "China" => {
+      case "Spain" => {
         po
       }
     }
