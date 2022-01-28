@@ -5,6 +5,10 @@ import java.time.temporal.ChronoUnit
 import scala.io.StdIn
 import scala.util.Random
 import com.Tools.DateHelper._
+import com.Producer.GenHelper._
+import com.ProductOrder
+import com.ProductOrder._
+import com.Tools.DateHelper
 
 /**
  * This object deals with creating a burst of orders for blocks of time,
@@ -25,36 +29,44 @@ object ProducerPipeline {
 //      case Date(year, month, day) => LocalDate.of(year.toInt, month.toInt, day.toInt).atStartOfDay()
 //      case _ => println("Invalid Input, Please follow format YYYY-MM-DD")
 //    }
-//
-//    println("start datetime is: " + startDay)
-//
-//
-//    val nowTime = LocalDate.now().atTime(0,0,0)
-//    val nowTime1 = LocalDate.now().atStartOfDay()
-//    println(nowTime.plus(15, ChronoUnit.MINUTES))
-//    println(nowTime1.plus(15, ChronoUnit.MINUTES))
-//
-//    val dateTime = LocalDateTime.now()
-//    val datePlus = dateTime.plus(15, ChronoUnit.MINUTES)
-//    println(dateTime)
-//    println(datePlus)
 
   }
 
-  def startProducing(startDateStr: String, minuteIncrements: Long = 15): Unit = {
+  def startProducing(startDateStr: String, minuteIncrements: Long = 60, processDelay: Long = 5000): Unit = {
     val startDate = strToLocalDate(startDateStr).atStartOfDay()//.plus(2, ChronoUnit.HOURS)
 //    println(startDate)
 //    println(getPercentThroughDay(startDate))
-//
+
+//    val po = ProductOrder.getInitialOrder(startDate)
+//    println(po)
+//    println(ProductOrder.toString(po))
+//    println(ProductOrder.toString(ProductOrder.getSampleOrder()))
+//    println()
+
+    println(s"Starting Production at ${DateHelper.print(startDate)} with $minuteIncrements minute increments, delayed by $processDelay")
     Stream
       .from(1)
-      .map(i => {
+      .flatMap(i => {
         val batchDateTime = startDate.plus(minuteIncrements * i, ChronoUnit.MINUTES)
-        println(getPercentThroughDay(batchDateTime))
-        Random.nextInt(20)
+        val dayPercentage = getPercentThroughDay(batchDateTime)
+        var batchSize = GenHelper.getGlobalBatchSize(dayPercentage)
+        batchSize = 2
+        val countryProbs = GenHelper.getCountryProbabilities(dayPercentage)
+        val dayOfWeek = DateHelper.getDayOfWeek(batchDateTime)
+
+        (1 to batchSize)
+          .map(_ => ProductOrder.getInitialOrder(batchDateTime, countryProbs))
+          .map(p => GenHelper.addCategory(dayPercentage, dayOfWeek, p))
+          .map(p => GenHelper.addProduct(dayPercentage, dayOfWeek, p))
+          .map(p => GenHelper.addCustomerInfo(dayPercentage, dayOfWeek, p))
+          .map(p => GenHelper.addTransactionInfo(dayPercentage, dayOfWeek, p))
+          .map(toFinalString)
       })
-      .foreach(n => {
-        Thread.sleep(500)
+      .foreach(p => {
+        println(p)
+        // TODO: Send to Producer
+        // TODO: Log events
+        Thread.sleep(5000)
       })
 
     // Get start time in ms
