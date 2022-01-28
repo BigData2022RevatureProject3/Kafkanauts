@@ -34,7 +34,7 @@ object CurrentWeekday {
   }
 
   def main (args: Array[String]): Unit = {
-    getWeekday("2022/01/27 18:58:42")
+    println(getWeekday("2022/01/27 18:58:42"))
   }
 
 }
