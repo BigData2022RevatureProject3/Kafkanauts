@@ -25,10 +25,15 @@ object customerInfoGenerator {
     countries += line
   }
   def generateCustomer(po:ProductOrder):ProductOrder={
-    po.country match{
-      case "United States" => genUSCustomer(po)
-      case "China" => genUSCustomer(po)
-      case "Spain" => genUSCustomer(po)
+    if(po.product_category == "gas"){
+      //Gas to be added
+      po
+    }else{
+      po.country match{
+        case "United States" => genUSCustomer(po)
+        case "China" => genCNCustomer(po)
+        case "Spain" => genEUCustomer(po)
+      }
     }
   }
   private def genUSCustomer(po:ProductOrder): ProductOrder = {
