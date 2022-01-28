@@ -8,3 +8,6 @@ libraryDependencies += "org.apache.spark" %% "spark-mllib" % "3.1.2"
 libraryDependencies += "org.apache.spark" %% "spark-streaming" % "3.1.2"
 libraryDependencies += "org.apache.spark" %% "spark-sql-kafka-0-10" % "3.1.2"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.9"
+
+// https://github.com/com-lihaoyi/os-lib
+libraryDependencies +="com.lihaoyi" %% "os-lib" % "0.8.0"
