@@ -1,7 +1,14 @@
 package com.Producer
 
-import java.time.{LocalDate, LocalDateTime}
+import java.time.{LocalDate, LocalDateTime, ZoneOffset}
 import java.time.temporal.ChronoUnit
+import scala.io.StdIn
+import scala.util.Random
+import com.Tools.DateHelper._
+import com.Producer.GenHelper._
+import com.ProductOrder
+import com.ProductOrder._
+import com.Tools.DateHelper
 
 /**
  * This object deals with creating a burst of orders for blocks of time,
@@ -11,25 +18,49 @@ import java.time.temporal.ChronoUnit
  */
 object ProducerPipeline {
   def main(args: Array[String]): Unit = {
-//    val date: LocalDateTime = LocalDateTime.parse(LocalDate.now().toString)
-//    println(date)
-//
-//    val newDate = date.plus(20, ChronoUnit.MINUTES)
-//
-//    println(newDate)
+    //TODO: For David to look at
+    startProducing("2022-01-27")
 
-    val nowTime = LocalDate.now()
-    nowTime.plus(15L, ChronoUnit.MINUTES)
+//    print("Insert desired date: ")
+//    val input = StdIn.readLine()
+//    val Date = """^(\d{4})-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])""".r
+//
+//    val startDay = input match {
+//      case Date(year, month, day) => LocalDate.of(year.toInt, month.toInt, day.toInt).atStartOfDay()
+//      case _ => println("Invalid Input, Please follow format YYYY-MM-DD")
+//    }
 
-    val dateTime = LocalDateTime.now()
-    val datePlus = dateTime.plus(15, ChronoUnit.MINUTES)
-    println(dateTime)
-    println(datePlus)
   }
 
-  def startProducing(startDate: String, minuteIncrements: Long = 15): Unit = {
-    val timeIncrementMS = minuteIncrements * 60 * 1000
-    Iterator
+  def startProducing(startDateStr: String, minuteIncrements: Long = 60, processDelay: Long = 5000): Unit = {
+    val startDate = strToLocalDate(startDateStr).atStartOfDay()
+
+    println(s"Starting Production at ${DateHelper.print(startDate)} with $minuteIncrements minute increments, delayed by $processDelay")
+    Stream
+      .from(1)
+      .flatMap(i => {
+        val batchDateTime = startDate.plus(minuteIncrements * i, ChronoUnit.MINUTES)
+        val dayPercentage = getPercentThroughDay(batchDateTime)
+        var batchSize = GenHelper.getGlobalBatchSize(dayPercentage)
+        batchSize = 2
+        val countryProbs = GenHelper.getCountryProbabilities(dayPercentage)
+        val dayOfWeek = DateHelper.getDayOfWeek(batchDateTime)
+
+        (1 to batchSize)
+          .map(_ => ProductOrder.getInitialOrder(batchDateTime, countryProbs))
+          .map(p => GenHelper.addCategory(dayPercentage, dayOfWeek, p))
+          .map(p => GenHelper.addProduct(dayPercentage, dayOfWeek, p))
+          .map(p => GenHelper.addCustomerInfo(dayPercentage, dayOfWeek, p))
+          .map(p => GenHelper.addTransactionInfo(dayPercentage, dayOfWeek, p))
+          .map(toFinalString)
+      })
+      .foreach(p => {
+        println(p)
+        // TODO: Send to Producer
+        // TODO: Log events
+        Thread.sleep(5000)
+      })
+
     // Get start time in ms
     // start Iterator/loop based on that start time
       // for each iteration, calculate day start/end time in ms
