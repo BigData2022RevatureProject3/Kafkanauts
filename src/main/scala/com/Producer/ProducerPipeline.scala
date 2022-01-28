@@ -1,8 +1,10 @@
 package com.Producer
 
-import java.time.{LocalDate, LocalDateTime}
+import java.time.{LocalDate, LocalDateTime, ZoneOffset}
 import java.time.temporal.ChronoUnit
 import scala.io.StdIn
+import scala.util.Random
+import com.Tools.DateHelper._
 
 /**
  * This object deals with creating a burst of orders for blocks of time,
@@ -13,32 +15,48 @@ import scala.io.StdIn
 object ProducerPipeline {
   def main(args: Array[String]): Unit = {
     //TODO: For David to look at
-    print("Insert desired date: ")
-    val input = StdIn.readLine()
-    val Date = """^(\d{4})-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])""".r
+    startProducing("2022-01-27")
 
-    val startDay = input match {
-      case Date(year, month, day) => LocalDate.of(year.toInt, month.toInt, day.toInt).atStartOfDay()
-      case _ => println("Invalid Input, Please follow format YYYY-MM-DD")
-    }
+//    print("Insert desired date: ")
+//    val input = StdIn.readLine()
+//    val Date = """^(\d{4})-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])""".r
+//
+//    val startDay = input match {
+//      case Date(year, month, day) => LocalDate.of(year.toInt, month.toInt, day.toInt).atStartOfDay()
+//      case _ => println("Invalid Input, Please follow format YYYY-MM-DD")
+//    }
+//
+//    println("start datetime is: " + startDay)
+//
+//
+//    val nowTime = LocalDate.now().atTime(0,0,0)
+//    val nowTime1 = LocalDate.now().atStartOfDay()
+//    println(nowTime.plus(15, ChronoUnit.MINUTES))
+//    println(nowTime1.plus(15, ChronoUnit.MINUTES))
+//
+//    val dateTime = LocalDateTime.now()
+//    val datePlus = dateTime.plus(15, ChronoUnit.MINUTES)
+//    println(dateTime)
+//    println(datePlus)
 
-    println("start datetime is: " + startDay)
-
-
-    val nowTime = LocalDate.now().atTime(0,0,0)
-    val nowTime1 = LocalDate.now().atStartOfDay()
-    println(nowTime.plus(15, ChronoUnit.MINUTES))
-    println(nowTime1.plus(15, ChronoUnit.MINUTES))
-
-    val dateTime = LocalDateTime.now()
-    val datePlus = dateTime.plus(15, ChronoUnit.MINUTES)
-    println(dateTime)
-    println(datePlus)
   }
 
-  def startProducing(startDate: String, minuteIncrements: Long = 15): Unit = {
-    val timeIncrementMS = minuteIncrements * 60 * 1000
-    Iterator
+  def startProducing(startDateStr: String, minuteIncrements: Long = 15): Unit = {
+    val startDate = strToLocalDate(startDateStr).atStartOfDay()//.plus(2, ChronoUnit.HOURS)
+//    println(startDate)
+//    println(getPercentThroughDay(startDate))
+//
+    Stream
+      .from(1)
+      .map(i => {
+        val batchDateTime = startDate.plus(minuteIncrements * i, ChronoUnit.MINUTES)
+        println(getPercentThroughDay(batchDateTime))
+        Random.nextInt(20)
+      })
+      .foreach(n => {
+        Thread.sleep(500)
+      })
+
     // Get start time in ms
     // start Iterator/loop based on that start time
       // for each iteration, calculate day start/end time in ms
