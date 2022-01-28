@@ -15,7 +15,7 @@ object GenHelper {
   val countries = List("China", "U.S", "Spain")
   // TODO: Finish and make canonical
   val categories = List("Gas", "Medicine", "Music", "Produce")
-  val corruptionChance: Double = 0.3
+  val corruptionChance: Double = 0.03
   // Access the map by country to get a list.
   // Access list by dayOfWeek to get category Map.
   // Access that map to get a function from dayPercentage to activity at that time
@@ -57,6 +57,7 @@ object GenHelper {
 
 
   def getGlobalBatchSize(dayPercent: Double): Int = {
+    // TODO: David-Carlson Make it query functions globally
     Math.ceil(1 - Math.abs(0.5 - dayPercent) * 50).toInt + 50
   }
 
@@ -72,7 +73,17 @@ object GenHelper {
   }
 
   def addProduct(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
-    po
+    po.country match {
+      case "China" => {
+        po
+      }
+      case "China" => {
+        po
+      }
+      case "China" => {
+        po
+      }
+    }
   }
 
   def addCustomerInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {

@@ -38,7 +38,7 @@ object ProducerPipeline {
     println(s"Starting Production at ${DateHelper.print(startDate)} with $minuteIncrements minute increments, delayed by $processDelay")
     Stream
       .from(1)
-      .flatMap(i => {
+      .map(i => {
         val batchDateTime = startDate.plus(minuteIncrements * i, ChronoUnit.MINUTES)
         val dayPercentage = getPercentThroughDay(batchDateTime)
         var batchSize = GenHelper.getGlobalBatchSize(dayPercentage)
@@ -52,10 +52,10 @@ object ProducerPipeline {
           .map(p => GenHelper.addProduct(dayPercentage, dayOfWeek, p))
           .map(p => GenHelper.addCustomerInfo(dayPercentage, dayOfWeek, p))
           .map(p => GenHelper.addTransactionInfo(dayPercentage, dayOfWeek, p))
-          .map(toFinalString)
+          .map(toFinalString).toList
       })
-      .foreach(p => {
-        println(p)
+      .foreach(pStrs => {
+        println(pStrs)
         // TODO: Send to Producer
         // TODO: Log events
         Thread.sleep(5000)
