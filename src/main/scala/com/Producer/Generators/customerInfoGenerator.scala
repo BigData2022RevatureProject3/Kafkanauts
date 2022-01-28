@@ -25,6 +25,12 @@ object customerInfoGenerator {
     countries += line
   }
 
+  def generate(po: ProductOrder): ProductOrder = {
+    po.country match {
+      case "China" => genCNCustomer(po)
+    }
+  }
+
   def genUSCustomer(po:ProductOrder): ProductOrder = {
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
