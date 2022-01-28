@@ -20,7 +20,7 @@ object customerInfoGenerator{
   for (line <- Source.fromFile("data/countries.txt").getLines) {
     countries += line }
 
-  def genUSCustomer(orderId:String):String ={
+  def genUSCustomer():String ={
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
     for (line <- Source.fromFile(fUsFile).getLines) {
@@ -36,10 +36,10 @@ object customerInfoGenerator{
     val country = countries(0)
     for (line <- Source.fromFile(usCityFile).getLines) {
       cities += line }
-    orderId +","+Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
+    Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
   }
 
-  def genCNCustomer(orderId:String):String={
+  def genCNCustomer():String={
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
     for (line <- Source.fromFile(fCnFile).getLines) {firstNameList += line}
@@ -51,10 +51,10 @@ object customerInfoGenerator{
     val country = countries(1)
     for (line <- Source.fromFile(cnCityFile).getLines) {
       cities += line }
-    orderId +","+Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
+    Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
   }
 
-  def genEUCustomer(orderId:String):String={
+  def genEUCustomer():String={
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
     for (line <- Source.fromFile(fEuFile).getLines) {firstNameList += line}
@@ -68,6 +68,6 @@ object customerInfoGenerator{
     val country = countries(2)
     for (line <- Source.fromFile(spCityFile).getLines) {
       cities += line }
-    orderId +","+Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
+    Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
   }
 }
