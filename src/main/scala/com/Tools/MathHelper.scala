@@ -12,7 +12,7 @@ object MathHelper {
 
   // https://www.itl.nist.gov/div898/handbook/eda/section3/eda3661.htm
   def getNormalPDF(mean: Double, stdDev: Double): (Double) => Double = {
-    (x: Double) => Math.exp(-Math.pow(x - mean, 2)) / Math.sqrt(2 * Math.PI) / (stdDev * Math.sqrt(2 * Math.PI))
+    (x: Double) => (Math.exp(-Math.pow(x - mean, 2)) / Math.sqrt(2 * Math.PI)) / (stdDev * Math.sqrt(2 * Math.PI))
   }
 
 
