@@ -1,23 +1,36 @@
 package com.Producer.Generators
 
+import os.RelPath
+
+import scala.collection.mutable
+
 object GeneratorDataCleaner {
 
-  def isValid(relativeFilePath: String): Boolean = {
-    val filePath = os.pwd / relativeFilePath
+  private def isValid(filePath: os.pwd.ThisType): Boolean = {
+    //If the file exists, check if it is pipe['|'] delimited
     if (os.isFile(filePath)) {
-      os
+      return os
         .read
         .lines(filePath)
         .toList
-        .map(_.contains("|"))
-        .contains("false")
+        .forall(_.contains("|"))
     }
     false
   }
 
+  def validatedData(relativeFilePath: String): Unit = {
+    val filePath = os.pwd / RelPath(relativeFilePath)
+    if(!isValid(filePath)) {
+      val validatedText = os
+        .read
+        .lines(filePath)
+        .map(_.replace(",", "|")).mkString("\n")
+      os.write.over(filePath, validatedText)
+    }
+  }
+
 
   def proofOfConcept(): Unit = {
-    //os.read.lines(os.pwd / "data" / "price.txt").take(5).foreach(println)
     val a = os
       .read
       .lines(os.pwd / "clean_data" / "dates_and_weekdays_starting_1970.csv")
@@ -29,6 +42,6 @@ object GeneratorDataCleaner {
   }
 
   def main(args: Array[String]): Unit = {
-    println(isValid("medicine/medicine_2007.txt"))
+    validatedData("clean_data/ecommerce_cleaned_teddy.txt")
   }
 }

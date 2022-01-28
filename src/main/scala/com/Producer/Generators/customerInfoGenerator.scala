@@ -13,8 +13,8 @@ object customerInfoGenerator {
 
   private final val fUsFile = "data/first_name_american_common_female.txt"
   private final val lUsFile = "data/last_name_american_common.txt"
-  private final val fCnFile = "data/first_name_chinese(given names).txt"
-  private final val lCnFile = "data/last_name_chinese(family name).txt"
+  private final val fCnFile = "data/first_name_chinese.txt"
+  private final val lCnFile = "data/last_name_chinese.txt"
   private final val fEuFile = "data/first_name_european.txt"
   private final val usCityFile = "data/american_cities.txt"
   private final val cnCityFile = "data/chinese_cities.txt"
