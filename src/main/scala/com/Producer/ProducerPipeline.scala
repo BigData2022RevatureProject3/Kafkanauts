@@ -32,34 +32,41 @@ object ProducerPipeline {
 
   }
 
-  def startProducing(startDateStr: String, minuteIncrements: Long = 60): Unit = {
+  def startProducing(startDateStr: String, minuteIncrements: Long = 60, processDelay: Long = 5000): Unit = {
     val startDate = strToLocalDate(startDateStr).atStartOfDay()//.plus(2, ChronoUnit.HOURS)
 //    println(startDate)
 //    println(getPercentThroughDay(startDate))
 
-    val po = ProductOrder.getInitialOrder(startDate)
-    println(po)
-    println(ProductOrder.toString(po))
-    println(ProductOrder.toString(ProductOrder.getSampleOrder()))
-    println()
+//    val po = ProductOrder.getInitialOrder(startDate)
+//    println(po)
+//    println(ProductOrder.toString(po))
+//    println(ProductOrder.toString(ProductOrder.getSampleOrder()))
+//    println()
 
+    println(s"Starting Production at ${DateHelper.print(startDate)} with $minuteIncrements minute increments, delayed by $processDelay")
     Stream
       .from(1)
       .flatMap(i => {
         val batchDateTime = startDate.plus(minuteIncrements * i, ChronoUnit.MINUTES)
         val dayPercentage = getPercentThroughDay(batchDateTime)
-        val batchSize = GenHelper.getGlobalBatchSize(dayPercentage)
+        var batchSize = GenHelper.getGlobalBatchSize(dayPercentage)
+        batchSize = 2
         val countryProbs = GenHelper.getCountryProbabilities(dayPercentage)
         val dayOfWeek = DateHelper.getDayOfWeek(batchDateTime)
-        println(batchDateTime)
 
-        (1 to 1)
+        (1 to batchSize)
           .map(_ => ProductOrder.getInitialOrder(batchDateTime, countryProbs))
-          .map(p => GenHelper.assignCategory(dayPercentage, 0, p))
+          .map(p => GenHelper.addCategory(dayPercentage, dayOfWeek, p))
+          .map(p => GenHelper.addProduct(dayPercentage, dayOfWeek, p))
+          .map(p => GenHelper.addCustomerInfo(dayPercentage, dayOfWeek, p))
+          .map(p => GenHelper.addTransactionInfo(dayPercentage, dayOfWeek, p))
+          .map(toFinalString)
       })
       .foreach(p => {
-        println(ProductOrder.toString(p))
-        Thread.sleep(10000)
+        println(p)
+        // TODO: Send to Producer
+        // TODO: Log events
+        Thread.sleep(5000)
       })
 
     // Get start time in ms
