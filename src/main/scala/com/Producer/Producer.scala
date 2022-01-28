@@ -2,7 +2,7 @@ package com.Producer
 
 import java.util.Properties
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
-object p3producer extends App {
+object Producer extends App {
 
   val props:Properties = new Properties()
   props.put("bootstrap.servers","[::1]:9092")

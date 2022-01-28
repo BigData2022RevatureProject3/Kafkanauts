@@ -3,7 +3,7 @@ package com.Producer.Generators
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
 
-object musicGenerator {
+object MusicGenerator {
   private final val ran = scala.util.Random
   private final val musicFile = "clean_data/track_info.txt"
 

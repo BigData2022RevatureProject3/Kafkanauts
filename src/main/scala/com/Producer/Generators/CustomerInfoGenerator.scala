@@ -5,7 +5,7 @@ import com.ProductOrder
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
 
-object customerInfoGenerator {
+object CustomerInfoGenerator {
 
   //Each function return a string separated by commas
   //In the follow respective order:

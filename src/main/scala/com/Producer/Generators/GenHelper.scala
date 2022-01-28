@@ -85,7 +85,7 @@ object GenHelper {
   }
 
   def addCustomerInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
-    customerInfoGenerator.generateCustomer(po)
+    CustomerInfoGenerator.generateCustomer(po)
   }
 
   def addTransactionInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {

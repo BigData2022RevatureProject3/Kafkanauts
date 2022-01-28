@@ -2,9 +2,7 @@ package com.Producer.Generators
 
 import os.RelPath
 
-import scala.collection.mutable
-
-object GeneratorDataCleaner {
+object DataValidator {
 
   private def isValid(filePath: os.pwd.ThisType): Boolean = {
     //If the file exists, check if it is pipe['|'] delimited

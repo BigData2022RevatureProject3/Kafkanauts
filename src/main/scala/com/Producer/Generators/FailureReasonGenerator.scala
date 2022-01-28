@@ -3,7 +3,7 @@ package com.Producer.Generators
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
 
-object failureReasonGenerator {
+object FailureReasonGenerator {
   private final val reasoncard = "clean_data/transaction_failure_reasons_card.txt"
   private final val reasonother = "clean_data/transaction_failure_reasons_other.txt"
   private final val lbcard = new ListBuffer[String]
