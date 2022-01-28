@@ -1,0 +1,14 @@
+grocery_id,date,admin1,admin2,market,category,commodity,unit,currency,price,usdprice
+1,10/15/2020,Hebei Sheng,Shijiazhuang,Sijiazhuang,cereals and tubers,Wheat,KG,CNY,2.47,0.3674
+2,10/15/2020,Heilongjiang Sheng,Harbin,Heilongjiang,cereals and tubers,Maize,KG,CNY,2.17,0.3223
+3,10/15/2020,Henan Sheng,Zhengzhou,Zhengzhou,cereals and tubers,Wheat,KG,CNY,2.42,0.3599
+4,10/15/2020,Hubei Sheng,Jingmen,Hubei,cereals and tubers,Rice (Indica),KG,CNY,4.01,0.5964
+5,10/15/2020,Jiangxi Sheng,Jiujiang,Jiujiang,cereals and tubers,Rice (Indica),KG,CNY,3.75,0.5578
+6,10/15/2020,Jiangxi Sheng,Jiujiang,Jiujiang,cereals and tubers,Wheat flour (first grade),KG,CNY,3.23,0.4809
+7,10/15/2020,Jilin Sheng,Jilin,Jilin,cereals and tubers,Maize,KG,CNY,2.25,0.3351
+8,10/15/2020,Shandong Sheng,Jinan,Shandong,cereals and tubers,Maize,KG,CNY,2.47,0.3669
+9,10/15/2020,Shandong Sheng,Linyi,Linyi,cereals and tubers,Wheat,KG,CNY,2.45,0.3639
+10,10/15/2020,Shanxi Sheng,Yuncheng,Yuncheng,cereals and tubers,Rice (Japonica),KG,CNY,4.28,0.6366
+11,10/15/2020,Shanxi Sheng,Yuncheng,Yuncheng,cereals and tubers,Wheat flour (first grade),KG,CNY,3.4,0.5057
+12,10/15/2020,Zhejiang Sheng,Hangzhou,Hangzhou,cereals and tubers,Rice (Indica),KG,CNY,4.18,0.6217
+13,10/15/2020,Zhejiang Sheng,Hangzhou,Hangzhou,cereals and tubers,Wheat flour (first grade),KG,CNY,3.68,0.5474
