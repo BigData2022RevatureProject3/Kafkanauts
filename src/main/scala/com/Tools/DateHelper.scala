@@ -64,13 +64,13 @@ object DateHelper {
     val fail4: Int = 123456789
 
 
-    println(s"${GREEN}Should pass 1, x in yyyy-MM-dd HH:mm:ss = $RESET" + DateTimeConverter.getDateElseMS(pass1))
-    println(s"${GREEN}Should pass 2, x parse to Long from String = $RESET" + DateTimeConverter.getDateElseMS(pass2))
-    println(s"${GREEN}Should pass 3, x asInstanceOf[Long] = $RESET" + DateTimeConverter.getDateElseMS(pass3))
-    println(s"${RED}Should fail 1, x in yyyy-MM-dd = $RESET" + DateTimeConverter.getDateElseMS(fail1))
-    println(s"${RED}Should fail 2, x in HH:mm:ss = $RESET" + DateTimeConverter.getDateElseMS(fail2))
-    println(s"${RED}Should fail 3, x in HH:mm:ss yyyy-MM-dd = $RESET" + DateTimeConverter.getDateElseMS(fail3))
-    println(s"${RED}Should fail 4, x asInstanceOf[Int] = $RESET" + DateTimeConverter.getDateElseMS(fail4))
+//    println(s"${GREEN}Should pass 1, x in yyyy-MM-dd HH:mm:ss = $RESET" + DateTimeConverter.getDateElseMS(pass1))
+//    println(s"${GREEN}Should pass 2, x parse to Long from String = $RESET" + DateTimeConverter.getDateElseMS(pass2))
+//    println(s"${GREEN}Should pass 3, x asInstanceOf[Long] = $RESET" + DateTimeConverter.getDateElseMS(pass3))
+//    println(s"${RED}Should fail 1, x in yyyy-MM-dd = $RESET" + DateTimeConverter.getDateElseMS(fail1))
+//    println(s"${RED}Should fail 2, x in HH:mm:ss = $RESET" + DateTimeConverter.getDateElseMS(fail2))
+//    println(s"${RED}Should fail 3, x in HH:mm:ss yyyy-MM-dd = $RESET" + DateTimeConverter.getDateElseMS(fail3))
+//    println(s"${RED}Should fail 4, x asInstanceOf[Int] = $RESET" + DateTimeConverter.getDateElseMS(fail4))
   }
 }
 
