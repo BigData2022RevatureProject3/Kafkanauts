@@ -1,6 +1,6 @@
 package com
 
-import com.Tools.POCityGenerator
+import com.Producer.Generators.POCityGenerator
 
 object Test {
   def main(args: Array[String]): Unit = {

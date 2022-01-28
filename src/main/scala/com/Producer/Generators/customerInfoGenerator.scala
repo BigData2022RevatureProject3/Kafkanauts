@@ -1,7 +1,9 @@
-package com.Tools
+package com.Producer.Generators
+
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
-object customerInfoGenerator{
+
+object customerInfoGenerator {
 
   //Each function return a string separated by commas
   //In the follow respective order:
@@ -18,56 +20,69 @@ object customerInfoGenerator{
   private final val countries = new ListBuffer[String]
   private final val ran = scala.util.Random
   for (line <- Source.fromFile("data/countries.txt").getLines) {
-    countries += line }
+    countries += line
+  }
 
-  def genUSCustomer():String ={
+  def genUSCustomer(): String = {
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
     for (line <- Source.fromFile(fUsFile).getLines) {
       val name = line.toLowerCase().split(",")
-      firstNameList += name(1).capitalize}
+      firstNameList += name(1).capitalize
+    }
     for (line <- Source.fromFile(lUsFile).getLines) {
       val name = line.toLowerCase().split(",")
-      lastNameList += name(1).capitalize}
+      lastNameList += name(1).capitalize
+    }
     val fName = firstNameList(ran.nextInt(firstNameList.length))
     val lName = lastNameList(ran.nextInt(lastNameList.length))
     val name = fName + " " + lName
     val cities = new ListBuffer[String]
     val country = countries(0)
     for (line <- Source.fromFile(usCityFile).getLines) {
-      cities += line }
-    Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
+      cities += line
+    }
+    Math.abs(name.hashCode()) + "," + name + "," + cities(ran.nextInt(cities.length)) + "," + country
   }
 
-  def genCNCustomer():String={
+  def genCNCustomer(): String = {
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
-    for (line <- Source.fromFile(fCnFile).getLines) {firstNameList += line}
-    for (line <- Source.fromFile(lCnFile).getLines) {lastNameList += line}
+    for (line <- Source.fromFile(fCnFile).getLines) {
+      firstNameList += line
+    }
+    for (line <- Source.fromFile(lCnFile).getLines) {
+      lastNameList += line
+    }
     val fName = firstNameList(ran.nextInt(firstNameList.length))
     val lName = lastNameList(ran.nextInt(lastNameList.length))
     val name = fName + lName
     val cities = new ListBuffer[String]
     val country = countries(1)
     for (line <- Source.fromFile(cnCityFile).getLines) {
-      cities += line }
-    Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
+      cities += line
+    }
+    Math.abs(name.hashCode()) + "," + name + "," + cities(ran.nextInt(cities.length)) + "," + country
   }
 
-  def genEUCustomer():String={
+  def genEUCustomer(): String = {
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
-    for (line <- Source.fromFile(fEuFile).getLines) {firstNameList += line}
+    for (line <- Source.fromFile(fEuFile).getLines) {
+      firstNameList += line
+    }
     for (line <- Source.fromFile(lUsFile).getLines) {
       val name = line.toLowerCase().split(",")
-      lastNameList += name(1).capitalize}
+      lastNameList += name(1).capitalize
+    }
     val fName = firstNameList(ran.nextInt(firstNameList.length))
     val lName = lastNameList(ran.nextInt(lastNameList.length))
-    val name = fName +" " + lName
+    val name = fName + " " + lName
     val cities = new ListBuffer[String]
     val country = countries(2)
     for (line <- Source.fromFile(spCityFile).getLines) {
-      cities += line }
-    Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
+      cities += line
+    }
+    Math.abs(name.hashCode()) + "," + name + "," + cities(ran.nextInt(cities.length)) + "," + country
   }
 }

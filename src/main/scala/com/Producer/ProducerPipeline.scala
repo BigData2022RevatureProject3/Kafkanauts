@@ -1,11 +1,13 @@
 package com.Producer
 
+import com.Producer.Generators.GenHelper
+
 import java.time.{LocalDate, LocalDateTime, ZoneOffset}
 import java.time.temporal.ChronoUnit
 import scala.io.StdIn
 import scala.util.Random
 import com.Tools.DateHelper._
-import com.Producer.GenHelper._
+import com.Producer.Generators.GenHelper._
 import com.ProductOrder
 import com.ProductOrder._
 import com.Tools.DateHelper

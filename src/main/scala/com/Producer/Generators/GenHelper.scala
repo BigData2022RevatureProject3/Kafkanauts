@@ -1,12 +1,10 @@
-package com.Producer
+package com.Producer.Generators
 
 import com.ProductOrder
-import com.Tools.{MathHelper, customerInfoGenerator}
+import com.Tools.MathHelper
 
-import java.time.LocalDateTime
+import scala.collection.{Map, mutable}
 import scala.util.Random
-import scala.collection._
-import scala.language.postfixOps
 
 /**
  * This object helps store the rate of production of various goods organized by country, day of week and product category
@@ -24,7 +22,7 @@ object GenHelper {
   def getProductionFunctions(): Any = {
     var funcs = mutable.Map[String, List[Map[String, (Double) => Double]]]()
     val chinaMap = List(
-//      Map("Gas" -> ((percent: Double) => getChineseFunc())
+      //      Map("Gas" -> ((percent: Double) => getChineseFunc())
       (perc: Double) => 20.34,
       (perc: Double) => 20.34,
       (perc: Double) => 20.34,
@@ -61,7 +59,7 @@ object GenHelper {
     Math.ceil(1 - Math.abs(0.5 - dayPercent) * 50).toInt + 50
   }
 
-  def getCountryProbabilities(dayPercent: Double): List[Double]= {
+  def getCountryProbabilities(dayPercent: Double): List[Double] = {
     // TODO: Change calculation
     List(1402, 329, 47)
   }
@@ -87,7 +85,7 @@ object GenHelper {
   }
 
   def addCustomerInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
-    po.country match{
+    po.country match {
       case "United States" =>
         val cSplit = customerInfoGenerator.genUSCustomer().split(",")
         po.customer_id = cSplit(0).toLong
