@@ -87,23 +87,11 @@ object GenHelper {
   def addCustomerInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
     po.country match {
       case "United States" =>
-        val cSplit = customerInfoGenerator.genUSCustomer().split(",")
-        po.customer_id = cSplit(0).toLong
-        po.customer_name = cSplit(1)
-        po.city = cSplit(2)
-        po.country = cSplit(3)
+        customerInfoGenerator.genUSCustomer(po)
       case "China" =>
-        val cSplit = customerInfoGenerator.genCNCustomer().split(",")
-        po.customer_id = cSplit(0).toLong
-        po.customer_name = cSplit(1)
-        po.city = cSplit(2)
-        po.country = cSplit(3)
+        customerInfoGenerator.genCNCustomer(po)
       case "Spain" =>
-        val cSplit = customerInfoGenerator.genEUCustomer().split(",")
-        po.customer_id = cSplit(0).toLong
-        po.customer_name = cSplit(1)
-        po.city = cSplit(2)
-        po.country = cSplit(3)
+        customerInfoGenerator.genEUCustomer(po)
     }
     po
   }

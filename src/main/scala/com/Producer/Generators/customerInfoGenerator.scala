@@ -1,5 +1,7 @@
 package com.Producer.Generators
 
+import com.ProductOrder
+
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
 
@@ -23,7 +25,7 @@ object customerInfoGenerator {
     countries += line
   }
 
-  def genUSCustomer(): String = {
+  def genUSCustomer(po:ProductOrder): ProductOrder = {
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
     for (line <- Source.fromFile(fUsFile).getLines) {
@@ -42,10 +44,14 @@ object customerInfoGenerator {
     for (line <- Source.fromFile(usCityFile).getLines) {
       cities += line
     }
-    Math.abs(name.hashCode()) + "," + name + "," + cities(ran.nextInt(cities.length)) + "," + country
+    po.customer_id = Math.abs(name.hashCode())
+    po.customer_name = name
+    po.city = cities(ran.nextInt(cities.length))
+    po.country = country
+    po
   }
 
-  def genCNCustomer(): String = {
+  def genCNCustomer(po:ProductOrder): ProductOrder = {
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
     for (line <- Source.fromFile(fCnFile).getLines) {
@@ -62,10 +68,14 @@ object customerInfoGenerator {
     for (line <- Source.fromFile(cnCityFile).getLines) {
       cities += line
     }
-    Math.abs(name.hashCode()) + "," + name + "," + cities(ran.nextInt(cities.length)) + "," + country
+    po.customer_id = Math.abs(name.hashCode())
+    po.customer_name = name
+    po.city = cities(ran.nextInt(cities.length))
+    po.country = country
+    po
   }
 
-  def genEUCustomer(): String = {
+  def genEUCustomer(po:ProductOrder): ProductOrder = {
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
     for (line <- Source.fromFile(fEuFile).getLines) {
@@ -83,6 +93,10 @@ object customerInfoGenerator {
     for (line <- Source.fromFile(spCityFile).getLines) {
       cities += line
     }
-    Math.abs(name.hashCode()) + "," + name + "," + cities(ran.nextInt(cities.length)) + "," + country
+    po.customer_id = Math.abs(name.hashCode())
+    po.customer_name = name
+    po.city = cities(ran.nextInt(cities.length))
+    po.country = country
+    po
   }
 }
