@@ -24,16 +24,8 @@ object customerInfoGenerator {
   for (line <- Source.fromFile("data/countries.txt").getLines) {
     countries += line
   }
-<<<<<<< HEAD
 
-  def generate(po: ProductOrder): ProductOrder = {
-    po.country match {
-      case "China" => genCNCustomer(po)
-    }
-  }
 
-  def genUSCustomer(po:ProductOrder): ProductOrder = {
-=======
   def generateCustomer(po:ProductOrder):ProductOrder={
     if(po.product_category == "gas"){
       //Gas to be added
@@ -47,7 +39,6 @@ object customerInfoGenerator {
     }
   }
   private def genUSCustomer(po:ProductOrder): ProductOrder = {
->>>>>>> 63594d42483fb7891f5f55853fafe273cd0d308f
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
     for (line <- Source.fromFile(fUsFile).getLines) {
