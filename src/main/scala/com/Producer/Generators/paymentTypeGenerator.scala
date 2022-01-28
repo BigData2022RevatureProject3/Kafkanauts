@@ -1,9 +1,12 @@
 package com.Producer.Generators
 
+import com.ProductOrder
+
 object paymentTypeGenerator {
-  def genPaymentType(): String = {
+  def genPaymentType(po:ProductOrder): ProductOrder = {
     val pTypes = List("Card", "Internet Banking", "UPI", "Wallet")
     val ran = scala.util.Random.nextInt(4)
-    pTypes(ran)
+    po.payment_type = pTypes(ran)
+    po
   }
 }
