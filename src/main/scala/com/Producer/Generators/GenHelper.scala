@@ -10,7 +10,7 @@ import scala.util.Random
  * This object helps store the rate of production of various goods organized by country, day of week and product category
  */
 object GenHelper {
-  val countries = List("China", "U.S", "Spain")
+  val countries = List("China", "United States", "Spain")
   // TODO: Finish and make canonical
   val categories = List("Gas", "Medicine", "Music", "Produce")
   val corruptionChance: Double = 0.03
@@ -72,28 +72,20 @@ object GenHelper {
 
   def addProduct(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
     po.country match {
-      case "China" => {
+      case "United States" => {
         po
       }
       case "China" => {
         po
       }
-      case "China" => {
+      case "Spain" => {
         po
       }
     }
   }
 
   def addCustomerInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
-    po.country match {
-      case "United States" =>
-        customerInfoGenerator.genUSCustomer(po)
-      case "China" =>
-        customerInfoGenerator.genCNCustomer(po)
-      case "Spain" =>
-        customerInfoGenerator.genEUCustomer(po)
-    }
-    po
+    customerInfoGenerator.generateCustomer(po)
   }
 
   def addTransactionInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
