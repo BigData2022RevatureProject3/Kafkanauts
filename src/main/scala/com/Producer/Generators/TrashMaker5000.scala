@@ -89,15 +89,9 @@ object TrashMaker5000 {
 
   }
 
-<<<<<<< HEAD:src/main/scala/com/Producer/Generators/TrashMaker5000.scala
   def main(args: Array[String]): Unit = {
-    makeTrash("taco_master.csv", 50, Option("This is an Easter Egg. Merry Christmas to Thor."))
-=======
-  def main (args: Array[String]): Unit = {
-    val POTest = ProductOrder.getSampleOrder()
-    makeTrash(POTest)
-//    makeTrashes("taco_master.csv",50,Option("This is an Easter Egg. Merry Christmas to Thor."))
->>>>>>> main:src/main/scala/com/Tools/TrashMaker5000.scala
+    makeTrashes("taco_master.csv", 50, Option("This is an Easter Egg. Merry Christmas to Thor."))
+
   }
 
 }
