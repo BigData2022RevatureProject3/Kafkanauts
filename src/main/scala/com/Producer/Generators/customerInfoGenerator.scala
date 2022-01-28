@@ -24,8 +24,14 @@ object customerInfoGenerator {
   for (line <- Source.fromFile("data/countries.txt").getLines) {
     countries += line
   }
-
-  def genUSCustomer(po:ProductOrder): ProductOrder = {
+  def generateCustomer(po:ProductOrder):ProductOrder={
+    po.country match{
+      case "United States" => genUSCustomer(po)
+      case "China" => genUSCustomer(po)
+      case "Spain" => genUSCustomer(po)
+    }
+  }
+  private def genUSCustomer(po:ProductOrder): ProductOrder = {
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
     for (line <- Source.fromFile(fUsFile).getLines) {
@@ -51,7 +57,7 @@ object customerInfoGenerator {
     po
   }
 
-  def genCNCustomer(po:ProductOrder): ProductOrder = {
+  private def genCNCustomer(po:ProductOrder): ProductOrder = {
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
     for (line <- Source.fromFile(fCnFile).getLines) {
@@ -75,7 +81,7 @@ object customerInfoGenerator {
     po
   }
 
-  def genEUCustomer(po:ProductOrder): ProductOrder = {
+  private def genEUCustomer(po:ProductOrder): ProductOrder = {
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
     for (line <- Source.fromFile(fEuFile).getLines) {

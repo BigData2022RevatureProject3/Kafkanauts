@@ -85,15 +85,7 @@ object GenHelper {
   }
 
   def addCustomerInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
-    po.country match {
-      case "United States" =>
-        customerInfoGenerator.genUSCustomer(po)
-      case "China" =>
-        customerInfoGenerator.genCNCustomer(po)
-      case "Spain" =>
-        customerInfoGenerator.genEUCustomer(po)
-    }
-    po
+    customerInfoGenerator.generateCustomer(po)
   }
 
   def addTransactionInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
