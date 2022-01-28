@@ -2,6 +2,11 @@ package com.Tools
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
 object customerInfoGenerator{
+
+  //Each function return a string separated by commas
+  //In the follow respective order:
+  //orderId, Customer ID, Customer Name, Customer City, Customer Country
+
   private final val fUsFile = "data/first_name_american_common_female.txt"
   private final val lUsFile = "data/last_name_american_common.txt"
   private final val fCnFile = "data/first_name_chinese(given names).txt"
@@ -15,7 +20,7 @@ object customerInfoGenerator{
   for (line <- Source.fromFile("data/countries.txt").getLines) {
     countries += line }
 
-  protected def genUSCustomer():String ={
+  def genUSCustomer(orderId:String):String ={
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
     for (line <- Source.fromFile(fUsFile).getLines) {
@@ -31,10 +36,10 @@ object customerInfoGenerator{
     val country = countries(0)
     for (line <- Source.fromFile(usCityFile).getLines) {
       cities += line }
-    Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
+    orderId +","+Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
   }
 
-  protected def genCNCustomer():String={
+  def genCNCustomer(orderId:String):String={
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
     for (line <- Source.fromFile(fCnFile).getLines) {firstNameList += line}
@@ -46,10 +51,10 @@ object customerInfoGenerator{
     val country = countries(1)
     for (line <- Source.fromFile(cnCityFile).getLines) {
       cities += line }
-    Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
+    orderId +","+Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
   }
 
-  protected def genEUCustomer():String={
+  def genEUCustomer(orderId:String):String={
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
     for (line <- Source.fromFile(fEuFile).getLines) {firstNameList += line}
@@ -63,6 +68,6 @@ object customerInfoGenerator{
     val country = countries(2)
     for (line <- Source.fromFile(spCityFile).getLines) {
       cities += line }
-    Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
+    orderId +","+Math.abs(name.hashCode())+","+name+","+cities(ran.nextInt(cities.length)) +","+ country
   }
 }

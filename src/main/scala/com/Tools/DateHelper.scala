@@ -1,11 +1,15 @@
 package com.Tools
 
 import java.text.{DateFormat, SimpleDateFormat}
+import java.time.{LocalDate, LocalDateTime, ZoneOffset}
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.Date
 import scala.io.AnsiColor.{GREEN, RED, RESET}
 
+object DateHelper {
+  val dateRegex = """^(\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) (?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d))$""".r
 
-object DateTimeConverter {
   /**
    * This method is used to convert time in milliseconds to DateFormat[yyyy-MM-dd HH:mm:ss] or vice versa.
    * @param dateTime Must be in DateFormat[yyyy-MM-dd HH:mm:ss] or can be parsed into a Long[milliseconds]
@@ -14,13 +18,29 @@ object DateTimeConverter {
   def getDateElseMS(dateTime: Any): String = {
     val dateFormat: DateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
     //Regex of the dateFormat
-    val dateRegex = """^(\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) (?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d))$""".r
+//    val dateRegex = """^(\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) (?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d))$""".r
     dateTime match {
       case x: String if x.forall(Character.isDigit) => s"${dateFormat.format(new Date(x.toLong))}"
       case x: String if dateRegex.pattern.matcher(x).matches() => s"${dateFormat.parse(x).getTime}"
       case x: Long => s"${new Date(x).getTime}"
       case _ => "DateManipulator.date(), invalid input"
     }
+  }
+
+  def strToLocalDate(localDateStr: String): LocalDate = {
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    LocalDate.parse(localDateStr, formatter)
+  }
+
+  def getPercentThroughDay(localDateTime: LocalDateTime): Double = {
+    val startMS = dateToMS(localDateTime.toLocalDate.atStartOfDay())
+    val currMS = dateToMS(localDateTime).toDouble
+    val endMS = dateToMS(localDateTime.toLocalDate.atStartOfDay().plus(1, ChronoUnit.DAYS))
+    (currMS - startMS) / (endMS - startMS)
+  }
+
+  def dateToMS(localDateTime: LocalDateTime): Long = {
+    localDateTime.toInstant(ZoneOffset.UTC).toEpochMilli
   }
 
   //Main method used to test Proof of Concept
