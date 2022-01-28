@@ -8,13 +8,19 @@ import scala.math.Fractional.Implicits.infixFractionalOps
 import scala.util.Random
 import com.ProductOrder
 
-class medicineGenerator {
+object MedicineGenerator {
   private final var medicineFile = "data/medicine/medicine_2021.txt"
-  def getMedicine(po: ProductOrder):ProductOrder = {
-    var medicineList:ListBuffer[String] = ListBuffer()
+  private var medicineList:ListBuffer[String] = ListBuffer() //object medicine list starts empty
+
+  // call this function before ever calling getMedicine function so that medicineList variable is not empty. This way we only ever have read the file once
+  def fillMedicineList():Unit = {
     for (lines <- Source.fromFile(medicineFile).getLines()) {
       medicineList += lines
     }
+  }
+
+  // this fills in the product related fields of the ProductOrder object
+  def getMedicine(po: ProductOrder):ProductOrder = {
     val ran = new Random()
     val rownum = ran.nextInt()
     val row = medicineList(rownum).split(",")
@@ -27,8 +33,6 @@ class medicineGenerator {
     po.product_category = "Medicine"
     po.price = totalPrice
     po.qty = quantity
-    po
-    //medicineList.foreach(println)
     return po
   }
 }
