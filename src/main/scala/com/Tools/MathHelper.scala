@@ -6,7 +6,7 @@ import scala.util.Random
 
 object MathHelper {
   def main(args: Array[String]): Unit = {
-    val x = NormalDistribution
+
   }
   def getNormalPDF(mean: Double, stdDev: Double): (Double) => Double = {
     (x: Double) => Math.exp(-x * x / 2) / Math.sqrt(2 * Math.PI) / (stdDev * ( Math.sqrt(2 * Math.PI)))
