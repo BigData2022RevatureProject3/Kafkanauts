@@ -4,6 +4,7 @@ import com.ProductOrder
 import com.Tools.MathHelper
 import com.Producer.Generators._
 
+import java.time.LocalDateTime
 import scala.collection.{Map, mutable}
 import scala.util.Random
 
@@ -89,7 +90,8 @@ object GenHelper {
     CustomerInfoGenerator.generateCustomer(po)
   }
 
-  def addTransactionInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
+//  def addTransactionInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
+    def addTransactionInfo(po: ProductOrder): ProductOrder = {
     //  Calls Bao's paymentType function to set paymentType attribute of po object.
     PaymentTypeGenerator.genPaymentType(po)
 
@@ -115,7 +117,10 @@ object GenHelper {
   }
 
   def main(args: Array[String]): Unit = {
-
+    val po = ProductOrder.getInitialOrder(LocalDateTime.now())
+    println(ProductOrder.toString(po))
+    addTransactionInfo(po)
+    println(ProductOrder.toString(po))
   }
 
 }
