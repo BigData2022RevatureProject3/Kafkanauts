@@ -98,9 +98,10 @@ object GenHelper {
   }
 
   def toFinalString(po: ProductOrder): String = {
-    if (Random.nextDouble() < GenHelper.corruptionChance) {
-      // TODO: Maybe outsource to dedicated corruption function?
-      "lasdkfjlasdkfj"
+    val min = 1
+    val max = 100
+    if ((Random.nextInt(max-min) + min) / 100.00 < GenHelper.corruptionChance) {
+      TrashMaker5000.makeTrash(po)
     } else {
       ProductOrder.toString(po)
     }
@@ -126,6 +127,7 @@ object GenHelper {
 //        println(po.payment_type + " | " + po.payment_txn_success + " | " + po.failure_reason)
         PriceMultiplier.multiplyPrice(po)
         println(ProductOrder.toString(po))
+        println(toFinalString(po))
       }
     }
 
