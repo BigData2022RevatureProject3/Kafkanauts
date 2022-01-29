@@ -125,7 +125,6 @@ object GenHelper {
 //        println(po.payment_type + " | " + po.payment_txn_success + " | " + po.failure_reason)
         println(ProductOrder.toString(po))
       }
-      println(ProductOrder.toString(po))
     }
 
   }

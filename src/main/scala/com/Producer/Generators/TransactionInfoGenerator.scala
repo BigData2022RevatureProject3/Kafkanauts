@@ -4,11 +4,18 @@ import com.ProductOrder
 import scala.util.Random
 
 object TransactionInfoGenerator {
+  var counter = 1000
+
   def addTransactionInfo(po: ProductOrder): ProductOrder = {
     val r = new Random()
 
-    //  Assigns a transaction ID to po object.
-    po.payment_txn_id = Math.abs(r.nextLong)
+    val min = 1000
+    val max = 999999999
+
+//    Assigns order ID and transaction ID to po object.
+    po.order_id = "#" + counter
+    counter += 1
+    po.payment_txn_id = Math.abs(r.nextInt(max-min).toLong + min) * 100
     println(po.payment_txn_id)
 
     //  Calls Bao's paymentType function to set paymentType attribute of po object.
