@@ -16,6 +16,7 @@ object GenHelper {
   // TODO: Finish and make canonical
   val categories = List("Gas", "Medicine", "Music", "Produce")
   val corruptionChance: Double = 0.03
+  var orderIDAccumulator = 1000 // A globally incremented value.
   // Access the map by country to get a list.
   // Access list by dayOfWeek to get category Map.
   // Access that map to get a function from dayPercentage to activity at that time
@@ -91,20 +92,9 @@ object GenHelper {
   }
 
 //  def addTransactionInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
-    def addTransactionInfo(po: ProductOrder): ProductOrder = {
-    //  Calls Bao's paymentType function to set paymentType attribute of po object.
-    PaymentTypeGenerator.genPaymentType(po)
-
-    //   Assigns payment_txn_success status to po object.
-    val r = new Random()
-    val ran2 = r.nextInt(10)
-    ran2 match {
-      case 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 => po.payment_txn_success = "Y"
-      case _ => po.payment_txn_success = "N"
-    }
-    //   Calls Bao's genFailReason function to assign failure reason to po object.
-    FailureReasonGenerator.genFailReason(po)
-    return po
+  def addTransactionInfo(po: ProductOrder): ProductOrder = {
+    TransactionInfoGenerator.addTransactionInfo(po)
+    po
   }
 
   def toFinalString(po: ProductOrder): String = {
@@ -117,11 +107,27 @@ object GenHelper {
   }
 
   def main(args: Array[String]): Unit = {
-    val po = ProductOrder.getInitialOrder(LocalDateTime.now())
-    for (i <- 1 to 1000) {
-      addTransactionInfo(po)
-      println(po.payment_type + " | " + po.payment_txn_success + " | " + po.failure_reason)
+    val input = scala.io.StdIn.readLine("Enter Int: ").toInt
+    input match {
+      case 1 => addTransactionInfoDemo
+      case 2 =>
+      case 3 =>
+      case 4 =>
+      case 5 =>
+      case 6 =>
+      case _ =>
     }
+    def addTransactionInfoDemo: Unit = {
+      val po = ProductOrder.getInitialOrder(LocalDateTime.now())
+      println(ProductOrder.toString(po))
+      for (i <- 1 to 1000) {
+        addTransactionInfo(po)
+//        println(po.payment_type + " | " + po.payment_txn_success + " | " + po.failure_reason)
+        println(ProductOrder.toString(po))
+      }
+      println(ProductOrder.toString(po))
+    }
+
   }
 
 }
