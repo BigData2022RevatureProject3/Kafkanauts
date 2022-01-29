@@ -121,8 +121,10 @@ object GenHelper {
       val po = ProductOrder.getInitialOrder(LocalDateTime.now())
       println(ProductOrder.toString(po))
       for (i <- 1 to 1000) {
+        po.price = 6.89
         addTransactionInfo(po)
 //        println(po.payment_type + " | " + po.payment_txn_success + " | " + po.failure_reason)
+        PriceMultiplier.multiplyPrice(po)
         println(ProductOrder.toString(po))
       }
     }
