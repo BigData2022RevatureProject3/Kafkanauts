@@ -118,9 +118,10 @@ object GenHelper {
 
   def main(args: Array[String]): Unit = {
     val po = ProductOrder.getInitialOrder(LocalDateTime.now())
-    println(ProductOrder.toString(po))
-    addTransactionInfo(po)
-    println(ProductOrder.toString(po))
+    for (i <- 1 to 1000) {
+      addTransactionInfo(po)
+      println(po.payment_type + " | " + po.payment_txn_success + " | " + po.failure_reason)
+    }
   }
 
 }
