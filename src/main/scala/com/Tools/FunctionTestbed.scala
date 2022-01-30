@@ -4,19 +4,23 @@ import org.apache.spark.sql.DataFrame
 
 object FunctionTestbed {
   def main(args: Array[String]): Unit = {
-    val normal = MathHelper.getNormalPDF(0.5, 0.2)
-    functionToDataFrame(normal).show()
-    
+    val n1 = MathHelper.getNormalPDF(0.3, 0.1)
+    val n2 = MathHelper.getNormalPDF(0.7, 0.1)
+    val n3 = (x: Double) => x
+    val func = (x: Double) => n1(x)
+    val func2 = MathHelper.minOfFunctions(n1, n3)
+
+    MathHelper.functionToDataFrame(func).show()
+    MathHelper.functionToDataFrame(func2).show()
   }
 
-  def functionToDataFrame(func: (Double) => Double, samples: Int = 10, initialX: Double = 0.0): DataFrame = {
-    val spark = SparkHelper.spark
-    import spark.implicits._
-
-    var step = (1.0 - initialX) / samples
-    val x = (initialX to 1.0 by step)
-    val y = x.map(func)
-    spark.sparkContext.parallelize(x.zip(y)).toDF()
+  def getSampleFunc(): DataFrame = {
+    val n1 = MathHelper.getNormalPDF(0.3, 0.1)
+    val n2 = MathHelper.getNormalPDF(0.7, 0.1)
+    val func = (x: Double) => n1(x) + n2(x)
+    MathHelper.functionToDataFrame(func)
   }
+
+
 
 }
