@@ -9,10 +9,10 @@ object CountryFunctions {
 
   }
   def compareTotals(): Unit = {
-    val globalScale = 5
-    val chinaScale  = 1402
-    val usScale     = 330
-    val spainScale  = 47
+    val globalScale = 1
+    val chinaScale  = 2
+    val usScale     = 1
+    val spainScale  = 1
 
     val c = getChineseDaily()
     val u = getUSDaily()
