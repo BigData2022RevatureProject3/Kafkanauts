@@ -1,31 +1,13 @@
 package com.Producer.Generators
 
-import spire.compat.fractional
-
-import scala.collection.mutable.ListBuffer
-import scala.io.Source
-import scala.math.Fractional.Implicits.infixFractionalOps
 import scala.util.Random
 import com.ProductOrder
 
 object MedicineGenerator {
-  private final var medicineFile = "data/medicine/medicine_2021.txt"
-  private var medicineList:ListBuffer[String] = ListBuffer() //object medicine list starts empty
-  var isListFilled:Boolean = false
-
-  // call this function before ever calling getMedicine function so that medicineList variable is not empty. This way we only ever have read the file once
-  def fillMedicineList():Unit = {
-    if (!isListFilled) {
-      for (lines <- Source.fromFile(medicineFile).getLines()) {
-        medicineList += lines
-      }
-    }
-    isListFilled = true
-  }
+  private final var medicineList = os.read.lines(os.pwd / "clean_data" / "medicine_2021.txt").drop(1).toList
 
   // this fills in the product related fields of the ProductOrder object
   def getMedicine(po: ProductOrder):ProductOrder = {
-    fillMedicineList()
     val ran = new Random()
     val rownum = Math.abs(ran.nextInt(medicineList.length))
     val row = medicineList(Math.abs(rownum)).split(",")
