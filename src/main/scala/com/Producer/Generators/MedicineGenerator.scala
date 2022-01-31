@@ -27,16 +27,16 @@ object MedicineGenerator {
   def getMedicine(po: ProductOrder):ProductOrder = {
     fillMedicineList()
     val ran = new Random()
-    val rownum = ran.nextInt(medicineList.length)
+    val rownum = Math.abs(ran.nextInt(medicineList.length))
     val row = medicineList(Math.abs(rownum)).split(",")
     val product = row(0)
     val price = row(2).toDouble
-    val quantity = ran.nextInt()
+    val quantity = Math.abs(ran.nextInt(10))
     val totalPrice = (math floor price * quantity * 100) / 100
     val result = product + totalPrice
     po.product_name = product
     po.product_category = "Medicine"
-    po.price = totalPrice
+    po.price = Math.abs(totalPrice)
     po.qty = quantity
     return po
   }
