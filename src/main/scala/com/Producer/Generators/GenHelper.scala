@@ -43,7 +43,7 @@ object GenHelper {
       case "Medicine" => MedicineGenerator.getMedicine(po)
       case "Music" => MusicGenerator.genMusic(po)
       case "Gas" => GasStationGenerator.generateStations(po)
-      case "Grocery" => po // to be added
+      case "Grocery" => GroceryGenerator.generateGroceries(po)
       case "Misc." => po // to be added
     }
   }
