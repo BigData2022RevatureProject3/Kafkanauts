@@ -15,11 +15,11 @@ object MedicineGenerator {
     val price = row(2).toDouble
     val quantity = Math.abs(ran.nextInt(10))
     val totalPrice = (math floor price * quantity * 100) / 100
-    val result = product + totalPrice
+    po.product_id = Math.abs(product.hashCode())
     po.product_name = product
     po.product_category = "Medicine"
     po.price = Math.abs(totalPrice)
     po.qty = quantity
-    return po
+    po
   }
 }
