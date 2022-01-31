@@ -21,9 +21,16 @@ object CustomerInfoGenerator {
   private final val spCityFile = "data/spain_cities.txt"
   private final val countries = new ListBuffer[String]
   private final val ran = scala.util.Random
-  for (line <- Source.fromFile("data/countries.txt").getLines) {
-    countries += line
+  var isListFilled:Boolean = false
+  def fillCountryList():Unit = {
+    if (!isListFilled) {
+      for (line <- Source.fromFile("data/countries.txt").getLines) {
+        countries += line
+      }
+    }
+    isListFilled = true
   }
+
 
   def generateCustomer(po:ProductOrder):ProductOrder={
     if(po.product_category == "gas"){
@@ -38,6 +45,7 @@ object CustomerInfoGenerator {
     }
   }
   private def genUSCustomer(po:ProductOrder): ProductOrder = {
+    fillCountryList()
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
     for (line <- Source.fromFile(fUsFile).getLines) {
@@ -64,6 +72,7 @@ object CustomerInfoGenerator {
   }
 
   private def genCNCustomer(po:ProductOrder): ProductOrder = {
+    fillCountryList()
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
     for (line <- Source.fromFile(fCnFile).getLines) {
@@ -88,6 +97,7 @@ object CustomerInfoGenerator {
   }
 
   private def genEUCustomer(po:ProductOrder): ProductOrder = {
+    fillCountryList()
     val firstNameList = new ListBuffer[String]
     val lastNameList = new ListBuffer[String]
     for (line <- Source.fromFile(fEuFile).getLines) {
