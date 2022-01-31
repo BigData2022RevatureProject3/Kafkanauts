@@ -66,7 +66,7 @@ object GroceryGenerator {
   //UsGrocery generator
     def genUsGrocery(po:ProductOrder): ProductOrder = {
       val (name, price) = MathHelper.chooseFromList(usGroceries)
-      val quantity = Random.nextInt(10) + 1
+      val quantity = Math.abs(Random.nextInt(10) + 1)
       po.product_name = name
       po.product_category = "Groceries"
       po.price = math.floor(quantity * price)
@@ -77,7 +77,7 @@ object GroceryGenerator {
   //ChinaGrocery generator
   def genChinaGrocery(po:ProductOrder): ProductOrder = {
     val (name, price) = MathHelper.chooseFromList(chinaGroceries)
-    val quantity = Random.nextInt(10) + 1
+    val quantity = Math.abs(Random.nextInt(10) + 1)
     po.product_name = name
     po.product_category = "Groceries"
     po.price = math.floor(quantity * price)
@@ -88,7 +88,7 @@ object GroceryGenerator {
   //SpainGrocery generator
   def genSpainGrocery(po:ProductOrder): ProductOrder = {
     val (name, price) = MathHelper.chooseFromList(spainGroceries)
-    val quantity = Random.nextInt(10) + 1
+    val quantity = Math.abs(Random.nextInt(10) + 1)
     po.product_name = name
     po.product_category = "Groceries"
     po.price = math.floor(quantity * price)
