@@ -32,8 +32,7 @@ object ProducerPipeline {
         val dayOfWeek: Int = DateHelper.getDayOfWeek(batchDateTime)
         val countryProbs = GenHelper.getCountryProbabilities(dayPercentage, dayOfWeek)
         var batchSize: Int = Math.ceil(countryProbs.sum * globalScale).toInt
-        batchSize = 2
-
+        batchSize = 1
         val chinaCats = CountryFunctions.getCategoryProbabilities("China", dayOfWeek, dayPercentage)
         val usCats    = CountryFunctions.getCategoryProbabilities("United States", dayOfWeek, dayPercentage)
         val spainCats = CountryFunctions.getCategoryProbabilities("Spain", dayOfWeek, dayPercentage)
