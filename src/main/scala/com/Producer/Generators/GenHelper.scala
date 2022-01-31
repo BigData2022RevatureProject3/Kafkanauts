@@ -19,7 +19,12 @@ object GenHelper {
   val spainDaily: List[Double => Double] = CountryFunctions.getSpainDaily()
 
   // TODO: Finish and make canonical
+<<<<<<< Updated upstream
   val categories = List("Gas", "Groceries", "Medicine")
+=======
+  val categories = List("Gas", "Medicine")
+//  Future categories: E-Commerce
+>>>>>>> Stashed changes
   val corruptionChance: Double = 0.03
 
   var orderIDAccumulator = 1000 // A globally incremented value.
@@ -42,11 +47,17 @@ object GenHelper {
     po.product_category match {
       case "Medicine" => MedicineGenerator.getMedicine(po)
       case "Music" => MusicGenerator.genMusic(po)
+<<<<<<< Updated upstream
       case "Gas" => GasStationGenerator.generateStations(po)
       case "Grocery" => GroceryGenerator.generateGroceries(po, day)
       case _ => po.product_category = "Medicine"
         MedicineGenerator.getMedicine(po)
 //      case "Misc." => po // to be added
+=======
+      case "Gas" => po // to be added
+      case "Grocery" => po // to be added
+      case "E-Commerce" => po // to be added
+>>>>>>> Stashed changes
     }
   }
 
@@ -71,29 +82,6 @@ object GenHelper {
   }
 
   def main(args: Array[String]): Unit = {
-    val input = scala.io.StdIn.readLine("Enter Int: ").toInt
-    input match {
-      case 1 => addTransactionInfoDemo
-      case 2 =>
-      case 3 =>
-      case 4 =>
-      case 5 =>
-      case 6 =>
-      case _ =>
-    }
-    def addTransactionInfoDemo: Unit = {
-      val po = ProductOrder.getInitialOrder(LocalDateTime.now())
-      println(ProductOrder.toString(po))
-      for (i <- 1 to 1000) {
-        po.price = 6.89
-        addTransactionInfo(po)
-//        println(po.payment_type + " | " + po.payment_txn_success + " | " + po.failure_reason)
-        PriceMultiplier.multiplyPrice(po)
-        println(ProductOrder.toString(po))
-        println(toFinalString(po))
-      }
-    }
-
   }
 
 }
