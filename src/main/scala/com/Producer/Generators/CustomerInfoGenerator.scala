@@ -11,20 +11,20 @@ object CustomerInfoGenerator {
   //In the follow respective order:
   //orderId, Customer ID, Customer Name, Customer City, Customer Country
 
-  private final val fUsFile = "data/first_name_american_common_female.txt"
-  private final val lUsFile = "data/last_name_american_common.txt"
-  private final val fCnFile = "data/first_name_chinese.txt"
-  private final val lCnFile = "data/last_name_chinese.txt"
-  private final val fEuFile = "data/first_name_european.txt"
-  private final val usCityFile = "data/american_cities.txt"
-  private final val cnCityFile = "data/chinese_cities.txt"
-  private final val spCityFile = "data/spain_cities.txt"
+  private final val fUsFile = "clean_data/first_name_american_common_female.txt"
+  private final val lUsFile = "clean_data/last_name_american_common.txt"
+  private final val fCnFile = "clean_data/first_name_chinese.txt"
+  private final val lCnFile = "clean_data/last_name_chinese.txt"
+  private final val fEuFile = "clean_data/first_name_european.txt"
+  private final val usCityFile = "clean_data/american_cities.txt"
+  private final val cnCityFile = "clean_data/chinese_cities.txt"
+  private final val spCityFile = "clean_data/spain_cities.txt"
   private final val countries = new ListBuffer[String]
   private final val ran = scala.util.Random
   var isListFilled:Boolean = false
   def fillCountryList():Unit = {
     if (!isListFilled) {
-      for (line <- Source.fromFile("data/countries.txt").getLines) {
+      for (line <- Source.fromFile("clean_data/countries.txt").getLines) {
         countries += line
       }
     }
