@@ -6,25 +6,20 @@ import com.Tools.MathHelper
 import scala.util.Random
 
 object GroceryGenerator {
-  private final val ran = new Random()
-  private final val groceryUSFile = "clean_data/clean_us_grocery_data.csv"
-  private final val groceryChinaFile = "clean_data/clean_china_grocery_data.csv"
-  private final val grocerySpainFile = "clean_data/clean_spain_grocery_data.csv"
 
   //Test generator
 //  def main(args: Array[String]): Unit = {
-//    val pos = (0 to 10)
-//      .map(_ => ProductOrder.getInitialOrder(LocalDateTime.now()))
-//      .map(po => {po.country = "China"; po})
-//      .map(genChinaGrocery)
-//      .foreach(p => println(ProductOrder.toString(p)))
+//    val po = ProductOrder.getInitialOrder(LocalDateTime.now())
+//  po.country = "United States"
+//    generateGroceries(po, 2)
+//  println(ProductOrder.toString(po))
 //  }
 //Created usGroceries List
   val usGroceries = os
     .read
-    .lines(os.pwd / "clean_data" / "clean_us_grocery_data.csv")
+    .lines(DataValidator.validatedData("clean_data/clean_us_grocery_data.csv"))
     .drop(1)
-    .map(line => line.split("|"))
+    .map(line => line.split("\\|"))
     .map(splitArray => {
       val name = splitArray(1)
       val price = splitArray(5).toDouble
@@ -34,9 +29,9 @@ object GroceryGenerator {
   //Created chinaGroceries List
   val chinaGroceries = os
     .read
-    .lines(os.pwd / "clean_data" / "clean_china_grocery_data.csv")
+    .lines(DataValidator.validatedData("clean_data/clean_china_grocery_data.csv"))
     .drop(1)
-    .map(line => line.split("|"))
+    .map(line => line.split("\\|"))
     .map(splitArray => {
       val name = splitArray(1)
       val price = splitArray(5).toDouble
@@ -46,15 +41,28 @@ object GroceryGenerator {
   //Created spainGroceries List
   val spainGroceries = os
     .read
-    .lines(os.pwd / "clean_data" / "clean_spain_grocery_data.csv")
+    .lines(DataValidator.validatedData("clean_data/clean_spain_grocery_data.csv"))
     .drop(1)
-    .map(line => line.split("|"))
+    .map(line => line.split("\\|"))
     .map(splitArray => {
       val name = splitArray(1)
       val price = splitArray(5).toDouble
       (name, price)
     })
     .toList
+  //Create tacoTuesday List
+  val tacoTuesday = os
+    .read
+    .lines(DataValidator.validatedData("clean_data/taco_master.csv"))
+    .drop(1)
+    .map(line => line.split("\\|"))
+    .map(splitArray => {
+      val name = splitArray(1)
+      val price = splitArray(2).toDouble
+      (name, price)
+    })
+    .toList
+
   //Create Groceries generator
   def generateGroceries(po:ProductOrder, day:Int ):ProductOrder={
     po.country match{
@@ -63,28 +71,30 @@ object GroceryGenerator {
       case "Spain" => genSpainGrocery(po)
     }
   }
-
+//Taco generator
+  def makeTaco(po:ProductOrder):ProductOrder = {
+    val (name, price) = MathHelper.chooseFromList(tacoTuesday)
+    val quantity = Math.abs(Random.nextInt(10) + 1)
+    po.product_name = name
+    po.product_category = "Groceries"
+    po.price = math.floor(quantity * price * 100) / 100
+    po.qty = quantity
+    po.product_id = Math.abs(("name" + price.toString).hashCode())
+    return po
+  }
   //UsGrocery generator
     def genUsGrocery(po:ProductOrder, isTacoDay: Boolean): ProductOrder = {
       val quantity = Math.abs(Random.nextInt(10) + 1)
-
       if (isTacoDay && Random.nextDouble() < 0.5) {
-        // TACO TUESDAY
-        val (name, price) = MathHelper.chooseFromList(usGroceries)
-        po.product_name = name
-        po.product_category = "Groceries"
-        po.price = math.floor(quantity * price)
-        po.qty = quantity
-        po.product_id = ("name" + price.toString).hashCode()
+        makeTaco(po)
       } else {
         val (name, price) = MathHelper.chooseFromList(usGroceries)
         po.product_name = name
         po.product_category = "Groceries"
-        po.price = math.floor(quantity * price)
+        po.price = math.floor(quantity * price * 100) / 100
         po.qty = quantity
-        po.product_id = ("name" + price.toString).hashCode()
+        po.product_id = Math.abs(("name" + price.toString).hashCode())
       }
-
       return po
     }
   //ChinaGrocery generator
@@ -93,9 +103,9 @@ object GroceryGenerator {
     val quantity = Math.abs(Random.nextInt(10) + 1)
     po.product_name = name
     po.product_category = "Groceries"
-    po.price = math.floor(quantity * price)
+    po.price = math.floor(quantity * price * 100) / 100
     po.qty = quantity
-    po.product_id = ("name" + price.toString).hashCode()
+    po.product_id = Math.abs(("name" + price.toString).hashCode())
     return po
   }
   //SpainGrocery generator
@@ -104,9 +114,9 @@ object GroceryGenerator {
     val quantity = Math.abs(Random.nextInt(10) + 1)
     po.product_name = name
     po.product_category = "Groceries"
-    po.price = math.floor(quantity * price)
+    po.price = math.floor(quantity * price * 100) / 100
     po.qty = quantity
-    po.product_id = ("name" + price.toString).hashCode()
+    po.product_id = Math.abs(("name" + price.toString).hashCode())
     return po
   }
 }

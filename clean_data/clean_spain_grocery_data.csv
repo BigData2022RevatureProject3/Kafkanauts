@@ -1,65 +1,65 @@
-﻿Area,Item,Year,Unit,Value,Price,Measurement
-Spain,Almonds- with shell,2020,USD,1204,1.204,KG
-Spain,Apples,2020,USD,570,0.57,KG
-Spain,Apricots,2020,USD,794,0.794,KG
-Spain,Artichokes,2020,USD,785,0.785,KG
-Spain,Asparagus,2020,USD,1879,1.879,KG
-Spain,Avocados,2020,USD,2541,2.541,KG
-Spain,Bananas,2020,USD,611,0.611,KG
-Spain,Barley,2020,USD,184,0.184,KG
-Spain,Beans- dry,2020,USD,1885,1.885,KG
-Spain,Beans- green,2020,USD,1828,1.828,KG
-Spain,Broad beans- horse beans- dry,2020,USD,268,0.268,KG
-Spain,Cabbages and other brassicas,2020,USD,398,0.398,KG
-Spain,Carrots and turnips,2020,USD,314,0.314,KG
-Spain,Cauliflowers and broccoli,2020,USD,614,0.614,KG
-Spain,Cherries,2020,USD,2390,2.39,KG
-Spain,Chick peas,2020,USD,586,0.586,KG
-Spain,Chillies and peppers- green,2020,USD,1126,1.126,KG
-Spain,Cucumbers and gherkins,2020,USD,617,0.617,KG
-Spain,Eggplants (aubergines),2020,USD,679,0.679,KG
-Spain,Eggs- hen- in shell,2020,USD,1537,1.537,KG
-Spain,Figs,2020,USD,920,0.92,KG
-Spain,Garlic,2020,USD,1603,1.603,KG
-Spain,Grapes,2020,USD,795,0.795,KG
-Spain,Hazelnuts- with shell,2020,USD,2483,2.483,KG
-Spain,Leeks- other alliaceous vegetables,2020,USD,658,0.658,KG
-Spain,Lemons and limes,2020,USD,462,0.462,KG
-Spain,Lentils,2020,USD,495,0.495,KG
-Spain,Lettuce and chicory,2020,USD,282,0.282,KG
-Spain,Maize,2020,USD,223,0.223,KG
-Spain,Meat live weight- chicken,2020,USD,1205,1.205,KG
-Spain,Meat live weight- goat,2020,USD,764,0.764,KG
-Spain,Meat live weight- rabbit,2020,USD,2135,2.135,KG
-Spain,Meat live weight- sheep,2020,USD,655,0.655,KG
-Spain,Melons- other (inc.cantaloupes),2020,USD,385,0.385,KG
-Spain,Milk- whole fresh cow,2020,USD,366,0.366,KG
-Spain,Milk- whole fresh goat,2020,USD,799,0.799,KG
-Spain,Milk- whole fresh sheep,2020,USD,991,0.991,KG
-Spain,Mushrooms and truffles,2020,USD,1931,1.931,KG
-Spain,Oats,2020,USD,188,0.188,KG
-Spain,Olives,2020,USD,831,0.831,KG
-Spain,Onions- dry,2020,USD,244,0.244,KG
-Spain,Oranges,2020,USD,314,0.314,KG
-Spain,Peaches and nectarines,2020,USD,887,0.887,KG
-Spain,Pears,2020,USD,712,0.712,KG
-Spain,Peas- green,2020,USD,531,0.531,KG
-Spain,Plums and sloes,2020,USD,538,0.538,KG
-Spain,Potatoes,2020,USD,291,0.291,KG
-Spain,Pumpkins- squash and gourds,2020,USD,777,0.777,KG
-Spain,Rice- paddy,2020,USD,362,0.362,KG
-Spain,Rye,2020,USD,174,0.174,KG
-Spain,Seed cotton,2020,USD,406,0.406,KG
-Spain,Sorghum,2020,USD,202,0.202,KG
-Spain,Spinach,2020,USD,988,0.988,KG
-Spain,Strawberries,2020,USD,1242,1.242,KG
-Spain,Sugar beet,2020,USD,36,0.036,KG
-Spain,Sunflower seed,2020,USD,384,0.384,KG
-Spain,Tangerines- mandarins- clementines- satsumas,2020,USD,381,0.381,KG
-Spain,Tobacco- unmanufactured,2020,USD,2657,2.657,KG
-Spain,Tomatoes,2020,USD,363,0.363,KG
-Spain,Vegetables- leguminous nes,2020,USD,1085,1.085,KG
-Spain,Vetches,2020,USD,243,0.243,KG
-Spain,Watermelons,2020,USD,403,0.403,KG
-Spain,Wheat,2020,USD,221,0.221,KG
-Spain,Wool- greasy,2020,USD,662,0.662,KG
+﻿Area|Item|Year|Unit|Value|Price|Measurement
+Spain|Almonds- with shell|2020|USD|1204|1.204|KG
+Spain|Apples|2020|USD|570|0.57|KG
+Spain|Apricots|2020|USD|794|0.794|KG
+Spain|Artichokes|2020|USD|785|0.785|KG
+Spain|Asparagus|2020|USD|1879|1.879|KG
+Spain|Avocados|2020|USD|2541|2.541|KG
+Spain|Bananas|2020|USD|611|0.611|KG
+Spain|Barley|2020|USD|184|0.184|KG
+Spain|Beans- dry|2020|USD|1885|1.885|KG
+Spain|Beans- green|2020|USD|1828|1.828|KG
+Spain|Broad beans- horse beans- dry|2020|USD|268|0.268|KG
+Spain|Cabbages and other brassicas|2020|USD|398|0.398|KG
+Spain|Carrots and turnips|2020|USD|314|0.314|KG
+Spain|Cauliflowers and broccoli|2020|USD|614|0.614|KG
+Spain|Cherries|2020|USD|2390|2.39|KG
+Spain|Chick peas|2020|USD|586|0.586|KG
+Spain|Chillies and peppers- green|2020|USD|1126|1.126|KG
+Spain|Cucumbers and gherkins|2020|USD|617|0.617|KG
+Spain|Eggplants (aubergines)|2020|USD|679|0.679|KG
+Spain|Eggs- hen- in shell|2020|USD|1537|1.537|KG
+Spain|Figs|2020|USD|920|0.92|KG
+Spain|Garlic|2020|USD|1603|1.603|KG
+Spain|Grapes|2020|USD|795|0.795|KG
+Spain|Hazelnuts- with shell|2020|USD|2483|2.483|KG
+Spain|Leeks- other alliaceous vegetables|2020|USD|658|0.658|KG
+Spain|Lemons and limes|2020|USD|462|0.462|KG
+Spain|Lentils|2020|USD|495|0.495|KG
+Spain|Lettuce and chicory|2020|USD|282|0.282|KG
+Spain|Maize|2020|USD|223|0.223|KG
+Spain|Meat live weight- chicken|2020|USD|1205|1.205|KG
+Spain|Meat live weight- goat|2020|USD|764|0.764|KG
+Spain|Meat live weight- rabbit|2020|USD|2135|2.135|KG
+Spain|Meat live weight- sheep|2020|USD|655|0.655|KG
+Spain|Melons- other (inc.cantaloupes)|2020|USD|385|0.385|KG
+Spain|Milk- whole fresh cow|2020|USD|366|0.366|KG
+Spain|Milk- whole fresh goat|2020|USD|799|0.799|KG
+Spain|Milk- whole fresh sheep|2020|USD|991|0.991|KG
+Spain|Mushrooms and truffles|2020|USD|1931|1.931|KG
+Spain|Oats|2020|USD|188|0.188|KG
+Spain|Olives|2020|USD|831|0.831|KG
+Spain|Onions- dry|2020|USD|244|0.244|KG
+Spain|Oranges|2020|USD|314|0.314|KG
+Spain|Peaches and nectarines|2020|USD|887|0.887|KG
+Spain|Pears|2020|USD|712|0.712|KG
+Spain|Peas- green|2020|USD|531|0.531|KG
+Spain|Plums and sloes|2020|USD|538|0.538|KG
+Spain|Potatoes|2020|USD|291|0.291|KG
+Spain|Pumpkins- squash and gourds|2020|USD|777|0.777|KG
+Spain|Rice- paddy|2020|USD|362|0.362|KG
+Spain|Rye|2020|USD|174|0.174|KG
+Spain|Seed cotton|2020|USD|406|0.406|KG
+Spain|Sorghum|2020|USD|202|0.202|KG
+Spain|Spinach|2020|USD|988|0.988|KG
+Spain|Strawberries|2020|USD|1242|1.242|KG
+Spain|Sugar beet|2020|USD|36|0.036|KG
+Spain|Sunflower seed|2020|USD|384|0.384|KG
+Spain|Tangerines- mandarins- clementines- satsumas|2020|USD|381|0.381|KG
+Spain|Tobacco- unmanufactured|2020|USD|2657|2.657|KG
+Spain|Tomatoes|2020|USD|363|0.363|KG
+Spain|Vegetables- leguminous nes|2020|USD|1085|1.085|KG
+Spain|Vetches|2020|USD|243|0.243|KG
+Spain|Watermelons|2020|USD|403|0.403|KG
+Spain|Wheat|2020|USD|221|0.221|KG
+Spain|Wool- greasy|2020|USD|662|0.662|KG

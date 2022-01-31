@@ -1,73 +1,73 @@
-﻿Area,Item,Year,Unit,Value,Price,Measurement
-United States of America,Almonds- with shell,2020,USD,4034,4.034,KG
-United States of America,Apples,2020,USD,849,0.849,KG
-United States of America,Apricots,2020,USD,1135,1.135,KG
-United States of America,Artichokes,2020,USD,1742,1.742,KG
-United States of America,Asparagus,2020,USD,3175,3.175,KG
-United States of America,Avocados,2020,USD,2282,2.282,KG
-United States of America,Barley,2020,USD,216,0.216,KG
-United States of America,Beans- dry,2020,USD,659,0.659,KG
-United States of America,Blueberries,2020,USD,4497,4.497,KG
-United States of America,Cabbages and other brassicas,2020,USD,459,0.459,KG
-United States of America,Carrots and turnips,2020,USD,507,0.507,KG
-United States of America,Cauliflowers and broccoli,2020,USD,864,0.864,KG
-United States of America,Cherries,2020,USD,3131,3.131,KG
-United States of America,Cherries- sour,2020,USD,838,0.838,KG
-United States of America,Chick peas,2020,USD,430,0.43,KG
-United States of America,Chillies and peppers- green,2020,USD,930,0.93,KG
-United States of America,Coffee- green,2020,USD,41226,41.226,KG
-United States of America,Cotton lint,2020,USD,1437,1.437,KG
-United States of America,Cottonseed,2020,USD,212,0.212,KG
-United States of America,Cranberries,2020,USD,1792,1.792,KG
-United States of America,Cucumbers and gherkins,2020,USD,650,0.65,KG
-United States of America,Dates,2020,USD,3362,3.362,KG
-United States of America,Garlic,2020,USD,1682,1.682,KG
-United States of America,Grapefruit (inc. pomelos),2020,USD,432,0.432,KG
-United States of America,Grapes,2020,USD,1653,1.653,KG
-United States of America,Groundnuts- with shell,2020,USD,456,0.456,KG
-United States of America,Hazelnuts- with shell,2020,USD,2315,2.315,KG
-United States of America,Honey- natural,2020,USD,4475,4.475,KG
-United States of America,Hops,2020,USD,13162,13.162,KG
-United States of America,Kiwi fruit,2020,USD,2116,2.116,KG
-United States of America,Lemons and limes,2020,USD,673,0.673,KG
-United States of America,Lentils,2020,USD,384,0.384,KG
-United States of America,Lettuce and chicory,2020,USD,679,0.679,KG
-United States of America,Linseed,2020,USD,378,0.378,KG
-United States of America,Maize,2020,USD,169,0.169,KG
-United States of America,Maize- green,2020,USD,827,0.827,KG
-United States of America,Meat live weight- cattle,2020,USD,2403,2.403,KG
-United States of America,Meat live weight- pig,2020,USD,1034,1.034,KG
-United States of America,Melons- other (inc.cantaloupes),2020,USD,575,0.575,KG
-United States of America,Milk- whole fresh cow,2020,USD,402,0.402,KG
-United States of America,Millet,2020,USD,436,0.436,KG
-United States of America,Mustard seed,2020,USD,597,0.597,KG
-United States of America,Oats,2020,USD,175,0.175,KG
-United States of America,Olives,2020,USD,953,0.953,KG
-United States of America,Onions- dry,2020,USD,320,0.32,KG
-United States of America,Oranges,2020,USD,361,0.361,KG
-United States of America,Papayas,2020,USD,968,0.968,KG
-United States of America,Peaches and nectarines,2020,USD,1576,1.576,KG
-United States of America,Pears,2020,USD,606,0.606,KG
-United States of America,Peas- dry,2020,USD,199,0.199,KG
-United States of America,Peas- green,2020,USD,284,0.284,KG
-United States of America,Pistachios,2020,USD,6063,6.063,KG
-United States of America,Potatoes,2020,USD,208,0.208,KG
-United States of America,Pumpkins- squash and gourds,2020,USD,315,0.315,KG
-United States of America,Rapeseed,2020,USD,498,0.498,KG
-United States of America,Raspberries,2020,USD,4652,4.652,KG
-United States of America,Rice- paddy,2020,USD,295,0.295,KG
-United States of America,Rye,2020,USD,205,0.205,KG
-United States of America,Safflower seed,2020,USD,470,0.47,KG
-United States of America,Sorghum,2020,USD,190,0.19,KG
-United States of America,Soybeans,2020,USD,410,0.41,KG
-United States of America,Spinach,2020,USD,1338,1.338,KG
-United States of America,Strawberries,2020,USD,2425,2.425,KG
-United States of America,String beans,2020,USD,1409,1.409,KG
-United States of America,Sunflower seed,2020,USD,434,0.434,KG
-United States of America,Sweet potatoes,2020,USD,525,0.525,KG
-United States of America,Tangerines- mandarins- clementines- satsumas,2020,USD,963,0.963,KG
-United States of America,Tobacco- unmanufactured,2020,USD,4636,4.636,KG
-United States of America,Tomatoes,2020,USD,1259,1.259,KG
-United States of America,Walnuts- with shell,2020,USD,1345,1.345,KG
-United States of America,Watermelons,2020,USD,370,0.37,KG
-United States of America,Wheat,2020,USD,184,0.184,KG
+﻿Area|Item|Year|Unit|Value|Price|Measurement
+United States of America|Almonds- with shell|2020|USD|4034|4.034|KG
+United States of America|Apples|2020|USD|849|0.849|KG
+United States of America|Apricots|2020|USD|1135|1.135|KG
+United States of America|Artichokes|2020|USD|1742|1.742|KG
+United States of America|Asparagus|2020|USD|3175|3.175|KG
+United States of America|Avocados|2020|USD|2282|2.282|KG
+United States of America|Barley|2020|USD|216|0.216|KG
+United States of America|Beans- dry|2020|USD|659|0.659|KG
+United States of America|Blueberries|2020|USD|4497|4.497|KG
+United States of America|Cabbages and other brassicas|2020|USD|459|0.459|KG
+United States of America|Carrots and turnips|2020|USD|507|0.507|KG
+United States of America|Cauliflowers and broccoli|2020|USD|864|0.864|KG
+United States of America|Cherries|2020|USD|3131|3.131|KG
+United States of America|Cherries- sour|2020|USD|838|0.838|KG
+United States of America|Chick peas|2020|USD|430|0.43|KG
+United States of America|Chillies and peppers- green|2020|USD|930|0.93|KG
+United States of America|Coffee- green|2020|USD|41226|41.226|KG
+United States of America|Cotton lint|2020|USD|1437|1.437|KG
+United States of America|Cottonseed|2020|USD|212|0.212|KG
+United States of America|Cranberries|2020|USD|1792|1.792|KG
+United States of America|Cucumbers and gherkins|2020|USD|650|0.65|KG
+United States of America|Dates|2020|USD|3362|3.362|KG
+United States of America|Garlic|2020|USD|1682|1.682|KG
+United States of America|Grapefruit (inc. pomelos)|2020|USD|432|0.432|KG
+United States of America|Grapes|2020|USD|1653|1.653|KG
+United States of America|Groundnuts- with shell|2020|USD|456|0.456|KG
+United States of America|Hazelnuts- with shell|2020|USD|2315|2.315|KG
+United States of America|Honey- natural|2020|USD|4475|4.475|KG
+United States of America|Hops|2020|USD|13162|13.162|KG
+United States of America|Kiwi fruit|2020|USD|2116|2.116|KG
+United States of America|Lemons and limes|2020|USD|673|0.673|KG
+United States of America|Lentils|2020|USD|384|0.384|KG
+United States of America|Lettuce and chicory|2020|USD|679|0.679|KG
+United States of America|Linseed|2020|USD|378|0.378|KG
+United States of America|Maize|2020|USD|169|0.169|KG
+United States of America|Maize- green|2020|USD|827|0.827|KG
+United States of America|Meat live weight- cattle|2020|USD|2403|2.403|KG
+United States of America|Meat live weight- pig|2020|USD|1034|1.034|KG
+United States of America|Melons- other (inc.cantaloupes)|2020|USD|575|0.575|KG
+United States of America|Milk- whole fresh cow|2020|USD|402|0.402|KG
+United States of America|Millet|2020|USD|436|0.436|KG
+United States of America|Mustard seed|2020|USD|597|0.597|KG
+United States of America|Oats|2020|USD|175|0.175|KG
+United States of America|Olives|2020|USD|953|0.953|KG
+United States of America|Onions- dry|2020|USD|320|0.32|KG
+United States of America|Oranges|2020|USD|361|0.361|KG
+United States of America|Papayas|2020|USD|968|0.968|KG
+United States of America|Peaches and nectarines|2020|USD|1576|1.576|KG
+United States of America|Pears|2020|USD|606|0.606|KG
+United States of America|Peas- dry|2020|USD|199|0.199|KG
+United States of America|Peas- green|2020|USD|284|0.284|KG
+United States of America|Pistachios|2020|USD|6063|6.063|KG
+United States of America|Potatoes|2020|USD|208|0.208|KG
+United States of America|Pumpkins- squash and gourds|2020|USD|315|0.315|KG
+United States of America|Rapeseed|2020|USD|498|0.498|KG
+United States of America|Raspberries|2020|USD|4652|4.652|KG
+United States of America|Rice- paddy|2020|USD|295|0.295|KG
+United States of America|Rye|2020|USD|205|0.205|KG
+United States of America|Safflower seed|2020|USD|470|0.47|KG
+United States of America|Sorghum|2020|USD|190|0.19|KG
+United States of America|Soybeans|2020|USD|410|0.41|KG
+United States of America|Spinach|2020|USD|1338|1.338|KG
+United States of America|Strawberries|2020|USD|2425|2.425|KG
+United States of America|String beans|2020|USD|1409|1.409|KG
+United States of America|Sunflower seed|2020|USD|434|0.434|KG
+United States of America|Sweet potatoes|2020|USD|525|0.525|KG
+United States of America|Tangerines- mandarins- clementines- satsumas|2020|USD|963|0.963|KG
+United States of America|Tobacco- unmanufactured|2020|USD|4636|4.636|KG
+United States of America|Tomatoes|2020|USD|1259|1.259|KG
+United States of America|Walnuts- with shell|2020|USD|1345|1.345|KG
+United States of America|Watermelons|2020|USD|370|0.37|KG
+United States of America|Wheat|2020|USD|184|0.184|KG
