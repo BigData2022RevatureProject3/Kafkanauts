@@ -1,201 +1,201 @@
-﻿Grocery_Id,Area,Item,Year,Unit,Value,Price,Measurement
-1,"China, Hong Kong SAR",Bananas non-Cavendish,2020,USD,1747,1.747,KG
-2,"China, Hong Kong SAR","Eggs, hen, in shell",2020,USD,9102,9.102,KG
-3,"China, Hong Kong SAR","Fruit, citrus nes",2020,USD,2320,2.32,KG
-4,"China, Hong Kong SAR","Meat live weight, chicken",2020,USD,6783,6.783,KG
-5,"China, Hong Kong SAR","Meat live weight, pig",2020,USD,7174,7.174,KG
-6,"China, mainland",Apples,2020,USD,1180,1.18,KG
-7,"China, mainland",Bananas,2020,USD,724,0.724,KG
-8,"China, mainland","Beans, dry",2020,USD,703,0.703,KG
-9,"China, mainland","Beans, green",2020,USD,935,0.935,KG
-10,"China, mainland",Carrots and turnips,2020,USD,333,0.333,KG
-11,"China, mainland",Cauliflowers and broccoli,2020,USD,478,0.478,KG
-12,"China, mainland",Cereals nes,2020,USD,403,0.403,KG
-13,"China, mainland","Chillies and peppers, dry",2020,USD,809,0.809,KG
-14,"China, mainland","Chillies and peppers, green",2020,USD,785,0.785,KG
-15,"China, mainland",Cotton lint,2020,USD,2281,2.281,KG
-16,"China, mainland",Cottonseed,2020,USD,401,0.401,KG
-17,"China, mainland",Cucumbers and gherkins,2020,USD,623,0.623,KG
-18,"China, mainland",Dates,2020,USD,1474,1.474,KG
-19,"China, mainland",Eggplants (aubergines),2020,USD,490,0.49,KG
-20,"China, mainland","Eggs, hen, in shell",2020,USD,1465,1.465,KG
-21,"China, mainland",Garlic,2020,USD,1094,1.094,KG
-22,"China, mainland",Ginger,2020,USD,4710,4.71,KG
-23,"China, mainland",Grapefruit (inc. pomelos),2020,USD,507,0.507,KG
-24,"China, mainland",Grapes,2020,USD,1500,1.5,KG
-25,"China, mainland","Groundnuts, with shell",2020,USD,1272,1.272,KG
-26,"China, mainland",Kiwi fruit,2020,USD,985,0.985,KG
-27,"China, mainland","Leeks, other alliaceous vegetables",2020,USD,464,0.464,KG
-28,"China, mainland",Lemons and limes,2020,USD,1014,1.014,KG
-29,"China, mainland",Lettuce and chicory,2020,USD,842,0.842,KG
-30,"China, mainland",Maize,2020,USD,419,0.419,KG
-31,"China, mainland","Mangoes, mangosteens, guavas",2020,USD,2174,2.174,KG
-32,"China, mainland","Meat live weight, buffalo",2020,USD,3768,3.768,KG
-33,"China, mainland","Meat live weight, cattle",2020,USD,2517,2.517,KG
-34,"China, mainland","Meat live weight, chicken",2020,USD,1322,1.322,KG
-35,"China, mainland","Meat live weight, duck",2020,USD,2385,2.385,KG
-36,"China, mainland","Meat live weight, goose",2020,USD,3688,3.688,KG
-37,"China, mainland","Meat live weight, pig",2020,USD,2781,2.781,KG
-38,"China, mainland","Meat live weight, sheep",2020,USD,5992,5.992,KG
-39,"China, mainland","Milk, whole fresh cow",2020,USD,613,0.613,KG
-40,"China, mainland","Oil, palm",2020,USD,1290,1.29,KG
-41,"China, mainland","Onions, shallots, green",2020,USD,417,0.417,KG
-42,"China, mainland",Oranges,2020,USD,736,0.736,KG
-43,"China, mainland",Pears,2020,USD,877,0.877,KG
-44,"China, mainland","Peas, green",2020,USD,507,0.507,KG
-45,"China, mainland",Pepper (piper spp.),2020,USD,4637,4.637,KG
-46,"China, mainland",Persimmons,2020,USD,420,0.42,KG
-47,"China, mainland",Pineapples,2020,USD,656,0.656,KG
-48,"China, mainland",Potatoes,2020,USD,348,0.348,KG
-49,"China, mainland","Pumpkins, squash and gourds",2020,USD,652,0.652,KG
-50,"China, mainland",Rapeseed,2020,USD,797,0.797,KG
-51,"China, mainland","Rice, paddy",2020,USD,414,0.414,KG
-52,"China, mainland","Rubber, natural",2020,USD,2010,2.01,KG
-53,"China, mainland",Seed cotton,2020,USD,884,0.884,KG
-54,"China, mainland",Sesame seed,2020,USD,1716,1.716,KG
-55,"China, mainland",Soybeans,2020,USD,769,0.769,KG
-56,"China, mainland",Spinach,2020,USD,326,0.326,KG
-57,"China, mainland",Sugar cane,2020,USD,756,0.756,KG
-58,"China, mainland",Sunflower seed,2020,USD,993,0.993,KG
-59,"China, mainland",Sweet potatoes,2020,USD,1000,1,KG
-60,"China, mainland",Taro (cocoyam),2020,USD,348,0.348,KG
-61,"China, mainland",Tomatoes,2020,USD,556,0.556,KG
-62,"China, mainland","Walnuts, with shell",2020,USD,6086,6.086,KG
-63,"China, mainland",Watermelons,2020,USD,668,0.668,KG
-64,"China, mainland",Wheat,2020,USD,366,0.366,KG
-65,Spain,"Almonds, with shell",2020,USD,1204,1.204,KG
-66,Spain,Apples,2020,USD,570,0.57,KG
-67,Spain,Apricots,2020,USD,794,0.794,KG
-68,Spain,Artichokes,2020,USD,785,0.785,KG
-69,Spain,Asparagus,2020,USD,1879,1.879,KG
-70,Spain,Avocados,2020,USD,2541,2.541,KG
-71,Spain,Bananas,2020,USD,611,0.611,KG
-72,Spain,Barley,2020,USD,184,0.184,KG
-73,Spain,"Beans, dry",2020,USD,1885,1.885,KG
-74,Spain,"Beans, green",2020,USD,1828,1.828,KG
-75,Spain,"Broad beans, horse beans, dry",2020,USD,268,0.268,KG
-76,Spain,Cabbages and other brassicas,2020,USD,398,0.398,KG
-77,Spain,Carrots and turnips,2020,USD,314,0.314,KG
-78,Spain,Cauliflowers and broccoli,2020,USD,614,0.614,KG
-79,Spain,Cherries,2020,USD,2390,2.39,KG
-80,Spain,Chick peas,2020,USD,586,0.586,KG
-81,Spain,"Chillies and peppers, green",2020,USD,1126,1.126,KG
-82,Spain,Cucumbers and gherkins,2020,USD,617,0.617,KG
-83,Spain,Eggplants (aubergines),2020,USD,679,0.679,KG
-84,Spain,"Eggs, hen, in shell",2020,USD,1537,1.537,KG
-85,Spain,Figs,2020,USD,920,0.92,KG
-86,Spain,Garlic,2020,USD,1603,1.603,KG
-87,Spain,Grapes,2020,USD,795,0.795,KG
-88,Spain,"Hazelnuts, with shell",2020,USD,2483,2.483,KG
-89,Spain,"Leeks, other alliaceous vegetables",2020,USD,658,0.658,KG
-90,Spain,Lemons and limes,2020,USD,462,0.462,KG
-91,Spain,Lentils,2020,USD,495,0.495,KG
-92,Spain,Lettuce and chicory,2020,USD,282,0.282,KG
-93,Spain,Maize,2020,USD,223,0.223,KG
-94,Spain,"Meat live weight, chicken",2020,USD,1205,1.205,KG
-95,Spain,"Meat live weight, goat",2020,USD,764,0.764,KG
-96,Spain,"Meat live weight, rabbit",2020,USD,2135,2.135,KG
-97,Spain,"Meat live weight, sheep",2020,USD,655,0.655,KG
-98,Spain,"Melons, other (inc.cantaloupes)",2020,USD,385,0.385,KG
-99,Spain,"Milk, whole fresh cow",2020,USD,366,0.366,KG
-100,Spain,"Milk, whole fresh goat",2020,USD,799,0.799,KG
-101,Spain,"Milk, whole fresh sheep",2020,USD,991,0.991,KG
-102,Spain,Mushrooms and truffles,2020,USD,1931,1.931,KG
-103,Spain,Oats,2020,USD,188,0.188,KG
-104,Spain,Olives,2020,USD,831,0.831,KG
-105,Spain,"Onions, dry",2020,USD,244,0.244,KG
-106,Spain,Oranges,2020,USD,314,0.314,KG
-107,Spain,Peaches and nectarines,2020,USD,887,0.887,KG
-108,Spain,Pears,2020,USD,712,0.712,KG
-109,Spain,"Peas, green",2020,USD,531,0.531,KG
-110,Spain,Plums and sloes,2020,USD,538,0.538,KG
-111,Spain,Potatoes,2020,USD,291,0.291,KG
-112,Spain,"Pumpkins, squash and gourds",2020,USD,777,0.777,KG
-113,Spain,"Rice, paddy",2020,USD,362,0.362,KG
-114,Spain,Rye,2020,USD,174,0.174,KG
-115,Spain,Seed cotton,2020,USD,406,0.406,KG
-116,Spain,Sorghum,2020,USD,202,0.202,KG
-117,Spain,Spinach,2020,USD,988,0.988,KG
-118,Spain,Strawberries,2020,USD,1242,1.242,KG
-119,Spain,Sugar beet,2020,USD,36,0.036,KG
-120,Spain,Sunflower seed,2020,USD,384,0.384,KG
-121,Spain,"Tangerines, mandarins, clementines, satsumas",2020,USD,381,0.381,KG
-122,Spain,"Tobacco, unmanufactured",2020,USD,2657,2.657,KG
-123,Spain,Tomatoes,2020,USD,363,0.363,KG
-124,Spain,"Vegetables, leguminous nes",2020,USD,1085,1.085,KG
-125,Spain,Vetches,2020,USD,243,0.243,KG
-126,Spain,Watermelons,2020,USD,403,0.403,KG
-127,Spain,Wheat,2020,USD,221,0.221,KG
-128,Spain,"Wool, greasy",2020,USD,662,0.662,KG
-129,United States of America,"Almonds, with shell",2020,USD,4034,4.034,KG
-130,United States of America,Apples,2020,USD,849,0.849,KG
-131,United States of America,Apricots,2020,USD,1135,1.135,KG
-132,United States of America,Artichokes,2020,USD,1742,1.742,KG
-133,United States of America,Asparagus,2020,USD,3175,3.175,KG
-134,United States of America,Avocados,2020,USD,2282,2.282,KG
-135,United States of America,Barley,2020,USD,216,0.216,KG
-136,United States of America,"Beans, dry",2020,USD,659,0.659,KG
-137,United States of America,Blueberries,2020,USD,4497,4.497,KG
-138,United States of America,Cabbages and other brassicas,2020,USD,459,0.459,KG
-139,United States of America,Carrots and turnips,2020,USD,507,0.507,KG
-140,United States of America,Cauliflowers and broccoli,2020,USD,864,0.864,KG
-141,United States of America,Cherries,2020,USD,3131,3.131,KG
-142,United States of America,"Cherries, sour",2020,USD,838,0.838,KG
-143,United States of America,Chick peas,2020,USD,430,0.43,KG
-144,United States of America,"Chillies and peppers, green",2020,USD,930,0.93,KG
-145,United States of America,"Coffee, green",2020,USD,41226,41.226,KG
-146,United States of America,Cotton lint,2020,USD,1437,1.437,KG
-147,United States of America,Cottonseed,2020,USD,212,0.212,KG
-148,United States of America,Cranberries,2020,USD,1792,1.792,KG
-149,United States of America,Cucumbers and gherkins,2020,USD,650,0.65,KG
-150,United States of America,Dates,2020,USD,3362,3.362,KG
-151,United States of America,Garlic,2020,USD,1682,1.682,KG
-152,United States of America,Grapefruit (inc. pomelos),2020,USD,432,0.432,KG
-153,United States of America,Grapes,2020,USD,1653,1.653,KG
-154,United States of America,"Groundnuts, with shell",2020,USD,456,0.456,KG
-155,United States of America,"Hazelnuts, with shell",2020,USD,2315,2.315,KG
-156,United States of America,"Honey, natural",2020,USD,4475,4.475,KG
-157,United States of America,Hops,2020,USD,13162,13.162,KG
-158,United States of America,Kiwi fruit,2020,USD,2116,2.116,KG
-159,United States of America,Lemons and limes,2020,USD,673,0.673,KG
-160,United States of America,Lentils,2020,USD,384,0.384,KG
-161,United States of America,Lettuce and chicory,2020,USD,679,0.679,KG
-162,United States of America,Linseed,2020,USD,378,0.378,KG
-163,United States of America,Maize,2020,USD,169,0.169,KG
-164,United States of America,"Maize, green",2020,USD,827,0.827,KG
-165,United States of America,"Meat live weight, cattle",2020,USD,2403,2.403,KG
-166,United States of America,"Meat live weight, pig",2020,USD,1034,1.034,KG
-167,United States of America,"Melons, other (inc.cantaloupes)",2020,USD,575,0.575,KG
-168,United States of America,"Milk, whole fresh cow",2020,USD,402,0.402,KG
-169,United States of America,Millet,2020,USD,436,0.436,KG
-170,United States of America,Mustard seed,2020,USD,597,0.597,KG
-171,United States of America,Oats,2020,USD,175,0.175,KG
-172,United States of America,Olives,2020,USD,953,0.953,KG
-173,United States of America,"Onions, dry",2020,USD,320,0.32,KG
-174,United States of America,Oranges,2020,USD,361,0.361,KG
-175,United States of America,Papayas,2020,USD,968,0.968,KG
-176,United States of America,Peaches and nectarines,2020,USD,1576,1.576,KG
-177,United States of America,Pears,2020,USD,606,0.606,KG
-178,United States of America,"Peas, dry",2020,USD,199,0.199,KG
-179,United States of America,"Peas, green",2020,USD,284,0.284,KG
-180,United States of America,Pistachios,2020,USD,6063,6.063,KG
-181,United States of America,Potatoes,2020,USD,208,0.208,KG
-182,United States of America,"Pumpkins, squash and gourds",2020,USD,315,0.315,KG
-183,United States of America,Rapeseed,2020,USD,498,0.498,KG
-184,United States of America,Raspberries,2020,USD,4652,4.652,KG
-185,United States of America,"Rice, paddy",2020,USD,295,0.295,KG
-186,United States of America,Rye,2020,USD,205,0.205,KG
-187,United States of America,Safflower seed,2020,USD,470,0.47,KG
-188,United States of America,Sorghum,2020,USD,190,0.19,KG
-189,United States of America,Soybeans,2020,USD,410,0.41,KG
-190,United States of America,Spinach,2020,USD,1338,1.338,KG
-191,United States of America,Strawberries,2020,USD,2425,2.425,KG
-192,United States of America,String beans,2020,USD,1409,1.409,KG
-193,United States of America,Sunflower seed,2020,USD,434,0.434,KG
-194,United States of America,Sweet potatoes,2020,USD,525,0.525,KG
-195,United States of America,"Tangerines, mandarins, clementines, satsumas",2020,USD,963,0.963,KG
-196,United States of America,"Tobacco, unmanufactured",2020,USD,4636,4.636,KG
-197,United States of America,Tomatoes,2020,USD,1259,1.259,KG
-198,United States of America,"Walnuts, with shell",2020,USD,1345,1.345,KG
-199,United States of America,Watermelons,2020,USD,370,0.37,KG
-200,United States of America,Wheat,2020,USD,184,0.184,KG
+﻿Area,Item,Year,Unit,Value,Price,Measurement
+"China, Hong Kong SAR",Bananas non-Cavendish,2020,USD,1747,1.747,KG
+"China, Hong Kong SAR","Eggs, hen, in shell",2020,USD,9102,9.102,KG
+"China, Hong Kong SAR","Fruit, citrus nes",2020,USD,2320,2.32,KG
+"China, Hong Kong SAR","Meat live weight, chicken",2020,USD,6783,6.783,KG
+"China, Hong Kong SAR","Meat live weight, pig",2020,USD,7174,7.174,KG
+"China, mainland",Apples,2020,USD,1180,1.18,KG
+"China, mainland",Bananas,2020,USD,724,0.724,KG
+"China, mainland","Beans, dry",2020,USD,703,0.703,KG
+"China, mainland","Beans, green",2020,USD,935,0.935,KG
+"China, mainland",Carrots and turnips,2020,USD,333,0.333,KG
+"China, mainland",Cauliflowers and broccoli,2020,USD,478,0.478,KG
+"China, mainland",Cereals nes,2020,USD,403,0.403,KG
+"China, mainland","Chillies and peppers, dry",2020,USD,809,0.809,KG
+"China, mainland","Chillies and peppers, green",2020,USD,785,0.785,KG
+"China, mainland",Cotton lint,2020,USD,2281,2.281,KG
+"China, mainland",Cottonseed,2020,USD,401,0.401,KG
+"China, mainland",Cucumbers and gherkins,2020,USD,623,0.623,KG
+"China, mainland",Dates,2020,USD,1474,1.474,KG
+"China, mainland",Eggplants (aubergines),2020,USD,490,0.49,KG
+"China, mainland","Eggs, hen, in shell",2020,USD,1465,1.465,KG
+"China, mainland",Garlic,2020,USD,1094,1.094,KG
+"China, mainland",Ginger,2020,USD,4710,4.71,KG
+"China, mainland",Grapefruit (inc. pomelos),2020,USD,507,0.507,KG
+"China, mainland",Grapes,2020,USD,1500,1.5,KG
+"China, mainland","Groundnuts, with shell",2020,USD,1272,1.272,KG
+"China, mainland",Kiwi fruit,2020,USD,985,0.985,KG
+"China, mainland","Leeks, other alliaceous vegetables",2020,USD,464,0.464,KG
+"China, mainland",Lemons and limes,2020,USD,1014,1.014,KG
+"China, mainland",Lettuce and chicory,2020,USD,842,0.842,KG
+"China, mainland",Maize,2020,USD,419,0.419,KG
+"China, mainland","Mangoes, mangosteens, guavas",2020,USD,2174,2.174,KG
+"China, mainland","Meat live weight, buffalo",2020,USD,3768,3.768,KG
+"China, mainland","Meat live weight, cattle",2020,USD,2517,2.517,KG
+"China, mainland","Meat live weight, chicken",2020,USD,1322,1.322,KG
+"China, mainland","Meat live weight, duck",2020,USD,2385,2.385,KG
+"China, mainland","Meat live weight, goose",2020,USD,3688,3.688,KG
+"China, mainland","Meat live weight, pig",2020,USD,2781,2.781,KG
+"China, mainland","Meat live weight, sheep",2020,USD,5992,5.992,KG
+"China, mainland","Milk, whole fresh cow",2020,USD,613,0.613,KG
+"China, mainland","Oil, palm",2020,USD,1290,1.29,KG
+"China, mainland","Onions, shallots, green",2020,USD,417,0.417,KG
+"China, mainland",Oranges,2020,USD,736,0.736,KG
+"China, mainland",Pears,2020,USD,877,0.877,KG
+"China, mainland","Peas, green",2020,USD,507,0.507,KG
+"China, mainland",Pepper (piper spp.),2020,USD,4637,4.637,KG
+"China, mainland",Persimmons,2020,USD,420,0.42,KG
+"China, mainland",Pineapples,2020,USD,656,0.656,KG
+"China, mainland",Potatoes,2020,USD,348,0.348,KG
+"China, mainland","Pumpkins, squash and gourds",2020,USD,652,0.652,KG
+"China, mainland",Grapeseed,2020,USD,797,0.797,KG
+"China, mainland","Rice, paddy",2020,USD,414,0.414,KG
+"China, mainland","Rubber, natural",2020,USD,2010,2.01,KG
+"China, mainland",Seed cotton,2020,USD,884,0.884,KG
+"China, mainland",Sesame seed,2020,USD,1716,1.716,KG
+"China, mainland",Soybeans,2020,USD,769,0.769,KG
+"China, mainland",Spinach,2020,USD,326,0.326,KG
+"China, mainland",Sugar cane,2020,USD,756,0.756,KG
+"China, mainland",Sunflower seed,2020,USD,993,0.993,KG
+"China, mainland",Sweet potatoes,2020,USD,1000,1,KG
+"China, mainland",Taro (cocoyam),2020,USD,348,0.348,KG
+"China, mainland",Tomatoes,2020,USD,556,0.556,KG
+"China, mainland","Walnuts, with shell",2020,USD,6086,6.086,KG
+"China, mainland",Watermelons,2020,USD,668,0.668,KG
+"China, mainland",Wheat,2020,USD,366,0.366,KG
+Spain,"Almonds, with shell",2020,USD,1204,1.204,KG
+Spain,Apples,2020,USD,570,0.57,KG
+Spain,Apricots,2020,USD,794,0.794,KG
+Spain,Artichokes,2020,USD,785,0.785,KG
+Spain,Asparagus,2020,USD,1879,1.879,KG
+Spain,Avocados,2020,USD,2541,2.541,KG
+Spain,Bananas,2020,USD,611,0.611,KG
+Spain,Barley,2020,USD,184,0.184,KG
+Spain,"Beans, dry",2020,USD,1885,1.885,KG
+Spain,"Beans, green",2020,USD,1828,1.828,KG
+Spain,"Broad beans, horse beans, dry",2020,USD,268,0.268,KG
+Spain,Cabbages and other brassicas,2020,USD,398,0.398,KG
+Spain,Carrots and turnips,2020,USD,314,0.314,KG
+Spain,Cauliflowers and broccoli,2020,USD,614,0.614,KG
+Spain,Cherries,2020,USD,2390,2.39,KG
+Spain,Chick peas,2020,USD,586,0.586,KG
+Spain,"Chillies and peppers, green",2020,USD,1126,1.126,KG
+Spain,Cucumbers and gherkins,2020,USD,617,0.617,KG
+Spain,Eggplants (aubergines),2020,USD,679,0.679,KG
+Spain,"Eggs, hen, in shell",2020,USD,1537,1.537,KG
+Spain,Figs,2020,USD,920,0.92,KG
+Spain,Garlic,2020,USD,1603,1.603,KG
+Spain,Grapes,2020,USD,795,0.795,KG
+Spain,"Hazelnuts, with shell",2020,USD,2483,2.483,KG
+Spain,"Leeks, other alliaceous vegetables",2020,USD,658,0.658,KG
+Spain,Lemons and limes,2020,USD,462,0.462,KG
+Spain,Lentils,2020,USD,495,0.495,KG
+Spain,Lettuce and chicory,2020,USD,282,0.282,KG
+Spain,Maize,2020,USD,223,0.223,KG
+Spain,"Meat live weight, chicken",2020,USD,1205,1.205,KG
+Spain,"Meat live weight, goat",2020,USD,764,0.764,KG
+Spain,"Meat live weight, rabbit",2020,USD,2135,2.135,KG
+Spain,"Meat live weight, sheep",2020,USD,655,0.655,KG
+Spain,"Melons, other (inc.cantaloupes)",2020,USD,385,0.385,KG
+Spain,"Milk, whole fresh cow",2020,USD,366,0.366,KG
+Spain,"Milk, whole fresh goat",2020,USD,799,0.799,KG
+Spain,"Milk, whole fresh sheep",2020,USD,991,0.991,KG
+Spain,Mushrooms and truffles,2020,USD,1931,1.931,KG
+Spain,Oats,2020,USD,188,0.188,KG
+Spain,Olives,2020,USD,831,0.831,KG
+Spain,"Onions, dry",2020,USD,244,0.244,KG
+Spain,Oranges,2020,USD,314,0.314,KG
+Spain,Peaches and nectarines,2020,USD,887,0.887,KG
+Spain,Pears,2020,USD,712,0.712,KG
+Spain,"Peas, green",2020,USD,531,0.531,KG
+Spain,Plums and sloes,2020,USD,538,0.538,KG
+Spain,Potatoes,2020,USD,291,0.291,KG
+Spain,"Pumpkins, squash and gourds",2020,USD,777,0.777,KG
+Spain,"Rice, paddy",2020,USD,362,0.362,KG
+Spain,Rye,2020,USD,174,0.174,KG
+Spain,Seed cotton,2020,USD,406,0.406,KG
+Spain,Sorghum,2020,USD,202,0.202,KG
+Spain,Spinach,2020,USD,988,0.988,KG
+Spain,Strawberries,2020,USD,1242,1.242,KG
+Spain,Sugar beet,2020,USD,36,0.036,KG
+Spain,Sunflower seed,2020,USD,384,0.384,KG
+Spain,"Tangerines, mandarins, clementines, satsumas",2020,USD,381,0.381,KG
+Spain,"Tobacco, unmanufactured",2020,USD,2657,2.657,KG
+Spain,Tomatoes,2020,USD,363,0.363,KG
+Spain,"Vegetables, leguminous nes",2020,USD,1085,1.085,KG
+Spain,Vetches,2020,USD,243,0.243,KG
+Spain,Watermelons,2020,USD,403,0.403,KG
+Spain,Wheat,2020,USD,221,0.221,KG
+Spain,"Wool, greasy",2020,USD,662,0.662,KG
+United States of America,"Almonds, with shell",2020,USD,4034,4.034,KG
+United States of America,Apples,2020,USD,849,0.849,KG
+United States of America,Apricots,2020,USD,1135,1.135,KG
+United States of America,Artichokes,2020,USD,1742,1.742,KG
+United States of America,Asparagus,2020,USD,3175,3.175,KG
+United States of America,Avocados,2020,USD,2282,2.282,KG
+United States of America,Barley,2020,USD,216,0.216,KG
+United States of America,"Beans, dry",2020,USD,659,0.659,KG
+United States of America,Blueberries,2020,USD,4497,4.497,KG
+United States of America,Cabbages and other brassicas,2020,USD,459,0.459,KG
+United States of America,Carrots and turnips,2020,USD,507,0.507,KG
+United States of America,Cauliflowers and broccoli,2020,USD,864,0.864,KG
+United States of America,Cherries,2020,USD,3131,3.131,KG
+United States of America,"Cherries, sour",2020,USD,838,0.838,KG
+United States of America,Chick peas,2020,USD,430,0.43,KG
+United States of America,"Chillies and peppers, green",2020,USD,930,0.93,KG
+United States of America,"Coffee, green",2020,USD,41226,41.226,KG
+United States of America,Cotton lint,2020,USD,1437,1.437,KG
+United States of America,Cottonseed,2020,USD,212,0.212,KG
+United States of America,Cranberries,2020,USD,1792,1.792,KG
+United States of America,Cucumbers and gherkins,2020,USD,650,0.65,KG
+United States of America,Dates,2020,USD,3362,3.362,KG
+United States of America,Garlic,2020,USD,1682,1.682,KG
+United States of America,Grapefruit (inc. pomelos),2020,USD,432,0.432,KG
+United States of America,Grapes,2020,USD,1653,1.653,KG
+United States of America,"Groundnuts, with shell",2020,USD,456,0.456,KG
+United States of America,"Hazelnuts, with shell",2020,USD,2315,2.315,KG
+United States of America,"Honey, natural",2020,USD,4475,4.475,KG
+United States of America,Hops,2020,USD,13162,13.162,KG
+United States of America,Kiwi fruit,2020,USD,2116,2.116,KG
+United States of America,Lemons and limes,2020,USD,673,0.673,KG
+United States of America,Lentils,2020,USD,384,0.384,KG
+United States of America,Lettuce and chicory,2020,USD,679,0.679,KG
+United States of America,Linseed,2020,USD,378,0.378,KG
+United States of America,Maize,2020,USD,169,0.169,KG
+United States of America,"Maize, green",2020,USD,827,0.827,KG
+United States of America,"Meat live weight, cattle",2020,USD,2403,2.403,KG
+United States of America,"Meat live weight, pig",2020,USD,1034,1.034,KG
+United States of America,"Melons, other (inc.cantaloupes)",2020,USD,575,0.575,KG
+United States of America,"Milk, whole fresh cow",2020,USD,402,0.402,KG
+United States of America,Millet,2020,USD,436,0.436,KG
+United States of America,Mustard seed,2020,USD,597,0.597,KG
+United States of America,Oats,2020,USD,175,0.175,KG
+United States of America,Olives,2020,USD,953,0.953,KG
+United States of America,"Onions, dry",2020,USD,320,0.32,KG
+United States of America,Oranges,2020,USD,361,0.361,KG
+United States of America,Papayas,2020,USD,968,0.968,KG
+United States of America,Peaches and nectarines,2020,USD,1576,1.576,KG
+United States of America,Pears,2020,USD,606,0.606,KG
+United States of America,"Peas, dry",2020,USD,199,0.199,KG
+United States of America,"Peas, green",2020,USD,284,0.284,KG
+United States of America,Pistachios,2020,USD,6063,6.063,KG
+United States of America,Potatoes,2020,USD,208,0.208,KG
+United States of America,"Pumpkins, squash and gourds",2020,USD,315,0.315,KG
+United States of America,Rapeseed,2020,USD,498,0.498,KG
+United States of America,Raspberries,2020,USD,4652,4.652,KG
+United States of America,"Rice, paddy",2020,USD,295,0.295,KG
+United States of America,Rye,2020,USD,205,0.205,KG
+United States of America,Safflower seed,2020,USD,470,0.47,KG
+United States of America,Sorghum,2020,USD,190,0.19,KG
+United States of America,Soybeans,2020,USD,410,0.41,KG
+United States of America,Spinach,2020,USD,1338,1.338,KG
+United States of America,Strawberries,2020,USD,2425,2.425,KG
+United States of America,String beans,2020,USD,1409,1.409,KG
+United States of America,Sunflower seed,2020,USD,434,0.434,KG
+United States of America,Sweet potatoes,2020,USD,525,0.525,KG
+United States of America,"Tangerines, mandarins, clementines, satsumas",2020,USD,963,0.963,KG
+United States of America,"Tobacco, unmanufactured",2020,USD,4636,4.636,KG
+United States of America,Tomatoes,2020,USD,1259,1.259,KG
+United States of America,"Walnuts, with shell",2020,USD,1345,1.345,KG
+United States of America,Watermelons,2020,USD,370,0.37,KG
+United States of America,Wheat,2020,USD,184,0.184,KG
