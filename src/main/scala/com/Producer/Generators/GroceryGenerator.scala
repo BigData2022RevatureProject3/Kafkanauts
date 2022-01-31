@@ -56,22 +56,35 @@ object GroceryGenerator {
     })
     .toList
   //Create Groceries generator
-  def generateGroceries(po:ProductOrder):ProductOrder={
+  def generateGroceries(po:ProductOrder, day:Int ):ProductOrder={
     po.country match{
-      case "United States" => genUsGrocery(po)
+      case "United States" => genUsGrocery(po, day == 2)
       case "China" => genChinaGrocery(po)
       case "Spain" => genSpainGrocery(po)
     }
   }
+
   //UsGrocery generator
-    def genUsGrocery(po:ProductOrder): ProductOrder = {
-      val (name, price) = MathHelper.chooseFromList(usGroceries)
+    def genUsGrocery(po:ProductOrder, isTacoDay: Boolean): ProductOrder = {
       val quantity = Math.abs(Random.nextInt(10) + 1)
-      po.product_name = name
-      po.product_category = "Groceries"
-      po.price = math.floor(quantity * price)
-      po.qty = quantity
-      po.product_id = ("name" + price.toString).hashCode()
+
+      if (isTacoDay && Random.nextDouble() < 0.5) {
+        // TACO TUESDAY
+        val (name, price) = MathHelper.chooseFromList(usGroceries)
+        po.product_name = name
+        po.product_category = "Groceries"
+        po.price = math.floor(quantity * price)
+        po.qty = quantity
+        po.product_id = ("name" + price.toString).hashCode()
+      } else {
+        val (name, price) = MathHelper.chooseFromList(usGroceries)
+        po.product_name = name
+        po.product_category = "Groceries"
+        po.price = math.floor(quantity * price)
+        po.qty = quantity
+        po.product_id = ("name" + price.toString).hashCode()
+      }
+
       return po
     }
   //ChinaGrocery generator

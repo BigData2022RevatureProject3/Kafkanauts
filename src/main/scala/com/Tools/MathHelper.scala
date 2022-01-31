@@ -14,12 +14,19 @@ object MathHelper {
     (0.0 to 1.0 by step).map(function(_)).sum * step
   }
 
+
+
   def addFuncs(functions: (Double) => Double*): Double => Double = {
     functions.reduce((a, b) => (x: Double) => a(x) + b(x))
   }
 
   def scaleFunc(function: Double => Double, scale: Double): Double => Double = {
     (x: Double) => function(x) * scale
+  }
+
+  def getBimodalFunc(mean1: Double, var1: Double, scale1: Double,
+                     mean2: Double, var2: Double, scale2: Double): Double => Double = {
+    x: Double => getNormalPDF(mean1, var1)(x) * scale1 + getNormalPDF(mean2, var2)(x) * scale2
   }
 
   def minOfFunctions(functions: (Double) => Double*): Double => Double = {
