@@ -11,7 +11,13 @@ object MathHelper {
     myGaussian(1/2)
   }
 
+  def areaUnderCurve(function: Double => Double, minutesPerSample: Int = 15): Double = {
+    val step = minutesPerSample/1440.0
+    (0.0 to 1.0 by step).map(function(_)).sum * step
+  }
+
   def addFuncs(functions: (Double) => Double*): Double => Double = {
+    println("addFuncs length: ", functions.length)
     functions.reduce((a, b) => (x: Double) => a(x) + b(x))
   }
 
@@ -32,6 +38,13 @@ object MathHelper {
     (x: Double) => (Math.exp(-Math.pow(x - mean, 2)) / Math.sqrt(2 * Math.PI)) / (stdDev * Math.sqrt(2 * Math.PI))
   }
 
+  def getLinearFunc(slope: Double, height: Double): Double => Double = {
+    (x: Double) => slope * x + height
+  }
+
+  def getConstantFunc(height: Double): Double => Double = {
+    (x: Double) => height
+  }
   def functionToDataFrame(func: (Double) => Double, samples: Int = 10, initialX: Double = 0.0): DataFrame = {
     val spark = SparkHelper.spark
     import spark.implicits._
