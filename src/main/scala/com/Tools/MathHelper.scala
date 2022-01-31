@@ -17,8 +17,11 @@ object MathHelper {
   }
 
   def addFuncs(functions: (Double) => Double*): Double => Double = {
-    println("addFuncs length: ", functions.length)
     functions.reduce((a, b) => (x: Double) => a(x) + b(x))
+  }
+
+  def scaleFunc(function: Double => Double, scale: Double): Double => Double = {
+    (x: Double) => function(x) * scale
   }
 
   def minOfFunctions(functions: (Double) => Double*): Double => Double = {
