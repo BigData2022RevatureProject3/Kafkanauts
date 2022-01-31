@@ -5,7 +5,7 @@ import scala.collection.mutable.ListBuffer
 import scala.io.Source
 import scala.util.Random
 
-object groceryGenerator {
+object GroceryGenerator {
   private final val ran = new Random()
   private final val groceryUSFile = "clean_data/clean_us_grocery_data.csv"
   private final val groceryChinaFile = "clean_data/clean_china_grocery_data.csv"
@@ -17,7 +17,7 @@ object groceryGenerator {
         groceryUSList += line
       }
       val groceryId = ran.nextInt()
-      val grocery = groceryUSList(groceryId).split(",")
+      val grocery = groceryUSList(groceryId).split("""\|""")
       val product = grocery(1)
       val price = grocery(5).toDouble
       val quantity = ran.nextInt()
@@ -34,7 +34,7 @@ object groceryGenerator {
       groceryChinaList += line
     }
     val groceryId = ran.nextInt()
-    val grocery = groceryChinaList(groceryId).split(",")
+    val grocery = groceryChinaList(groceryId).split("""\|""")
     val product = grocery(1)
     val price = grocery(5).toDouble
     val quantity = ran.nextInt()
@@ -51,7 +51,7 @@ object groceryGenerator {
       grocerySpainList += line
     }
     val groceryId = ran.nextInt()
-    val grocery = grocerySpainList(groceryId).split(",")
+    val grocery = grocerySpainList(groceryId).split("""\|""")
     val product = grocery(1)
     val price = grocery(5).toDouble
     val quantity = ran.nextInt()
