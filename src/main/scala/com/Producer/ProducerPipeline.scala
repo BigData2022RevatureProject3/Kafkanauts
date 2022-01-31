@@ -43,7 +43,9 @@ object ProducerPipeline {
           .map(p => GenHelper.addCategory(p, chinaCats, usCats, spainCats))
           .map(p => GenHelper.addProduct(dayPercentage, dayOfWeek, p))
           .map(p => GenHelper.addCustomerInfo(dayPercentage, dayOfWeek, p))
-          .map(p => GenHelper.addTransactionInfo(dayPercentage, dayOfWeek, p))
+//          .map(p => GenHelper.addTransactionInfo(dayPercentage, dayOfWeek, p))
+          .map(p => GenHelper.addTransactionInfo(p))
+
           .map(toFinalString).toList
       })
       .foreach(pStrs => {

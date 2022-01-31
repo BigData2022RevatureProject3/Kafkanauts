@@ -24,14 +24,14 @@ object TrashMaker5000 {
 
     val r = new Random()
     val randomTrash = r.nextInt(21)
-    val randomIndex1 = r.nextInt(aB.size)
+    val randomIndex1 = r.nextInt(aB.size - 1)
 
     randomTrash match {
       case 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 => aB(randomIndex1) = ""
       case 10 | 11 | 12 | 13 | 14 | 15 => aB(randomIndex1) = r.nextString(aB(randomIndex1).length)
       case 16 | 17 | 18 => aB(randomIndex1) = r.nextPrintableChar().toString.concat(r.nextPrintableChar().toString).concat(r.nextPrintableChar().toString).concat(r.nextPrintableChar().toString).concat(r.nextPrintableChar().toString).concat(r.nextPrintableChar().toString)
       case 19 => aB(randomIndex1) = easterEgg.toString.slice(4,easterEgg.toString.length)
-      case 20 => aB -= aB(aB.size)
+      case 20 => aB -= aB(randomIndex1)
       case _ =>
     }
 

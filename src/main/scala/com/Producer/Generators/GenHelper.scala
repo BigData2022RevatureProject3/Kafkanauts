@@ -2,6 +2,7 @@ package com.Producer.Generators
 
 import com.ProductOrder
 import com.Tools.MathHelper
+import java.time.LocalDateTime
 import scala.util.Random
 
 /**
@@ -20,6 +21,8 @@ object GenHelper {
   // TODO: Finish and make canonical
   val categories = List("Gas", "Medicine")
   val corruptionChance: Double = 0.03
+
+  var orderIDAccumulator = 1000 // A globally incremented value.
 
 
   def getCountryProbabilities(dayPercent: Double, day: Int): List[Double] = {
@@ -53,17 +56,46 @@ object GenHelper {
     CustomerInfoGenerator.generateCustomer(po)
   }
 
-  def addTransactionInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
+//  def addTransactionInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
+  def addTransactionInfo(po: ProductOrder): ProductOrder = {
+    TransactionInfoGenerator.addTransactionInfo(po)
     po
   }
 
   def toFinalString(po: ProductOrder): String = {
-    if (Random.nextDouble() < GenHelper.corruptionChance) {
-      // TODO: Maybe outsource to dedicated corruption function?
-      "lasdkfjlasdkfj"
+    val min = 1
+    val max = 100
+    if ((Random.nextInt(max-min) + min) / 100.00 < GenHelper.corruptionChance) {
+      TrashMaker5000.makeTrash(po)
     } else {
       ProductOrder.toString(po)
     }
+  }
+
+  def main(args: Array[String]): Unit = {
+    val input = scala.io.StdIn.readLine("Enter Int: ").toInt
+    input match {
+      case 1 => addTransactionInfoDemo
+      case 2 =>
+      case 3 =>
+      case 4 =>
+      case 5 =>
+      case 6 =>
+      case _ =>
+    }
+    def addTransactionInfoDemo: Unit = {
+      val po = ProductOrder.getInitialOrder(LocalDateTime.now())
+      println(ProductOrder.toString(po))
+      for (i <- 1 to 1000) {
+        po.price = 6.89
+        addTransactionInfo(po)
+//        println(po.payment_type + " | " + po.payment_txn_success + " | " + po.failure_reason)
+        PriceMultiplier.multiplyPrice(po)
+        println(ProductOrder.toString(po))
+        println(toFinalString(po))
+      }
+    }
+
   }
 
 }
