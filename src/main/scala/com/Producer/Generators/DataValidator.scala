@@ -2,6 +2,8 @@ package com.Producer.Generators
 
 import os.RelPath
 
+import java.nio.file.NoSuchFileException
+
 object DataValidator {
   /**
    * Checks if the file is validated or not. Returns true if the file is pipe-delimited and false if not.
@@ -30,6 +32,11 @@ object DataValidator {
    */
   def validatedData(relativeFilePath: String): os.pwd.ThisType = {
     var filePath = os.pwd / RelPath(relativeFilePath)
+
+    if(!os.isFile(filePath)) {
+      throw new NoSuchFileException(s"$filePath does not exist. Check input string.")
+    }
+
     if (relativeFilePath.split("/").head != "clean_data") {
       //println("Validate Data Log, Copy file from pwd/data to pwd/clean_data and validating it.")
       val cleanFilePath = os.pwd / "clean_data" / relativeFilePath.split("/").tail
@@ -62,6 +69,6 @@ object DataValidator {
   }
 
   def main(args: Array[String]): Unit = {
-    validatedData("data/hello.txt")
+    //validatedData("data/hello.txt")
   }
 }
