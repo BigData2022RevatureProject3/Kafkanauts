@@ -40,21 +40,11 @@ object GenHelper {
 
   def addProduct(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
     po.country match {
-      case "United States" => {
-        if(po.product_category == "Medicine"){
-          MedicineGenerator.getMedicine(po)
-        }else{po}
-      }
-      case "China" => {
-        if(po.product_category == "Medicine"){
-          MedicineGenerator.getMedicine(po)
-        }else{po}
-      }
-      case "Spain" => {
-        if(po.product_category == "Medicine"){
-          MedicineGenerator.getMedicine(po)
-        }else{po}
-      }
+      case "Medicine" => MedicineGenerator.getMedicine(po)
+      case "Music" => po // to be added
+      case "Gas" => po // to be added
+      case "Grocery" => po // to be added
+      case "Misc." => po // to be added
     }
   }
 
