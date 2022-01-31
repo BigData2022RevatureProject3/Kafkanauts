@@ -12,7 +12,7 @@ object GasStationGenerator {
   //private final val gasStations1 = "data/unique_gas_stations.csv"
   val gasStations = os
     .read
-    .lines(os.pwd / "cleaned_data" / "unique_gas_stations.csv")
+    .lines(os.pwd / "clean_data" / "unique_gas_stations.csv")
     .map(line => line)
     .toList
 
