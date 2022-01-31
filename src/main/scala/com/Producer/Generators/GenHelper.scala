@@ -44,7 +44,9 @@ object GenHelper {
       case "Music" => MusicGenerator.genMusic(po)
       case "Gas" => GasStationGenerator.generateStations(po)
       case "Grocery" => GroceryGenerator.generateGroceries(po)
-      case "Misc." => po // to be added
+      case _ => po.product_category = "Medicine"
+        MedicineGenerator.getMedicine(po)
+//      case "Misc." => po // to be added
     }
   }
 
