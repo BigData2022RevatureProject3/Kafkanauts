@@ -2,8 +2,6 @@ package com.Producer.Generators
 
 import com.ProductOrder
 import com.Tools.MathHelper
-
-import scala.collection.{Map, mutable}
 import scala.util.Random
 
 /**
@@ -11,62 +9,29 @@ import scala.util.Random
  */
 object GenHelper {
   val countries = List("China", "United States", "Spain")
+  val globalScale = 5
+  val chinaScale  = 1047
+  val usScale     = 344
+  val spainScale  = 47
+  val chinaDaily: List[Double => Double] = CountryFunctions.getChineseDaily()
+  val usDaily:    List[Double => Double] = CountryFunctions.getUSDaily()
+  val spainDaily: List[Double => Double] = CountryFunctions.getSpainDaily()
+
   // TODO: Finish and make canonical
-  val categories = List("Gas", "Medicine", "Music", "Produce")
+  val categories = List("Gas", "Medicine")
   val corruptionChance: Double = 0.03
-  // Access the map by country to get a list.
-  // Access list by dayOfWeek to get category Map.
-  // Access that map to get a function from dayPercentage to activity at that time
-  val prodFunctions: mutable.Map[String, List[Map[String, (Double) => Double]]] = mutable.Map()
 
-  def getProductionFunctions(): Any = {
-    var funcs = mutable.Map[String, List[Map[String, (Double) => Double]]]()
-    val chinaMap = List(
-      //      Map("Gas" -> ((percent: Double) => getChineseFunc())
-      (perc: Double) => 20.34,
-      (perc: Double) => 20.34,
-      (perc: Double) => 20.34,
-      (perc: Double) => 20.34,
-      (perc: Double) => 20.34,
-      (perc: Double) => 20.34,
-    )
 
-    val usMap = List(
-      (perc: Double) => 20.34,
-      (perc: Double) => 20.34,
-      (perc: Double) => 20.34,
-      (perc: Double) => 20.34,
-      (perc: Double) => 20.34,
-      (perc: Double) => 20.34,
-      (perc: Double) => 20.34,
-    )
-
-    val spainMap = List(
-      (perc: Double) => 20.34,
-      (perc: Double) => 20.34,
-      (perc: Double) => 20.34,
-      (perc: Double) => 20.34,
-      (perc: Double) => 20.34,
-      (perc: Double) => 20.34,
-      (perc: Double) => 20.34,
-    )
-
+  def getCountryProbabilities(dayPercent: Double, day: Int): List[Double] = {
+    List(chinaDaily(day)(dayPercent) * chinaScale, usDaily(day)(dayPercent) * usScale, spainDaily(day)(dayPercent) * spainScale)
   }
 
-
-  def getGlobalBatchSize(dayPercent: Double): Int = {
-    // TODO: David-Carlson Make it query functions globally
-    Math.ceil(1 - Math.abs(0.5 - dayPercent) * 50).toInt + 50
-  }
-
-  def getCountryProbabilities(dayPercent: Double): List[Double] = {
-    // TODO: Change calculation
-    List(1402, 329, 47)
-  }
-
-  def addCategory(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
-    // TODO: Change to per-country/day/percent choice
-    po.product_category = MathHelper.chooseFromList(GenHelper.categories)
+  def addCategory(po: ProductOrder, chinaProbs: List[Double], usProbs: List[Double], spainProbs: List[Double]): ProductOrder = {
+    po.product_category = po.country match {
+      case "China"         => MathHelper.chooseFromWeightedList(categories, chinaProbs)
+      case "United States" => MathHelper.chooseFromWeightedList(categories, usProbs)
+      case "Spain"         => MathHelper.chooseFromWeightedList(categories, spainProbs)
+    }
     po
   }
 
@@ -85,7 +50,7 @@ object GenHelper {
   }
 
   def addCustomerInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
-    customerInfoGenerator.generateCustomer(po)
+    CustomerInfoGenerator.generateCustomer(po)
   }
 
   def addTransactionInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {

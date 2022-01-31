@@ -49,4 +49,10 @@ object  ProductOrder {
          "2004-05-23T14:25:10", country, "Flagstaff", "google.com", 234, "Y", "")
    }
 
+   def isValidOrder(order:String):Boolean ={
+      val pattern = "^\\d+[|]\\d+[|]\\w+\\s\\w+[|]\\d+[|]\\w+[|]\\w+[|]\\w+[|]\\d+[|]\\d+.\\d+[|]\\d+-\\d+-\\d+\\s\\d+:\\d+[|]\\w+[|]\\w+\\s\\w+[|]\\w+.\\w+[|]\\d+[|][YN][|]\\w+$".r
+      val result = (pattern findAllIn order)
+      result.nonEmpty
+   }
+
 }

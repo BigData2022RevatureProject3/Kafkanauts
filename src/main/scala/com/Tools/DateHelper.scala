@@ -5,7 +5,6 @@ import java.time.{LocalDate, LocalDateTime, ZoneOffset}
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.Date
-import scala.io.AnsiColor.{GREEN, RED, RESET}
 
 object DateHelper {
   val dateRegex = """^(\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) (?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d))$""".r
@@ -17,8 +16,6 @@ object DateHelper {
    */
   def getDateElseMS(dateTime: Any): String = {
     val dateFormat: DateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-    //Regex of the dateFormat
-//    val dateRegex = """^(\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) (?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d))$""".r
     dateTime match {
       case x: String if x.forall(Character.isDigit) => s"${dateFormat.format(new Date(x.toLong))}"
       case x: String if dateRegex.pattern.matcher(x).matches() => s"${dateFormat.parse(x).getTime}"
