@@ -1,9 +1,6 @@
 package com.Producer.Generators
 
 import com.Tools.MathHelper
-import com.Tools.MathHelper.scaleFunc
-
-import scala.collection.immutable.Nil.:::
 
 object CountryFunctions {
   def main(args: Array[String]): Unit = {
@@ -12,27 +9,27 @@ object CountryFunctions {
 
   }
   def compareTotals(): Unit = {
-    val totalScale = 5
-    val chinaScale = 1402
-    val usScale = 330
-    val spainScale = 47
+    val globalScale = 5
+    val chinaScale  = 1402
+    val usScale     = 330
+    val spainScale  = 47
 
     val c = getChineseDaily()
     val u = getUSDaily()
     val s = getSpainDaily()
     val chinaSum = MathHelper.areaUnderCurve(c(0), 1) * chinaScale
-    val usSum = MathHelper.areaUnderCurve(u(0), 1) * usScale
+    val usSum =    MathHelper.areaUnderCurve(u(0), 1) * usScale
     val spainSum = MathHelper.areaUnderCurve(s(0), 1) * spainScale
     val all = chinaSum + usSum + spainSum
-    println(chinaSum, usSum, spainSum, Math.ceil(all) * totalScale)
+    println(chinaSum, usSum, spainSum, Math.ceil(all) * globalScale)
   }
 
   def printWeeklySum(): Unit = {
-    val totalScale = 5
-    val chinaScale = 1402
-    val usScale = 330
-    val spainScale = 47
-    val weekly = (0 to 2).map(getDailySum(_, chinaScale, usScale, spainScale)).sum * totalScale
+    val globalScale = 5
+    val chinaScale  = 1402
+    val usScale     = 330
+    val spainScale  = 47
+    val weekly = (0 to 2).map(getDailySum(_, chinaScale, usScale, spainScale)).sum * globalScale
     println(s"Weekly sum: $weekly")
   }
   def getDailySum(day: Int, chinaScale: Double, usScale: Double, spainScale: Double): Double = {
@@ -40,7 +37,7 @@ object CountryFunctions {
     val u = getUSDaily()
     val s = getSpainDaily()
     val chinaSum = MathHelper.areaUnderCurve(c(day), 1) * chinaScale
-    val usSum = MathHelper.areaUnderCurve(u(day), 1) * usScale
+    val usSum =    MathHelper.areaUnderCurve(u(day), 1) * usScale
     val spainSum = MathHelper.areaUnderCurve(s(day), 1) * spainScale
     chinaSum + usSum + spainSum
   }
@@ -53,39 +50,23 @@ object CountryFunctions {
     (sa.head.map(List(_)) /: sa.tail)(_.zip(_).map(p=>p._2 :: p._1))
   }
 
-  def getGlobalTotals(): List[Double => Double] = {
-    val allCategories = getCountryFunctions()
-    combineLists(allCategories:_*).map(dayFuncs => MathHelper.addFuncs(dayFuncs:_*))
-  }
-
   def getChineseDaily(): List[Double => Double] = {
     combineLists(getChinaCategories():_*).map(dayFuncs => MathHelper.addFuncs(dayFuncs:_*))
   }
-  def getUSDaily(scale: Double = 1.0): List[Double => Double] = {
+  def getUSDaily(): List[Double => Double] = {
     combineLists(getUSCategories():_*).map(dayFuncs => MathHelper.addFuncs(dayFuncs:_*))
   }
   def getSpainDaily(): List[Double => Double] = {
     combineLists(getSpainCategories():_*).map(dayFuncs => MathHelper.addFuncs(dayFuncs:_*))
   }
 
-  def getCategoryProbabilities(country: String, day: Int, timePercent: Double): List[Double] = {
+  def getCategoryProbabilities(country: String, day: Int, dayPercent: Double): List[Double] = {
     val categoriesForWeek =  country match {
       case "China" => getChinaCategories()
       case "United States" => getUSCategories()
       case "Spain" => getSpainCategories()
     }
-    categoriesForWeek.map(_(day)(timePercent))
-  }
-
-  def test(some:String*){}
-
-  def call () {
-    val some = Array("asd", "zxc")
-    test(some: _*)
-  }
-
-  def getCountryFunctions():  List[List[Double => Double]]= {
-    List(getChinaCategories(), getUSCategories(), getSpainCategories()).reduce(_ ++ _)
+    categoriesForWeek.map(_(day)(dayPercent))
   }
 
   def getChinaCategories(): List[List[Double => Double]] = {

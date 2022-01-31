@@ -1,6 +1,6 @@
 package com.Producer
 
-import com.Producer.Generators.GenHelper
+import com.Producer.Generators.{CountryFunctions, GenHelper}
 
 import java.time.{LocalDate, LocalDateTime, ZoneOffset}
 import java.time.temporal.ChronoUnit
@@ -43,14 +43,17 @@ object ProducerPipeline {
       .map(i => {
         val batchDateTime = startDate.plus(minuteIncrements * i, ChronoUnit.MINUTES)
         val dayPercentage = getPercentThroughDay(batchDateTime)
-        var batchSize = GenHelper.getGlobalBatchSize(dayPercentage)
+        val dayOfWeek: Int = DateHelper.getDayOfWeek(batchDateTime)
+        val countryProbs = GenHelper.getCountryProbabilities(dayPercentage, dayOfWeek)
+        var batchSize: Int = Math.ceil(countryProbs.sum * globalScale).toInt
         batchSize = 2
-        val countryProbs = GenHelper.getCountryProbabilities(dayPercentage)
-        val dayOfWeek = DateHelper.getDayOfWeek(batchDateTime)
+        val chinaCats = CountryFunctions.getCategoryProbabilities("China", dayOfWeek, dayPercentage)
+        val usCats    = CountryFunctions.getCategoryProbabilities("United States", dayOfWeek, dayPercentage)
+        val spainCats = CountryFunctions.getCategoryProbabilities("Spain", dayOfWeek, dayPercentage)
 
         (1 to batchSize)
           .map(_ => ProductOrder.getInitialOrder(batchDateTime, countryProbs))
-          .map(p => GenHelper.addCategory(dayPercentage, dayOfWeek, p))
+          .map(p => GenHelper.addCategory(p, chinaCats, usCats, spainCats))
           .map(p => GenHelper.addProduct(dayPercentage, dayOfWeek, p))
           .map(p => GenHelper.addCustomerInfo(dayPercentage, dayOfWeek, p))
           .map(p => GenHelper.addTransactionInfo(dayPercentage, dayOfWeek, p))
