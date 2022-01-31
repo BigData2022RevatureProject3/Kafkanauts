@@ -1,8 +1,6 @@
 package com.Tools
 
-import org.apache.commons.math3.distribution.NormalDistribution
 import org.apache.spark.sql.DataFrame
-
 import scala.util.Random
 
 object MathHelper {

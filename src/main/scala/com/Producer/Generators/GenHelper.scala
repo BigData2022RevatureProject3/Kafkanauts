@@ -2,8 +2,6 @@ package com.Producer.Generators
 
 import com.ProductOrder
 import com.Tools.MathHelper
-
-import scala.collection.{Map, mutable}
 import scala.util.Random
 
 /**
@@ -25,7 +23,6 @@ object GenHelper {
 
 
   def getCountryProbabilities(dayPercent: Double, day: Int): List[Double] = {
-    //    List(1402, 329, 47)
     List(chinaDaily(day)(dayPercent) * chinaScale, usDaily(day)(dayPercent) * usScale, spainDaily(day)(dayPercent) * spainScale)
   }
 
