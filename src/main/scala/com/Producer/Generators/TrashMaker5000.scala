@@ -43,7 +43,6 @@ object TrashMaker5000 {
       case 19 => str3(randomIndex2) = '|'
     }
 
-    println(str3)
     return str3.toString()
 
   }
