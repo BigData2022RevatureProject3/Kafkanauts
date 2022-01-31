@@ -42,9 +42,8 @@ object DateHelper {
   }
 
   def getDayOfWeek(localDateTime: LocalDateTime): Int = {
-    localDateTime.getDayOfWeek.getValue
+    localDateTime.getDayOfWeek.getValue - 1
   }
-
 
   def print(localDateTime: LocalDateTime): String = {
     localDateTime.format(DateTimeFormatter.ISO_DATE_TIME)

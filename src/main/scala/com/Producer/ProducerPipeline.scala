@@ -20,7 +20,7 @@ object ProducerPipeline {
 
   }
 
-  def startProducing(startDateStr: String, minuteIncrements: Long = 60, processDelay: Long = 5000): Unit = {
+  def startProducing(startDateStr: String, minuteIncrements: Long = 12*60, processDelay: Long = 5000): Unit = {
     val startDate = strToLocalDate(startDateStr).atStartOfDay()
 
     println(s"Starting Production at ${DateHelper.print(startDate)} with $minuteIncrements minute increments, delayed by $processDelay")
@@ -33,6 +33,7 @@ object ProducerPipeline {
         val countryProbs = GenHelper.getCountryProbabilities(dayPercentage, dayOfWeek)
         var batchSize: Int = Math.ceil(countryProbs.sum * globalScale).toInt
         batchSize = 2
+
         val chinaCats = CountryFunctions.getCategoryProbabilities("China", dayOfWeek, dayPercentage)
         val usCats    = CountryFunctions.getCategoryProbabilities("United States", dayOfWeek, dayPercentage)
         val spainCats = CountryFunctions.getCategoryProbabilities("Spain", dayOfWeek, dayPercentage)
@@ -49,7 +50,7 @@ object ProducerPipeline {
         println(pStrs)
         // TODO: Send to Producer
         // TODO: Log events
-        Thread.sleep(5000)
+        Thread.sleep(100)
       })
   }
 }

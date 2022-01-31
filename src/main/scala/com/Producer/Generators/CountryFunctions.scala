@@ -99,8 +99,6 @@ object CountryFunctions {
     MathHelper.getConstantFunc(1),
     MathHelper.getConstantFunc(5),
   )
-  val sundayActivity = usGas(0)(0.5) + usMedicine(0)(0.5)
-
 
   val usGas = List(
     MathHelper.getConstantFunc(1),
@@ -117,7 +115,7 @@ object CountryFunctions {
     MathHelper.getConstantFunc(1),
     MathHelper.getConstantFunc(4),
     MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(0.05),
+    MathHelper.getConstantFunc(1),
     MathHelper.getConstantFunc(4),
   )
 
