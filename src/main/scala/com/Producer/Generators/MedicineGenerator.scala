@@ -4,7 +4,7 @@ import scala.util.Random
 import com.ProductOrder
 
 object MedicineGenerator {
-  private final var medicineList = os.read.lines(os.pwd / "clean_data" / "medicine_2021.txt").drop(1).toList
+  private final var medicineList = os.read.lines(os.pwd / "clean_data" /"medicine"/ "medicine_2021.txt").drop(1).toList
 
   // this fills in the product related fields of the ProductOrder object
   def getMedicine(po: ProductOrder):ProductOrder = {
