@@ -17,7 +17,7 @@ object GroceryGenerator {
 //Created usGroceries List
   val usGroceries = os
     .read
-    .lines(DataValidator.validatedData("clean_data/clean_us_grocery_data.csv"))
+    .lines(DataValidator.validatedData("clean_data/grocery_data_us.csv"))
     .drop(1)
     .map(line => line.split("\\|"))
     .map(splitArray => {
@@ -29,7 +29,7 @@ object GroceryGenerator {
   //Created chinaGroceries List
   val chinaGroceries = os
     .read
-    .lines(DataValidator.validatedData("clean_data/clean_china_grocery_data.csv"))
+    .lines(DataValidator.validatedData("clean_data/grocery_data_china.csv"))
     .drop(1)
     .map(line => line.split("\\|"))
     .map(splitArray => {
@@ -41,7 +41,7 @@ object GroceryGenerator {
   //Created spainGroceries List
   val spainGroceries = os
     .read
-    .lines(DataValidator.validatedData("clean_data/clean_spain_grocery_data.csv"))
+    .lines(DataValidator.validatedData("clean_data/grocery_data_spain.csv"))
     .drop(1)
     .map(line => line.split("\\|"))
     .map(splitArray => {
