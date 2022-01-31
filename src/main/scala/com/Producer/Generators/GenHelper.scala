@@ -19,7 +19,7 @@ object GenHelper {
   val spainDaily: List[Double => Double] = CountryFunctions.getSpainDaily()
 
   // TODO: Finish and make canonical
-  val categories = List("Gas", "Medicine")
+  val categories = List("Gas", "Groceries", "Medicine")
   val corruptionChance: Double = 0.03
 
   var orderIDAccumulator = 1000 // A globally incremented value.

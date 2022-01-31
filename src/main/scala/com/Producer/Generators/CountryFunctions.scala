@@ -42,6 +42,9 @@ object CountryFunctions {
     chinaSum + usSum + spainSum
   }
 
+//  List(1,2,3,4), List(10, 11, 12, 13, 14)
+//  List(1, 10), (2, 12), (3,13),
+
   // Zips the nth element of each list together
   //  (List(1, 2, 3), List(10, 20, 30), List(100, 200, 300))
   //  => List(List(1, 10, 100), List(2, 20, 200), List(3, 30, 300))
@@ -70,17 +73,26 @@ object CountryFunctions {
   }
 
   def getChinaCategories(): List[List[Double => Double]] = {
-    List(chineseGas, chineseMedicine)
+    List(chineseGas, chineseGroceries, chineseMedicine)
   }
 
   def getUSCategories(): List[List[Double => Double]] = {
-    List(usGas, usMedicine)
+    List(usGas, usGroceries, usMedicine)
   }
 
   def getSpainCategories(): List[List[Double => Double]]= {
-    List(spainGas, spainMedicine)
+    List(spainGas, spainGroceries, spainMedicine)
   }
 
+  val chineseEcommerce = List(
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+  )
   val chineseGas = List(
     MathHelper.getConstantFunc(1),
     MathHelper.getConstantFunc(1),
@@ -89,6 +101,15 @@ object CountryFunctions {
     MathHelper.getConstantFunc(1),
     MathHelper.getConstantFunc(1),
     MathHelper.getConstantFunc(1),
+  )
+  val chineseGroceries = List(
+    MathHelper.getConstantFunc(5),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(5),
   )
   val chineseMedicine = List(
     MathHelper.getConstantFunc(5),
@@ -99,7 +120,16 @@ object CountryFunctions {
     MathHelper.getConstantFunc(1),
     MathHelper.getConstantFunc(5),
   )
-
+/////////////////////////////////////////////
+  val usEcommerce = List(
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+  )
   val usGas = List(
     MathHelper.getConstantFunc(1),
     MathHelper.getConstantFunc(1),
@@ -108,6 +138,15 @@ object CountryFunctions {
     MathHelper.getConstantFunc(1),
     MathHelper.getConstantFunc(1),
     MathHelper.getConstantFunc(1),
+  )
+  val usGroceries = List(
+    MathHelper.getConstantFunc(5),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(5),
   )
   val usMedicine = List(
     MathHelper.getConstantFunc(4),
@@ -118,7 +157,17 @@ object CountryFunctions {
     MathHelper.getConstantFunc(1),
     MathHelper.getConstantFunc(4),
   )
+///////////////////////////////////////////////
 
+  val spainEcommerce = List(
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+  )
   val spainGas = List(
     MathHelper.getConstantFunc(8),
     MathHelper.getConstantFunc(6),
@@ -127,6 +176,15 @@ object CountryFunctions {
     MathHelper.getConstantFunc(6),
     MathHelper.getConstantFunc(7),
     MathHelper.getConstantFunc(8),
+  )
+  val spainGroceries = List(
+    MathHelper.getConstantFunc(5),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(1),
+    MathHelper.getConstantFunc(5),
   )
   val spainMedicine = List(
     MathHelper.getConstantFunc(3),
