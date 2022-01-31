@@ -10,7 +10,7 @@ object MedicineGenerator {
   def getMedicine(po: ProductOrder):ProductOrder = {
     val ran = new Random()
     val rownum = Math.abs(ran.nextInt(medicineList.length))
-    val row = medicineList(Math.abs(rownum)).split(",")
+    val row = medicineList(rownum).split("""\|""")
     val product = row(0)
     val price = row(2).toDouble
     val quantity = Math.abs(ran.nextInt(10))
