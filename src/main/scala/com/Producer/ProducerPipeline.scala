@@ -14,6 +14,8 @@ import com.Tools.DateHelper
  * It then sends it to a Kafka topic
  */
 object ProducerPipeline {
+  val debugMode = false
+
   def main(args: Array[String]): Unit = {
     //TODO: For David to look at
     startProducing("2022-01-27")
