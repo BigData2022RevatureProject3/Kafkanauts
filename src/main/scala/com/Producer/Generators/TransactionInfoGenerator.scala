@@ -16,7 +16,7 @@ object TransactionInfoGenerator {
     po.order_id = "#" + counter
     counter += 1
     po.payment_txn_id = Math.abs(r.nextInt(max-min).toLong + min) * 100
-    println(po.payment_txn_id)
+    //println(po.payment_txn_id)
 
     //  Calls Bao's paymentType function to set paymentType attribute of po object.
     PaymentTypeGenerator.genPaymentType(po)
