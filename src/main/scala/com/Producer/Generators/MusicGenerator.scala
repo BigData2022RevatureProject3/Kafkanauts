@@ -7,17 +7,12 @@ import scala.io.Source
 
 object MusicGenerator {
   private final val ran = scala.util.Random
-  private final val musicFile = "clean_data/track_info.txt"
+  private final val musicFile = os.read.lines(os.pwd/"clean_data"/"track_info.txt").drop(1)
 
   def genMusic(po:ProductOrder): ProductOrder = {
-    val lb = new ListBuffer[String]
-    for (line <- Source.fromFile(musicFile).getLines.drop(1)) {
-      lb += line
-    }
-    val music = lb(ran.nextInt(lb.length)).split("""\|""")
-    val price = Math.floor(music(2).toDouble / 10000 * 100) / 100
+    val price = Math.floor(musicFile(2).toDouble / 10000 * 100) / 100
     po.product_id = Math.abs(ran.nextLong())
-    po.product_name = music(1)
+    po.product_name = musicFile(1)
     po.price = price
     po
   }
