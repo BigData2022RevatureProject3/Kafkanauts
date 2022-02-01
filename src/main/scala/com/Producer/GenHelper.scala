@@ -18,9 +18,10 @@ object GenHelper {
   val spainDaily: List[Double => Double] = CountryFunctions.getSpainDaily()
 
   // TODO: Finish and make canonical
-  val categories = List("Gas", "Groceries", "Medicine")
+  val categories = List("E-Commerce", "Gas", "Groceries", "Medicine")
   //  val categories = List("Gas", "Medicine")
   //  Future categories: E-Commerce
+
 
   val corruptionChance: Double = 0.03
 
@@ -47,16 +48,16 @@ object GenHelper {
     if (poOpt.isDefined) {
       val po = poOpt.get
       po.product_category match {
-        case "Medicine" => MedicineGenerator.getMedicine(po)
-        case "Music" => MusicGenerator.genMusic(po)
         case "Gas" => GasStationGenerator.generateStations(po)
         case "Grocery" => GroceryGenerator.generateGroceries(po, day)
+        case "E-Commerce" => ECommGenerator.genECommOrder(po)
+        case "Medicine" => MedicineGenerator.getMedicine(po)
+        case "Music" => MusicGenerator.genMusic(po)
         case _ => po.product_category = "Medicine"
           MedicineGenerator.getMedicine(po)
         //      case "Misc." => po // to be added
         case "Gas" => po // to be added
         case "Grocery" => po // to be added
-        case "E-Commerce" => ECommGenerator.genECommOrder(po)
       }
       Some(po)
     } else None
