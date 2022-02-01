@@ -35,7 +35,7 @@ object ConsumerDigester {
       .toList
     val invalidOrdersList = invalidData.toList
 
-//    consumer.close()
+    //    consumer.close()
 
     (validOrdersList, invalidOrdersList)
   }
@@ -64,7 +64,7 @@ object ConsumerDigester {
         price, datetime, country, city, ecommerce_website_name, payment_txn_id, payment_txn_success, failure_reason)
       if(values.exists(_.isEmpty)) {
         // TODO append to invalid data path
-//        os.write.over(o)
+        //        os.write.over(o)
         return None
       }
       // TODO Check with David to see if I should exclude failure_reason

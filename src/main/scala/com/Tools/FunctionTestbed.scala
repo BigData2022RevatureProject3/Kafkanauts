@@ -5,14 +5,14 @@ import MathHelper._
 
 object FunctionTestbed {
   def main(args: Array[String]): Unit = {
-//    testBimodal()
-//    testSkew()
-//    biSkew()
+    //    testBimodal()
+    //    testSkew()
+    //    biSkew()
     testCountry()
-//    val f = getNormalPDF(0, 0.1, 0.1)
-//
-//    val quad = getQuadModal(getNormalPDF(0, 0.1, 0.1), 12 - 4, 12 + 4)
-//    functionsToString(24, 0, f, quad)
+    //    val f = getNormalPDF(0, 0.1, 0.1)
+    //
+    //    val quad = getQuadModal(getNormalPDF(0, 0.1, 0.1), 12 - 4, 12 + 4)
+    //    functionsToString(24, 0, f, quad)
   }
 
   def testCountry(): Unit = {
@@ -32,7 +32,7 @@ object FunctionTestbed {
 
     val all = addFuncs(spain, us, china)
     val allShift = addFuncs(spainShift, chinaShift, us)
-//    functionsToString(24, 0, china, us, spain, all)
+    //    functionsToString(24, 0, china, us, spain, all)
     functionsToString(24, 0, chinaShift, us, spainShift, allShift)
 
   }
@@ -78,9 +78,9 @@ object FunctionTestbed {
     val fminus = MathHelper.getNormalPDF(middle, 0.1, 0.05)
 
     val all = MathHelper.subtractFunc(bi, fminus)
-//    MathHelper.functionToDataFrame(bi, 24).show(50)
-//    MathHelper.functionToDataFrame(fminus, 24).show(50)
-//    MathHelper.functionToDataFrame(all, 24).show(50)
+    //    MathHelper.functionToDataFrame(bi, 24).show(50)
+    //    MathHelper.functionToDataFrame(fminus, 24).show(50)
+    //    MathHelper.functionToDataFrame(all, 24).show(50)
 
     MathHelper.functionsToString(24, 0, one, two, bi, fminus, all)
 

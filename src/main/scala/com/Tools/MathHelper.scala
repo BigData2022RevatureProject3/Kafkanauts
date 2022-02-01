@@ -53,10 +53,10 @@ object MathHelper {
     funcs
       .zipWithIndex.
       foreach(f => {
-      val y = x.map(f._1)
-      val i = f._2 + 1
-      println(s"y$i = (${y.mkString(", ")})")
-    })
+        val y = x.map(f._1)
+        val i = f._2 + 1
+        println(s"y$i = (${y.mkString(", ")})")
+      })
     println()
     funcs.zipWithIndex
       .foreach(f => println(s"ax.plot(x, y${f._2 + 1});"))

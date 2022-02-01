@@ -10,14 +10,14 @@ import scala.util.Random
 object ECommGenerator {
 
   private final val r = new Random()
-//  private final val eCommerceFile = "clean_data/ecommerce_cleaned_teddy.txt"
-//  private final val quantities = List(1,2,3,4,5)
+  //  private final val eCommerceFile = "clean_data/ecommerce_cleaned_teddy.txt"
+  //  private final val quantities = List(1,2,3,4,5)
   var baseQuant = 2
 
   val eCommerceList = os
     .read
     .lines
-//    .stream(os.pwd / "clean_data" / "ecommerce_data.csv" )
+    //    .stream(os.pwd / "clean_data" / "ecommerce_data.csv" )
     .stream(DataValidator.validatedData("clean_data/ecommerce_data.csv"))
     .drop(1)
     .map(line => line.split("\\|"))
@@ -32,7 +32,7 @@ object ECommGenerator {
     })
 
   def genECommOrder(po:ProductOrder): ProductOrder = {
-//    val quantity = MathHelper.chooseFromWeightedList(quantities,List(0.))
+    //    val quantity = MathHelper.chooseFromWeightedList(quantities,List(0.))
     val (name, price, site) = MathHelper.chooseFromList(eCommerceList)
 
     val quant = price match {
@@ -67,18 +67,18 @@ object ECommGenerator {
 
   }
 
-    def main(args: Array[String]): Unit = {
+  def main(args: Array[String]): Unit = {
     val po = ProductOrder.getInitialOrder(LocalDateTime.now)
-      for (i <- 1 to 1000) {
-        println("Order " + i + ":")
-        genECommOrder(po)
-        println("name: " + po.product_name)
-        println("price: " + po.price)
-        println("qty: " + po.qty)
-        GenHelper.addTransactionInfo(Option(po))
-        println(GenHelper.toFinalString(Option(po)))
-        println
-      }
+    for (i <- 1 to 1000) {
+      println("Order " + i + ":")
+      genECommOrder(po)
+      println("name: " + po.product_name)
+      println("price: " + po.price)
+      println("qty: " + po.qty)
+      GenHelper.addTransactionInfo(Option(po))
+      println(GenHelper.toFinalString(Option(po)))
+      println
+    }
   }
 
 

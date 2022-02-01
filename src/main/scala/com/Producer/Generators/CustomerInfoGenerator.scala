@@ -19,11 +19,11 @@ object CustomerInfoGenerator {
 
 
   def generateCustomer(po:ProductOrder):ProductOrder={
-      po.country match{
-        case "United States" => genUSCustomer(po)
-        case "China" => genCNCustomer(po)
-        case "Spain" => genEUCustomer(po)
-      }
+    po.country match{
+      case "United States" => genUSCustomer(po)
+      case "China" => genCNCustomer(po)
+      case "Spain" => genEUCustomer(po)
+    }
   }
   private def genUSCustomer(po:ProductOrder): ProductOrder = {
     val name = fullUsFile(Math.abs(ran.nextInt(fullUsFile.length)))

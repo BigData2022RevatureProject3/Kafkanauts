@@ -12,7 +12,7 @@ object TransactionInfoGenerator {
     val min = 1000
     val max = 999999999
 
-//    Assigns order ID and transaction ID to po object.
+    //    Assigns order ID and transaction ID to po object.
     po.order_id = counter
     counter += 1
     po.payment_txn_id = Math.abs(r.nextInt(max-min).toLong + min) * 100

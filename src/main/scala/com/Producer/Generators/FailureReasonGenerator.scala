@@ -33,7 +33,7 @@ object FailureReasonGenerator {
     }
   }
 
-//  Proof of concept:
+  //  Proof of concept:
   def main(args: Array[String]): Unit = {
     val po = ProductOrder.getInitialOrder(LocalDateTime.now())
     println(ProductOrder.toString(po))

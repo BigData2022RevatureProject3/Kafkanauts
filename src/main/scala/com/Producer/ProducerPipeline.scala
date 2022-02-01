@@ -49,10 +49,10 @@ object ProducerPipeline {
           .map(toFinalString).toList
       })
       .foreach(pStrs => {
-//        println(pStrs)
+        //        println(pStrs)
         // TODO: Send to Producer
         // TODO: Log events
-//        Producer.send(pStrs.toString())  //Uncomment this line when run as producer or consumer
+        //        Producer.send(pStrs.toString())  //Uncomment this line when run as producer or consumer
         pStrs.map(Producer.send)
         Thread.sleep(processDelay)
       })
