@@ -14,9 +14,10 @@ import com.Tools.{CountryFunctions, DateHelper}
  * It then sends it to a Kafka topic
  */
 object ProducerPipeline {
-  val debugMode = false
+  val debugMode = true
 
   def main(args: Array[String]): Unit = {
+    // get date, increments, delay, bool for produce/write from args?
     startProducing("2022-01-27")
 
   }

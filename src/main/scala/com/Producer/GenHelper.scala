@@ -4,6 +4,7 @@ import com.Producer.Generators._
 import com.ProductOrder
 import com.Tools.CountryFunctions.{chinaScale, spainScale, usScale}
 import com.Tools.{CountryFunctions, MathHelper}
+import com.Producer.ProducerPipeline.debugMode
 
 import scala.util.Random
 
@@ -44,7 +45,7 @@ object GenHelper {
         Some(po)
       } else None
     } catch {
-      case e: Throwable  => throw e
+      case e: Throwable  => if (debugMode) throw e else None
     }
   }
 
@@ -66,7 +67,7 @@ object GenHelper {
         Some(po)
       } else None
     } catch {
-      case e: Throwable  => throw e
+      case e: Throwable  => if (debugMode) throw e else None
     }
   }
 
@@ -76,7 +77,7 @@ object GenHelper {
         Some(CustomerInfoGenerator.generateCustomer(poOpt.get))
       } else None
     } catch {
-      case e: Throwable => throw e
+      case e: Throwable => if (debugMode) throw e else None
     }
   }
 
@@ -87,7 +88,7 @@ object GenHelper {
         Some(TransactionInfoGenerator.addTransactionInfo(poOpt.get))
       } else None
     } catch {
-      case e: Throwable => throw e
+      case e: Throwable => if (debugMode) throw e else None
     }
   }
 
@@ -97,7 +98,7 @@ object GenHelper {
         Some(WebsiteGenerator.getWebsite(poOpt.get))
       } else None
     } catch {
-      case e: Throwable => throw e
+      case e: Throwable => if (debugMode) throw e else None
     }
   }
 
@@ -110,7 +111,7 @@ object GenHelper {
       }
       return TrashMaker5000.makeTrash(poOpt)
     } catch {
-      case e: Throwable  => ";lakdsjf;lak|djfs;alsd|jf;aldsf"
+      case e: Throwable  => if (debugMode) throw e else "as;lakdjsfla;sdfj;lkaj;lks| lkasdf|"
     }
   }
 }
