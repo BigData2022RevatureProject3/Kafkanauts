@@ -1,7 +1,9 @@
 package com.Consumer
 
 import com.ProductOrder
+import com.Tools.SparkHelper
 import org.apache.kafka.clients.consumer.KafkaConsumer
+
 import java.util.Properties
 
 
@@ -35,8 +37,8 @@ object ConsumerDigester {
       .map(_.get)
       .toList
     val invalidOrdersList = invalidData.toList
-
-    consumer.close()
+    import SparkHelper.spark.implicits._
+    SparkHelper.spark.sparkContext.parallelize(invalidOrdersList).toDF()
 
     (validOrdersList, invalidOrdersList)
   }
