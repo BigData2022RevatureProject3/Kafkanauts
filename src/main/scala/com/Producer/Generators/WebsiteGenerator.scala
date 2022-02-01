@@ -4,11 +4,12 @@ import scala.collection.mutable.ListBuffer
 import scala.io.Source
 import scala.util.Random
 import com.ProductOrder
+import com.ProductOrder.{isValidOrder, toString}
 
 object WebsiteGenerator {
-  private final var usWebsite = "clean_data/us_websites.txt"
-  private final var chinaWebsite = "data/medicine/china_websites.txt"
-  private final var spainWebsite = "data/medicine/spain_websites.txt"
+  private final var usWebsite = "./clean_data/us_websites.txt"
+  private final var chinaWebsite = "./clean_data/china_websites.txt"
+  private final var spainWebsite = "./clean_data/spain_websites.txt"
 
   private var usList:ListBuffer[String] = ListBuffer() //object medicine list starts empty
   private var chinaList:ListBuffer[String] = ListBuffer()
