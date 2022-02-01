@@ -3,7 +3,7 @@ package com.Consumer
 import com.ProductOrder
 import com.Tools.SparkHelper
 import org.apache.kafka.clients.consumer.KafkaConsumer
-
+import scala.collection.JavaConverters._
 import java.util.Properties
 
 
@@ -21,10 +21,28 @@ object ConsumerDigester {
     props.put("auto.commit.interval.ms", "1000")
     val consumer = new KafkaConsumer(props)
     val topics = List("text_topic")
+//    try {
+//      consumer.subscribe(topics.asJava)
+//      while (true) {
+//        val records = consumer.poll(10)
+//        for (record <- records.asScala) {
+//          println("Topic: " + record.topic() +
+//            ",Key: " + record.key() +
+//            ",Value: " + record.value() +
+//            ", Offset: " + record.offset() +
+//            ", Partition: " + record.partition())
+//        }
+//      }
+//    }catch{
+//      case e:Exception => e.printStackTrace()
+//    }finally {
+//      consumer.close()
+//    }
     (props, consumer, topics)
   }
 
-  def startConsuming(consumer: KafkaConsumer[Nothing, Nothing]): (List[ProductOrder], List[String]) = {
+  def startConsuming(props: Properties, consumer: KafkaConsumer[Nothing, Nothing], topics: List[String]): (List[ProductOrder], List[String]) = {
+    import org.apache.spark
     //Read information from producer
     val (validData, invalidData) = os
       .read
@@ -37,9 +55,10 @@ object ConsumerDigester {
       .map(_.get)
       .toList
     val invalidOrdersList = invalidData.toList
-    import SparkHelper.spark.implicits._
-    SparkHelper.spark.sparkContext.parallelize(invalidOrdersList).toDF()
 
+//    val spark = SparkHelper.spark
+//    spark.sparkContext.parallelize(validOrdersList).saveAsTextFile("./validOrders")
+//    spark.sparkContext.parallelize(invalidOrdersList).saveAsTextFile("./invalidOrders/")
     (validOrdersList, invalidOrdersList)
   }
 
@@ -76,11 +95,11 @@ object ConsumerDigester {
 
   def main(args: Array[String]): Unit = {
     val (props, consumer, topics) = initializeSubscription()
-    val (valid, invalid) = startConsuming(consumer)
+    val (valid, invalid) = startConsuming(props, consumer, topics)
 
     println("------------------------VALID----------------------")
-    valid.foreach(ProductOrder.toString(_))
+    valid.foreach(x => print("consumer_digester valid:", x))
     println("------------------------INVALID--------------------")
-    invalid.foreach(println)
+    invalid.foreach(x => print("consumer_digester invalid:", x))
   }
 }
