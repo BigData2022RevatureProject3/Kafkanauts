@@ -40,6 +40,7 @@ object ProducerPipeline {
 
         (1 to batchSize)
           .map(_ => ProductOrder.getInitialOptOrder(batchDateTime, countryProbs))
+          .map(p => GenHelper.addWebsiteInfo(p))
           .map(p => GenHelper.addCategory(p, chinaCats, usCats, spainCats))
           .map(p => GenHelper.addProduct(p, dayPercentage, dayOfWeek))
           .map(p => GenHelper.addCustomerInfo(p, dayPercentage, dayOfWeek))

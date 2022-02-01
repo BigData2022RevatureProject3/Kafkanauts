@@ -80,6 +80,14 @@ object GenHelper {
     } else None
   }
 
+  def addWebsiteInfo(poOpt: Option[ProductOrder]): Option[ProductOrder] = {
+    if (poOpt.isDefined) {
+      val po = poOpt.get
+      WebsiteGenerator.getWebsite(po)
+      Some(po)
+    } else None
+  }
+
   def toFinalString(poOpt: Option[ProductOrder]): String = {
     if (poOpt.isDefined) {
       val po = poOpt.get
