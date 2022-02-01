@@ -13,12 +13,14 @@ object ECommGenerator {
 //  private final val eCommerceFile = "clean_data/ecommerce_cleaned_teddy.txt"
 //  private final val quantities = List(1,2,3,4,5)
   var baseQuant = 2
+
   val eCommerceList = os
     .read
     .lines
-    .stream(os.pwd / "clean_data" / "ecommerce_data.csv" )
+//    .stream(os.pwd / "clean_data" / "ecommerce_data.csv" )
+    .stream(DataValidator.validatedData("clean_data/ecommerce_data.csv"))
     .drop(1)
-    .map(line => line.split(","))
+    .map(line => line.split("\\|"))
     .filter(_.length == 6)
     .filter(!_(2).contains("$"))
     .toList

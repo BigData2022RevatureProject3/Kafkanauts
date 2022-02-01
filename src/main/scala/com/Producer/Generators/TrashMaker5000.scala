@@ -67,6 +67,9 @@ object TrashMaker5000 {
     //  Reads data from text file into an ArrayBuffer.
     val aB = new ArrayBuffer[Array[String]]()
     val bufferedSource = scala.io.Source.fromFile(file).getLines.foreach(aB += _.split(","))
+//    val bufferedSource = os.read.lines.stream(os.pwd / file)
+//      .getLines
+//      .foreach(aB += _.split(","))
 
     //  For each number 1 to x, chooses a random element from the file and modifies it.
     val r = new Random()
