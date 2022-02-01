@@ -1,7 +1,9 @@
 package com.Producer.Generators
 
+import com.Producer.GenHelper
 import com.ProductOrder
 import com.Tools.MathHelper
+
 import java.time.LocalDateTime
 import scala.util.Random
 
@@ -57,6 +59,7 @@ object ECommGenerator {
     po.qty = quant
     po.price = price
     po.product_name = name
+    po.ecommerce_website_name = site
 
     return po
 
@@ -64,16 +67,16 @@ object ECommGenerator {
 
     def main(args: Array[String]): Unit = {
     val po = ProductOrder.getInitialOrder(LocalDateTime.now)
-      for (i <- 1 to 100) {
+      for (i <- 1 to 1000) {
         println("Order " + i + ":")
         genECommOrder(po)
         println("name: " + po.product_name)
         println("price: " + po.price)
         println("qty: " + po.qty)
+        GenHelper.addTransactionInfo(Option(po))
+        println(GenHelper.toFinalString(Option(po)))
         println
       }
-
-    return po
   }
 
 
