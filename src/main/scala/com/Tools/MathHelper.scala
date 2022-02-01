@@ -76,6 +76,7 @@ object MathHelper {
   def addFuncs(functions: Double => Double*): Double => Double = {
     functions.reduce((a, b) => (x: Double) => a(x) + b(x))
   }
+
   def subtractFunc(func1: Double => Double, func2: Double => Double): Double => Double = {
     x: Double => Math.max(func1(x) - func2(x), 0.01)
   }
@@ -87,6 +88,11 @@ object MathHelper {
   def getBimodalFunc(mean1: Double, var1: Double, scale1: Double,
                      mean2: Double, var2: Double, scale2: Double): Double => Double = {
     x: Double => Math.max(getNormalPDF(mean1, var1, scale1)(x), getNormalPDF(mean2, var2, scale2)(x))
+  }
+  def getQuadModal(f: Double => Double, startHour: Double, endHour: Double): Double => Double = {
+    val start = startHour / 24
+    val end = endHour / 24
+    maxOfFunctions((start to end by (start - end) / 4).map(t => shiftTimezone(f, t)):_*)
   }
 
   def getExtraBimodalFunc(mean1: Double, var1: Double, scale1: Double,

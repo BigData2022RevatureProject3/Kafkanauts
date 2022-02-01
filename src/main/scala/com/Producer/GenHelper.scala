@@ -44,7 +44,7 @@ object GenHelper {
         Some(po)
       } else None
     } catch {
-      case e: Throwable  => None
+      case e: Throwable  => throw e
     }
   }
 
@@ -66,7 +66,7 @@ object GenHelper {
         Some(po)
       } else None
     } catch {
-      case e: Throwable  => None
+      case e: Throwable  => throw e
     }
   }
 
@@ -87,7 +87,7 @@ object GenHelper {
         Some(TransactionInfoGenerator.addTransactionInfo(poOpt.get))
       } else None
     } catch {
-      case e: Throwable => None
+      case e: Throwable => throw e
     }
   }
 
@@ -97,7 +97,7 @@ object GenHelper {
         Some(WebsiteGenerator.getWebsite(poOpt.get))
       } else None
     } catch {
-      case e: Throwable => None
+      case e: Throwable => throw e
     }
   }
 
