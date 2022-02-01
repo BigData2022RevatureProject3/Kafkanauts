@@ -83,16 +83,16 @@ object CountryFunctions {
   }
 
   def getChinaCategories(): List[List[Double => Double]] = {
-    List(chineseGas, chineseGroceries, chineseMedicine)
+    List(chineseEcommerce, chineseGas, chineseGroceries, chineseMedicine)
       .map(_.map(shiftTimezone(_, chinaTimeDiff)))
   }
 
   def getUSCategories(): List[List[Double => Double]] = {
-    List(usGas, usGroceries, usMedicine)
+    List(usEcommerce, usGas, usGroceries, usMedicine)
   }
 
   def getSpainCategories(): List[List[Double => Double]] = {
-    List(spainGas, spainGroceries, spainMedicine)
+    List(spainEcommerce, spainGas, spainGroceries, spainMedicine)
       .map(_.map(shiftTimezone(_, spainTimeDiff)))
   }
 
