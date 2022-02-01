@@ -28,8 +28,11 @@ object Consumer extends App {
     while (true) {
       val records = consumer.poll(10000L)
       val size = records.asScala.toList.length
-      if (size != 0)
-        println(size)
+//      if (size != 0)
+//        println(size)
+      for(record <- records.asScala){
+        os.write.append(os.pwd/"testdata.csv",record.value.toString+"\n")
+      }
       //      for (record <- records.asScala) {
       //        println("Topic: " + record.topic() +
       //          ",Key: " + record.key() +
