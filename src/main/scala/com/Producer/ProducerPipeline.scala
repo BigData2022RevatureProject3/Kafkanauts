@@ -51,8 +51,8 @@ object ProducerPipeline {
         println(pStrs)
         // TODO: Send to Producer
         // TODO: Log events
-
-        Thread.sleep(100)
+        //Producer.send(pStrs.toString())  //Uncomment this line when run as producer or consumer
+        Thread.sleep(1000)
       })
   }
 }
