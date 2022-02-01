@@ -4,10 +4,11 @@ import MathHelper.shiftTimezone
 import MathHelper._
 
 object CountryFunctions {
-  val globalScale = 5
-  val chinaScale  = 1047
-  val usScale     = 344
-  val spainScale  = 47
+  val globalScale: Double = 5
+  val chinaScale:  Double = 1047
+  val usScale:     Double = 344
+  val spainScale:  Double = 47
+  val tacoScale:   Double = 2.0
 
   val weekscale = List(1.0, 0.8)
   def main(args: Array[String]): Unit = {

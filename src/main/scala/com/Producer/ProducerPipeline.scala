@@ -15,19 +15,19 @@ import com.Tools.{CountryFunctions, DateHelper}
  */
 object ProducerPipeline {
   val debugMode = true
+  val useEC2 = false
 
   def main(args: Array[String]): Unit = {
     // get date, increments, delay, bool for produce/write from args?
-    startProducing("2022-01-27")
+    startProducing("2022-01-27", 15, 5000, 20)
 
   }
 
-  def startProducing(startDateStr: String, minuteIncrements: Long = 12*60, processDelay: Long = 5000): Unit = {
+  def startProducing(startDateStr: String, minuteIncrements: Long = 12*60, processDelay: Long = 5000, maxBatch: Int = Int.MaxValue): Unit = {
     val startDate = strToLocalDate(startDateStr).atStartOfDay()
 
     println(s"Starting Production at ${DateHelper.print(startDate)} with $minuteIncrements minute increments, delayed by $processDelay")
-    Stream
-      .from(1)
+    (1 to maxBatch)
       .map(i => {
         val batchDateTime = startDate.plus(minuteIncrements * i, ChronoUnit.MINUTES)
         val dayPercentage = getPercentThroughDay(batchDateTime)
@@ -49,11 +49,12 @@ object ProducerPipeline {
           .map(toFinalString).toList
       })
       .foreach(pStrs => {
-        println(pStrs)
+//        println(pStrs)
         // TODO: Send to Producer
         // TODO: Log events
-        //Producer.send(pStrs.toString())  //Uncomment this line when run as producer or consumer
-        Thread.sleep(1000)
+//        Producer.send(pStrs.toString())  //Uncomment this line when run as producer or consumer
+        pStrs.map(Producer.send)
+        Thread.sleep(processDelay)
       })
   }
 }
