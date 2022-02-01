@@ -1,8 +1,10 @@
-package com.Producer.Generators
+package com.Producer
 
+import com.Producer.Generators._
 import com.ProductOrder
-import com.Tools.MathHelper
-import java.time.LocalDateTime
+import com.Tools.CountryFunctions.{chinaScale, spainScale, usScale}
+import com.Tools.{CountryFunctions, MathHelper}
+
 import scala.util.Random
 
 /**
@@ -10,18 +12,15 @@ import scala.util.Random
  */
 object GenHelper {
   val countries = List("China", "United States", "Spain")
-  val globalScale = 5
-  val chinaScale  = 1047
-  val usScale     = 344
-  val spainScale  = 47
+
   val chinaDaily: List[Double => Double] = CountryFunctions.getChineseDaily()
-  val usDaily:    List[Double => Double] = CountryFunctions.getUSDaily()
+  val usDaily: List[Double => Double] = CountryFunctions.getUSDaily()
   val spainDaily: List[Double => Double] = CountryFunctions.getSpainDaily()
 
   // TODO: Finish and make canonical
   val categories = List("Gas", "Groceries", "Medicine")
-//  val categories = List("Gas", "Medicine")
-//  Future categories: E-Commerce
+  //  val categories = List("Gas", "Medicine")
+  //  Future categories: E-Commerce
   val corruptionChance: Double = 0.03
 
   var orderIDAccumulator = 1000 // A globally incremented value.
@@ -33,9 +32,9 @@ object GenHelper {
 
   def addCategory(po: ProductOrder, chinaProbs: List[Double], usProbs: List[Double], spainProbs: List[Double]): ProductOrder = {
     po.product_category = po.country match {
-      case "China"         => MathHelper.chooseFromWeightedList(categories, chinaProbs)
+      case "China" => MathHelper.chooseFromWeightedList(categories, chinaProbs)
       case "United States" => MathHelper.chooseFromWeightedList(categories, usProbs)
-      case "Spain"         => MathHelper.chooseFromWeightedList(categories, spainProbs)
+      case "Spain" => MathHelper.chooseFromWeightedList(categories, spainProbs)
     }
     po
   }
@@ -48,7 +47,7 @@ object GenHelper {
       case "Grocery" => GroceryGenerator.generateGroceries(po, day)
       case _ => po.product_category = "Medicine"
         MedicineGenerator.getMedicine(po)
-//      case "Misc." => po // to be added
+      //      case "Misc." => po // to be added
       case "Gas" => po // to be added
       case "Grocery" => po // to be added
       case "E-Commerce" => po // to be added
@@ -59,7 +58,7 @@ object GenHelper {
     CustomerInfoGenerator.generateCustomer(po)
   }
 
-//  def addTransactionInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
+  //  def addTransactionInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
   def addTransactionInfo(po: ProductOrder): ProductOrder = {
     TransactionInfoGenerator.addTransactionInfo(po)
     po
@@ -68,7 +67,7 @@ object GenHelper {
   def toFinalString(po: ProductOrder): String = {
     val min = 1
     val max = 100
-    if ((Random.nextInt(max-min) + min) / 100.00 < GenHelper.corruptionChance) {
+    if ((Random.nextInt(max - min) + min) / 100.00 < GenHelper.corruptionChance) {
       TrashMaker5000.makeTrash(po)
     } else {
       ProductOrder.toString(po)

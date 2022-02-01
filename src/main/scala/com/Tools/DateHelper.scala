@@ -8,8 +8,6 @@ import java.util.Date
 
 object DateHelper {
   val dateRegex = """^(\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) (?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d))$""".r
-  val chinaTimeDiff = 12
-  val spainTimeDiff = 6
   /**
    * This method is used to convert time in milliseconds to DateFormat[yyyy-MM-dd HH:mm:ss] or vice versa.
    * @param dateTime Must be in DateFormat[yyyy-MM-dd HH:mm:ss] or can be parsed into a Long[milliseconds]
