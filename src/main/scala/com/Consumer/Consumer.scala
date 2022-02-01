@@ -26,14 +26,17 @@ object Consumer extends App {
   try {
     consumer.subscribe(topics.asJava)
     while (true) {
-      val records = consumer.poll(10)
-      for (record <- records.asScala) {
-        println("Topic: " + record.topic() +
-          ",Key: " + record.key() +
-          ",Value: " + record.value() +
-          ", Offset: " + record.offset() +
-          ", Partition: " + record.partition())
-      }
+      val records = consumer.poll(10000L)
+      val size = records.asScala.toList.length
+      if (size != 0)
+        println(size)
+//      for (record <- records.asScala) {
+//        println("Topic: " + record.topic() +
+//          ",Key: " + record.key() +
+//          ",Value: " + record.value() +
+//          ", Offset: " + record.offset() +
+//          ", Partition: " + record.partition())
+//      }
     }
   }catch{
     case e:Exception => e.printStackTrace()

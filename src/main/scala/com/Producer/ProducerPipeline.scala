@@ -19,7 +19,7 @@ object ProducerPipeline {
 
   def main(args: Array[String]): Unit = {
     // get date, increments, delay, bool for produce/write from args?
-    startProducing("2022-01-27", 15, 5000, 20)
+    startProducing("2022-01-27", 15, 1, 20)
 
   }
 
@@ -34,7 +34,7 @@ object ProducerPipeline {
         val dayOfWeek: Int = DateHelper.getDayOfWeek(batchDateTime)
         val countryProbs = GenHelper.getCountryProbabilities(dayPercentage, dayOfWeek)
         var batchSize: Int = Math.ceil(countryProbs.sum * globalScale).toInt
-        batchSize = 1
+        batchSize = 100
         val chinaCats = CountryFunctions.getCategoryProbabilities("China", dayOfWeek, dayPercentage)
         val usCats    = CountryFunctions.getCategoryProbabilities("United States", dayOfWeek, dayPercentage)
         val spainCats = CountryFunctions.getCategoryProbabilities("Spain", dayOfWeek, dayPercentage)
