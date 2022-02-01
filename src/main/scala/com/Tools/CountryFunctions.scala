@@ -7,6 +7,8 @@ object CountryFunctions {
   val chinaScale  = 1047
   val usScale     = 344
   val spainScale  = 47
+
+  val weekscale = List(1.0, 0.8)
   def main(args: Array[String]): Unit = {
     compareTotals()
     printWeeklySum()

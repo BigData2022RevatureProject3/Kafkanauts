@@ -39,19 +39,18 @@ object ProducerPipeline {
         val spainCats = CountryFunctions.getCategoryProbabilities("Spain", dayOfWeek, dayPercentage)
 
         (1 to batchSize)
-          .map(_ => ProductOrder.getInitialOrder(batchDateTime, countryProbs))
+          .map(_ => ProductOrder.getInitialOptOrder(batchDateTime, countryProbs))
           .map(p => GenHelper.addCategory(p, chinaCats, usCats, spainCats))
-          .map(p => GenHelper.addProduct(dayPercentage, dayOfWeek, p))
-          .map(p => GenHelper.addCustomerInfo(dayPercentage, dayOfWeek, p))
-//          .map(p => GenHelper.addTransactionInfo(dayPercentage, dayOfWeek, p))
+          .map(p => GenHelper.addProduct(p, dayPercentage, dayOfWeek))
+          .map(p => GenHelper.addCustomerInfo(p, dayPercentage, dayOfWeek))
           .map(p => GenHelper.addTransactionInfo(p))
-
           .map(toFinalString).toList
       })
       .foreach(pStrs => {
         println(pStrs)
         // TODO: Send to Producer
         // TODO: Log events
+
         Thread.sleep(100)
       })
   }

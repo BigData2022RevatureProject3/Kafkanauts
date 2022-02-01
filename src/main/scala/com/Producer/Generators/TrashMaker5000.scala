@@ -1,41 +1,42 @@
 package com.Producer.Generators
 
 import com.ProductOrder
+import com.Tools.MathHelper
 
 import scala.util.Random
-
 import scala.collection.mutable.ArrayBuffer
 import scala.util.Random
+import com.Tools.MathHelper.chooseFromList
 
 object TrashMaker5000 {
-
-  def makeTrash(PO: ProductOrder, easterEgg: Option[String] = None): String = {
-    /**
-     * Purpose: Takes a PO and returns it as a string with random "corruptions."
-     * @param PO to be parsed and modified.
-     * @param easterEgg is an optional string that has a 5% of being introduced into the PO.
-     * @return PO as string, with "corruptions."
-     */
-
-    val str = PO.toString.replaceAll("ProductOrder","")
-    val str2 = str.slice(1, str.length - 1)
-    var aB = new ArrayBuffer[String]()
-    val arr = str2.split(",").foreach(aB += _)
+  /**
+   * Purpose: Takes a PO and returns it as a string with random "corruptions."
+   * @param PO to be parsed and modified.
+   * @param easterEgg is an optional string that has a 5% of being introduced into the PO.
+   * @return PO as string, with "corruptions."
+   */
+  def makeTrash(poOpt: Option[ProductOrder], easterEgg: Option[String] = None): String = {
+    val po = if (poOpt.isDefined) poOpt.get else ProductOrder.getSampleOrder()
+    val poStr = ProductOrder.toString(po)
+    val splitFields = poStr.split("//|").toBuffer
 
     val r = new Random()
-    val randomTrash = r.nextInt(21)
-    val randomIndex1 = r.nextInt(aB.size - 1)
+    val diceRoll = r.nextInt(21)
+    val idx = Random.nextInt(splitFields.size - 1)
 
-    randomTrash match {
-      case 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 => aB(randomIndex1) = ""
-      case 10 | 11 | 12 | 13 | 14 | 15 => aB(randomIndex1) = r.nextString(aB(randomIndex1).length)
-      case 16 | 17 | 18 => aB(randomIndex1) = r.nextPrintableChar().toString.concat(r.nextPrintableChar().toString).concat(r.nextPrintableChar().toString).concat(r.nextPrintableChar().toString).concat(r.nextPrintableChar().toString).concat(r.nextPrintableChar().toString)
-      case 19 => aB(randomIndex1) = easterEgg.toString.slice(4,easterEgg.toString.length)
-      case 20 => aB -= aB(randomIndex1)
+    diceRoll match {
+      case 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 => splitFields(idx) = ""
+      case 10 | 11 | 12 | 13 | 14 | 15 => splitFields(idx) = r.nextString(chooseFromList(splitFields.toList).length)
+      case 16 | 17 | 18 => splitFields(idx) =
+        r.nextPrintableChar().toString.concat(r.nextPrintableChar().toString)
+          .concat(r.nextPrintableChar().toString).concat(r.nextPrintableChar().toString)
+          .concat(r.nextPrintableChar().toString).concat(r.nextPrintableChar().toString)
+      case 19 => splitFields(idx)  = easterEgg.toString.slice(4,easterEgg.toString.length)
+      case 20 => splitFields.remove(idx)
       case _ =>
     }
 
-    val str3 = new StringBuilder(aB.mkString("|"))
+    val str3 = new StringBuilder(splitFields.mkString("|"))
     val randomTrash2 = r.nextInt(20)
     val randomIndex2 = r.nextInt(str3.length)
     randomTrash2 match {
@@ -44,7 +45,6 @@ object TrashMaker5000 {
     }
 
     return str3.toString()
-
   }
 
   def makeTrashes(file: String, x: Int, easterEgg: Option[String] = None): ArrayBuffer[Array[String]] = {

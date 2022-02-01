@@ -31,48 +31,61 @@ object GenHelper {
     List(chinaDaily(day)(dayPercent) * chinaScale, usDaily(day)(dayPercent) * usScale, spainDaily(day)(dayPercent) * spainScale)
   }
 
-  def addCategory(po: ProductOrder, chinaProbs: List[Double], usProbs: List[Double], spainProbs: List[Double]): ProductOrder = {
-    po.product_category = po.country match {
-      case "China" => MathHelper.chooseFromWeightedList(categories, chinaProbs)
-      case "United States" => MathHelper.chooseFromWeightedList(categories, usProbs)
-      case "Spain" => MathHelper.chooseFromWeightedList(categories, spainProbs)
-    }
-    po
+  def addCategory(poOpt: Option[ProductOrder], chinaProbs: List[Double], usProbs: List[Double], spainProbs: List[Double]): Option[ProductOrder] = {
+    if (poOpt.isDefined) {
+      val po = poOpt.get
+      po.product_category = po.country match {
+        case "China" => MathHelper.chooseFromWeightedList(categories, chinaProbs)
+        case "United States" => MathHelper.chooseFromWeightedList(categories, usProbs)
+        case "Spain" => MathHelper.chooseFromWeightedList(categories, spainProbs)
+      }
+      Some(po)
+    } else None
   }
 
-  def addProduct(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
-    po.product_category match {
-      case "Medicine" => MedicineGenerator.getMedicine(po)
-      case "Music" => MusicGenerator.genMusic(po)
-      case "Gas" => GasStationGenerator.generateStations(po)
-      case "Grocery" => GroceryGenerator.generateGroceries(po, day)
-      case _ => po.product_category = "Medicine"
-        MedicineGenerator.getMedicine(po)
-      //      case "Misc." => po // to be added
-      case "Gas" => po // to be added
-      case "Grocery" => po // to be added
-      case "E-Commerce" => ECommGenerator.genECommOrder(po)
-    }
+  def addProduct(poOpt: Option[ProductOrder], dayPercent: Double, day: Int): Option[ProductOrder] = {
+    if (poOpt.isDefined) {
+      val po = poOpt.get
+      po.product_category match {
+        case "Medicine" => MedicineGenerator.getMedicine(po)
+        case "Music" => MusicGenerator.genMusic(po)
+        case "Gas" => GasStationGenerator.generateStations(po)
+        case "Grocery" => GroceryGenerator.generateGroceries(po, day)
+        case _ => po.product_category = "Medicine"
+          MedicineGenerator.getMedicine(po)
+        //      case "Misc." => po // to be added
+        case "Gas" => po // to be added
+        case "Grocery" => po // to be added
+        case "E-Commerce" => ECommGenerator.genECommOrder(po)
+      }
+      Some(po)
+    } else None
   }
 
-  def addCustomerInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
-    CustomerInfoGenerator.generateCustomer(po)
+  def addCustomerInfo(poOpt: Option[ProductOrder], dayPercent: Double, day: Int): Option[ProductOrder] = {
+    if (poOpt.isDefined) {
+      val po = poOpt.get
+      CustomerInfoGenerator.generateCustomer(po)
+      Some(po)
+    } else None
   }
 
   //  def addTransactionInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
-  def addTransactionInfo(po: ProductOrder): ProductOrder = {
-    TransactionInfoGenerator.addTransactionInfo(po)
-    po
+  def addTransactionInfo(poOpt: Option[ProductOrder]): Option[ProductOrder] = {
+    if (poOpt.isDefined) {
+      val po = poOpt.get
+      TransactionInfoGenerator.addTransactionInfo(po)
+      Some(po)
+    } else None
   }
 
-  def toFinalString(po: ProductOrder): String = {
-    val min = 1
-    val max = 100
-    if ((Random.nextInt(max - min) + min) / 100.00 < GenHelper.corruptionChance) {
-      TrashMaker5000.makeTrash(po)
-    } else {
-      ProductOrder.toString(po)
+  def toFinalString(poOpt: Option[ProductOrder]): String = {
+    if (poOpt.isDefined) {
+      val po = poOpt.get
+      if (Random.nextDouble() > GenHelper.corruptionChance)
+        return ProductOrder.toString(po)
     }
+    return TrashMaker5000.makeTrash(poOpt)
   }
 
   def main(args: Array[String]): Unit = {
