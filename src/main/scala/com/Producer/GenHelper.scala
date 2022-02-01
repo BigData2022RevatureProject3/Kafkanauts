@@ -76,7 +76,7 @@ object GenHelper {
         Some(CustomerInfoGenerator.generateCustomer(poOpt.get))
       } else None
     } catch {
-      case e: Throwable => None
+      case e: Throwable => throw e
     }
   }
 
