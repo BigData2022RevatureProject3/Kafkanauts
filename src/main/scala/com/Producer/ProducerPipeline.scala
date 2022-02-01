@@ -1,11 +1,11 @@
 package com.Producer
 
-import com.Producer.Generators.{CountryFunctions, GenHelper}
 import java.time.temporal.ChronoUnit
 import com.Tools.DateHelper._
-import com.Producer.Generators.GenHelper._
+import GenHelper._
 import com.ProductOrder
-import com.Tools.DateHelper
+import com.Tools.CountryFunctions.globalScale
+import com.Tools.{CountryFunctions, DateHelper}
 
 /**
  * This object deals with creating a burst of orders for blocks of time,
@@ -17,7 +17,6 @@ object ProducerPipeline {
   val debugMode = false
 
   def main(args: Array[String]): Unit = {
-    //TODO: For David to look at
     startProducing("2022-01-27")
 
   }
