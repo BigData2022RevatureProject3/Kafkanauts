@@ -48,10 +48,9 @@ object GenHelper {
       case "Grocery" => GroceryGenerator.generateGroceries(po, day)
       case _ => po.product_category = "Medicine"
         MedicineGenerator.getMedicine(po)
-//      case "Misc." => po // to be added
       case "Gas" => po // to be added
       case "Grocery" => po // to be added
-      case "E-Commerce" => po // to be added
+      case "E-Commerce" => ECommGenerator.genECommOrder(po)
     }
   }
 
