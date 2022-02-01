@@ -1,6 +1,7 @@
 package com.Tools
 
 import org.apache.spark.sql.DataFrame
+import MathHelper._
 
 object FunctionTestbed {
   def main(args: Array[String]): Unit = {
@@ -9,10 +10,24 @@ object FunctionTestbed {
     biSkew()
   }
 
+  def testCountry(): Unit = {
+    val spainStartTime: Double = 14 / 24.0
+    val spainEndTime: Double = 17 / 24.0
+    val spainMidtime: Double = (spainStartTime + spainEndTime) / 2
+    val sVar = 0.1
+    val sScale = 0.4
+
+    val spain = getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2)
+    val us = getNormalPDF(0.4, 0.8)
+    val china = getNormalPDF(0.6, 1, 1.2)
+
+//    functionsToString()
+  }
+
   def testShifting(): Unit = {
     val f = MathHelper.getNormalPDF(0.5, 1, 10)
-    MathHelper.functionToDataFrame(f).show()
-    MathHelper.functionToDataFrame(MathHelper.shiftTimezone(f, 6)).show()
+    functionToDataFrame(f).show()
+    functionToDataFrame(shiftTimezone(f, 6)).show()
 
   }
 

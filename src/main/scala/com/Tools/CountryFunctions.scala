@@ -1,6 +1,7 @@
 package com.Tools
 
 import MathHelper.shiftTimezone
+import MathHelper._
 
 object CountryFunctions {
   val globalScale = 5
@@ -24,9 +25,9 @@ object CountryFunctions {
     val c = getChineseDaily()
     val u = getUSDaily()
     val s = getSpainDaily()
-    val chinaSum = MathHelper.areaUnderCurve(c(0), 1) * chinaScale
-    val usSum = MathHelper.areaUnderCurve(u(0), 1) * usScale
-    val spainSum = MathHelper.areaUnderCurve(s(0), 1) * spainScale
+    val chinaSum = areaUnderCurve(c(0), 1) * chinaScale
+    val usSum = areaUnderCurve(u(0), 1) * usScale
+    val spainSum = areaUnderCurve(s(0), 1) * spainScale
     val all = chinaSum + usSum + spainSum
     println(chinaSum, usSum, spainSum, Math.ceil(all) * globalScale)
   }
@@ -62,15 +63,15 @@ object CountryFunctions {
   }
 
   def getChineseDaily(): List[Double => Double] = {
-    combineLists(getChinaCategories(): _*).map(dayFuncs => MathHelper.addFuncs(dayFuncs: _*))
+    combineLists(getChinaCategories(): _*).map(dayFuncs => addFuncs(dayFuncs: _*))
   }
 
   def getUSDaily(): List[Double => Double] = {
-    combineLists(getUSCategories(): _*).map(dayFuncs => MathHelper.addFuncs(dayFuncs: _*))
+    combineLists(getUSCategories(): _*).map(dayFuncs => addFuncs(dayFuncs: _*))
   }
 
   def getSpainDaily(): List[Double => Double] = {
-    combineLists(getSpainCategories(): _*).map(dayFuncs => MathHelper.addFuncs(dayFuncs: _*))
+    combineLists(getSpainCategories(): _*).map(dayFuncs => addFuncs(dayFuncs: _*))
   }
 
   def getCategoryProbabilities(country: String, day: Int, dayPercent: Double): List[Double] = {
@@ -100,119 +101,122 @@ object CountryFunctions {
   val chinaTimeDiff = 12
 
   val chineseEcommerce = List(
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+
   )
   val chineseGas = List(
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
   )
   val chineseGroceries = List(
-    MathHelper.getConstantFunc(5),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(5),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
   )
   val chineseMedicine = List(
-    MathHelper.getConstantFunc(5),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(1),
-    MathHelper.getConstantFunc(5),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
   )
   /////////////////////////////////////////////
   val usEcommerce = List(
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
   )
   val usGas = List(
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
   )
   val usGroceries = List(
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
   )
   val usMedicine = List(
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
-    MathHelper.getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
+    getNormalPDF(0.5, 0.8),
   )
   ///////////////////////////////////////////////
   val spainTimeDiff = 6
   val spainStartTime: Double = 14 / 24.0
   val spainEndTime: Double = 17 / 24.0
   val spainMidtime: Double = (spainStartTime + spainEndTime) / 2
+  val sVar = 0.1
+  val sScale = 0.4
 
   val spainEcommerce = List(
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
   )
   val spainGas = List(
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
   )
   val spainGroceries = List(
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
   )
   val spainMedicine = List(
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
-    MathHelper.getExtraBimodalFunc(spainStartTime, 0.1, 0.4, spainEndTime, 0.1, 0.4, spainMidtime, 0.1, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
+    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2),
   )
 
 }

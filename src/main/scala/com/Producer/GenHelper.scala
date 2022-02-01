@@ -33,71 +33,84 @@ object GenHelper {
   }
 
   def addCategory(poOpt: Option[ProductOrder], chinaProbs: List[Double], usProbs: List[Double], spainProbs: List[Double]): Option[ProductOrder] = {
-    if (poOpt.isDefined) {
-      val po = poOpt.get
-      po.product_category = po.country match {
-        case "China" => MathHelper.chooseFromWeightedList(categories, chinaProbs)
-        case "United States" => MathHelper.chooseFromWeightedList(categories, usProbs)
-        case "Spain" => MathHelper.chooseFromWeightedList(categories, spainProbs)
-      }
-      Some(po)
-    } else None
+    try {
+      if (poOpt.isDefined) {
+        val po = poOpt.get
+        po.product_category = po.country match {
+          case "China" => MathHelper.chooseFromWeightedList(categories, chinaProbs)
+          case "United States" => MathHelper.chooseFromWeightedList(categories, usProbs)
+          case "Spain" => MathHelper.chooseFromWeightedList(categories, spainProbs)
+        }
+        Some(po)
+      } else None
+    } catch {
+      case e: Throwable  => None
+    }
   }
 
   def addProduct(poOpt: Option[ProductOrder], dayPercent: Double, day: Int): Option[ProductOrder] = {
-    if (poOpt.isDefined) {
-      val po = poOpt.get
-      po.product_category match {
-        case "Gas" => GasStationGenerator.generateStations(po)
-        case "Grocery" => GroceryGenerator.generateGroceries(po, day)
-        case "E-Commerce" => ECommGenerator.genECommOrder(po)
-        case "Medicine" => MedicineGenerator.getMedicine(po)
-        case "Music" => MusicGenerator.genMusic(po)
-        case _ => po.product_category = "Medicine"
-          MedicineGenerator.getMedicine(po)
-        //      case "Misc." => po // to be added
-        case "Gas" => po // to be added
-        case "Grocery" => po // to be added
-      }
-      Some(po)
-    } else None
+    try {
+      if (poOpt.isDefined) {
+        val po = poOpt.get
+        po.product_category match {
+          case "Gas" => GasStationGenerator.generateStations(po)
+          case "Groceries" => GroceryGenerator.generateGroceries(po, day)
+          case "E-Commerce" => ECommGenerator.genECommOrder(po)
+          case "Medicine" => MedicineGenerator.getMedicine(po)
+          case "Music" => MusicGenerator.genMusic(po)
+          case e =>
+            println("Bad category: ", e)
+            po.product_category = "Medicine"
+            MedicineGenerator.getMedicine(po)
+        }
+        Some(po)
+      } else None
+    } catch {
+      case e: Throwable  => None
+    }
   }
 
   def addCustomerInfo(poOpt: Option[ProductOrder], dayPercent: Double, day: Int): Option[ProductOrder] = {
-    if (poOpt.isDefined) {
-      val po = poOpt.get
-      CustomerInfoGenerator.generateCustomer(po)
-      Some(po)
-    } else None
+    try {
+      if (poOpt.isDefined) {
+        Some(CustomerInfoGenerator.generateCustomer(poOpt.get))
+      } else None
+    } catch {
+      case e: Throwable => None
+    }
   }
 
   //  def addTransactionInfo(dayPercent: Double, day: Int, po: ProductOrder): ProductOrder = {
   def addTransactionInfo(poOpt: Option[ProductOrder]): Option[ProductOrder] = {
-    if (poOpt.isDefined) {
-      val po = poOpt.get
-      TransactionInfoGenerator.addTransactionInfo(po)
-      Some(po)
-    } else None
+    try {
+      if (poOpt.isDefined) {
+        Some(TransactionInfoGenerator.addTransactionInfo(poOpt.get))
+      } else None
+    } catch {
+      case e: Throwable => None
+    }
   }
 
   def addWebsiteInfo(poOpt: Option[ProductOrder]): Option[ProductOrder] = {
-    if (poOpt.isDefined) {
-      val po = poOpt.get
-      WebsiteGenerator.getWebsite(po)
-      Some(po)
-    } else None
+    try {
+      if (poOpt.isDefined) {
+        Some(WebsiteGenerator.getWebsite(poOpt.get))
+      } else None
+    } catch {
+      case e: Throwable => None
+    }
   }
 
   def toFinalString(poOpt: Option[ProductOrder]): String = {
-    if (poOpt.isDefined) {
-      val po = poOpt.get
-      if (Random.nextDouble() > GenHelper.corruptionChance)
-        return ProductOrder.toString(po)
+    try {
+      if (poOpt.isDefined) {
+        val po = poOpt.get
+        if (Random.nextDouble() > GenHelper.corruptionChance)
+          return ProductOrder.toString(po)
+      }
+      return TrashMaker5000.makeTrash(poOpt)
+    } catch {
+      case e: Throwable  => ";lakdsjf;lak|djfs;alsd|jf;aldsf"
     }
-    return TrashMaker5000.makeTrash(poOpt)
   }
-
-  def main(args: Array[String]): Unit = {
-  }
-
 }
