@@ -21,6 +21,7 @@ object GenHelper {
   val categories = List("Gas", "Groceries", "Medicine")
   //  val categories = List("Gas", "Medicine")
   //  Future categories: E-Commerce
+
   val corruptionChance: Double = 0.03
 
   var orderIDAccumulator = 1000 // A globally incremented value.

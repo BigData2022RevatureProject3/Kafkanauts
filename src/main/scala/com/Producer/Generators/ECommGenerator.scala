@@ -2,7 +2,6 @@ package com.Producer.Generators
 
 import com.ProductOrder
 import com.Tools.MathHelper
-
 import java.time.LocalDateTime
 import scala.util.Random
 
@@ -27,11 +26,6 @@ object ECommGenerator {
       val site = splitArray(1)
       (name, price, site)
     })
-
-
-
-//  def getQuant(price: Double): Int = {
-
 
   def genECommOrder(po:ProductOrder): ProductOrder = {
 //    val quantity = MathHelper.chooseFromWeightedList(quantities,List(0.))
@@ -78,6 +72,9 @@ object ECommGenerator {
         println("qty: " + po.qty)
         println
       }
+
+    return po
   }
+
 
 }
