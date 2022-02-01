@@ -8,7 +8,6 @@ import java.util.Date
 
 object DateHelper {
   val dateRegex = """^(\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) (?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d))$""".r
-
   /**
    * This method is used to convert time in milliseconds to DateFormat[yyyy-MM-dd HH:mm:ss] or vice versa.
    * @param dateTime Must be in DateFormat[yyyy-MM-dd HH:mm:ss] or can be parsed into a Long[milliseconds]
@@ -22,6 +21,22 @@ object DateHelper {
       case x: Long => s"${new Date(x).getTime}"
       case _ => "DateManipulator.date(), invalid input"
     }
+  }
+
+  def getTimeOfDay(hours: Long, minutes: Long = 0): LocalDateTime = {
+    LocalDate.now().atStartOfDay().plusHours(hours).plusMinutes(minutes)
+  }
+
+  def getTimeAsPercent(hours: Long, minutes: Long = 0): Double = {
+    getPercentThroughDay(getTimeOfDay(hours, minutes))
+  }
+
+  def convertToChinaTime(localDateTime: LocalDateTime): LocalDateTime = {
+    localDateTime.plusHours(12)
+  }
+
+  def convertToSpainTime(localDateTime: LocalDateTime): LocalDateTime = {
+    localDateTime.plusHours(6)
   }
 
 
@@ -58,6 +73,18 @@ object DateHelper {
     val fail2: String = "11:12:12"
     val fail3: String = "11:12:12 2021-02-19"
     val fail4: Int = 123456789
+
+//    println(LocalDateTime.now())
+//    val atTime = getTimeOfDay(14)
+//    val endTime = getTimeOfDay(17)
+//    println(atTime)
+//    println(getPercentThroughDay(atTime))
+//    println(convertToSpainTime(atTime))
+//    println(convertToSpainTime(endTime))
+//    println(getPercentThroughDay(convertToSpainTime(atTime))-1)
+//    println(getPercentThroughDay(convertToSpainTime(endTime))-1)
+
+
 
 
 //    println(s"${GREEN}Should pass 1, x in yyyy-MM-dd HH:mm:ss = $RESET" + DateTimeConverter.getDateElseMS(pass1))

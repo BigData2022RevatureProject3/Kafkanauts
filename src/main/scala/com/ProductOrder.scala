@@ -1,6 +1,6 @@
 package com
 
-import com.Producer.Generators.GenHelper
+import com.Producer.GenHelper
 import com.Tools.{DateHelper, MathHelper}
 
 import java.time.LocalDateTime
