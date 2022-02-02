@@ -5,55 +5,10 @@ import MathHelper._
 
 object CountryFunctions {
   val globalScale: Double = 5
-  val chinaScale:  Double = 1047
-  val usScale:     Double = 344
-  val spainScale:  Double = 47
+  val chinaScale:  Double = 10//1047
+  val usScale:     Double = 3//344
+  val spainScale:  Double = 1//47
   val tacoScale:   Double = 2.0
-
-  val weekscale = List(1.0, 0.8)
-  def main(args: Array[String]): Unit = {
-    compareTotals()
-    printWeeklySum()
-
-  }
-
-  def compareTotals(): Unit = {
-    val globalScale = 1
-    val chinaScale = 2
-    val usScale = 1
-    val spainScale = 1
-
-    val c = getChineseDaily()
-    val u = getUSDaily()
-    val s = getSpainDaily()
-    val chinaSum = areaUnderCurve(c(0), 1) * chinaScale
-    val usSum = areaUnderCurve(u(0), 1) * usScale
-    val spainSum = areaUnderCurve(s(0), 1) * spainScale
-    val all = chinaSum + usSum + spainSum
-    println(chinaSum, usSum, spainSum, Math.ceil(all) * globalScale)
-  }
-
-  def printWeeklySum(): Unit = {
-    val globalScale = 5
-    val chinaScale = 1402
-    val usScale = 330
-    val spainScale = 47
-    val weekly = (0 to 2).map(getDailySum(_, chinaScale, usScale, spainScale)).sum * globalScale
-    println(s"Weekly sum: $weekly")
-  }
-
-  def getDailySum(day: Int, chinaScale: Double, usScale: Double, spainScale: Double): Double = {
-    val c = getChineseDaily()
-    val u = getUSDaily()
-    val s = getSpainDaily()
-    val chinaSum = MathHelper.areaUnderCurve(c(day), 1) * chinaScale
-    val usSum = MathHelper.areaUnderCurve(u(day), 1) * usScale
-    val spainSum = MathHelper.areaUnderCurve(s(day), 1) * spainScale
-    chinaSum + usSum + spainSum
-  }
-
-  //  List(1,2,3,4), List(10, 11, 12, 13, 14)
-  //  List(1, 10), (2, 12), (3,13),
 
   // Zips the nth element of each list together
   //  (List(1, 2, 3), List(10, 20, 30), List(100, 200, 300))
@@ -187,5 +142,47 @@ object CountryFunctions {
   val spainMusic: List[Double => Double]  = (0 until 7)
     .map(_ => getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale))
     .toList
+
+
+  def main(args: Array[String]): Unit = {
+    compareTotals()
+    printWeeklySum()
+
+  }
+
+  def compareTotals(): Unit = {
+    val globalScale = 1
+    val chinaScale = 2
+    val usScale = 1
+    val spainScale = 1
+
+    val c = getChineseDaily()
+    val u = getUSDaily()
+    val s = getSpainDaily()
+    val chinaSum = areaUnderCurve(c(0), 1) * chinaScale
+    val usSum = areaUnderCurve(u(0), 1) * usScale
+    val spainSum = areaUnderCurve(s(0), 1) * spainScale
+    val all = chinaSum + usSum + spainSum
+    println(chinaSum, usSum, spainSum, Math.ceil(all) * globalScale)
+  }
+
+  def printWeeklySum(): Unit = {
+    val globalScale = 5
+    val chinaScale = 1402
+    val usScale = 330
+    val spainScale = 47
+    val weekly = (0 to 2).map(getDailySum(_, chinaScale, usScale, spainScale)).sum * globalScale
+    println(s"Weekly sum: $weekly")
+  }
+
+  def getDailySum(day: Int, chinaScale: Double, usScale: Double, spainScale: Double): Double = {
+    val c = getChineseDaily()
+    val u = getUSDaily()
+    val s = getSpainDaily()
+    val chinaSum = MathHelper.areaUnderCurve(c(day), 1) * chinaScale
+    val usSum = MathHelper.areaUnderCurve(u(day), 1) * usScale
+    val spainSum = MathHelper.areaUnderCurve(s(day), 1) * spainScale
+    chinaSum + usSum + spainSum
+  }
 
 }
