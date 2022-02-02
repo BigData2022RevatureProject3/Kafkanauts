@@ -5,7 +5,7 @@ import com.Tools.DateHelper._
 import GenHelper._
 import com.ProductOrder
 import com.Tools.CountryFunctions.globalScale
-import com.Tools.{CountryFunctions, DateHelper}
+import com.Tools.{CountryFunctions, DateHelper, FunctionTiming}
 
 /**
  * This object deals with creating a burst of orders for blocks of time,
@@ -23,15 +23,16 @@ object ProducerPipeline {
     val increment = 5
     val daysWorth = 1440.0/increment
     // 5*288*7*2
-    estimateTotal("2022-01-31", increment, 1, 288 * 7 * 2)
-    startProducing("2022-01-31", increment, 1, 288 * 7 * 2)
-
+    estimateTotal("2022-01-31", increment, 1, 288 * 7 * 3)
+    val start = FunctionTiming.start()
+    startProducing("2022-01-31", increment, 1, 288)
+    FunctionTiming.end(start)
   }
 
   def estimateTotal(startDateStr: String, minuteIncrements: Long = 12*60, processDelay: Long = 5000, maxIterations: Int = Int.MaxValue): Unit = {
     val startDate = strToLocalDate(startDateStr).atStartOfDay()
 
-    println(s"Starting Production at ${DateHelper.print(startDate)} with $minuteIncrements minute increments, delayed by $processDelay")
+    println(s"Starting Production at ${DateHelper.print(startDate)} with $minuteIncrements minute increments x $maxIterations, delayed by $processDelay ms")
     val total = (1 until maxIterations)
       .map(i => {
         val batchDateTime = startDate.plus(minuteIncrements * i, ChronoUnit.MINUTES)
@@ -41,12 +42,16 @@ object ProducerPipeline {
         val batchSize: Int = Math.ceil(countryProbs.sum * globalScale).toInt
         batchSize
       }).sum
-    println(s"This will create about $total records in total")
+    println(s"This will create about $total records in total\n")
   }
 
   def startProducing(startDateStr: String, minuteIncrements: Long = 12*60, processDelay: Long = 5000, maxIterations: Int = Int.MaxValue): Unit = {
     val startDate = strToLocalDate(startDateStr).atStartOfDay()
     var lastDay = DateHelper.getDayOfWeek(startDate)
+
+    if (useKafka) {
+      println(s"Producing into topic: ${Producer.topic}")
+    }
 
     println(s"Starting Production at ${DateHelper.print(startDate)} with $minuteIncrements minute increments, delayed by $processDelay")
     (1 until maxIterations)

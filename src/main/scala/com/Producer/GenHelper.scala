@@ -20,9 +20,6 @@ object GenHelper {
 
   // TODO: Finish and make canonical
   val categories = List("E-Commerce", "Gas", "Groceries", "Medicine", "Music")
-  //  val categories = List("Gas", "Medicine")
-  //  Future categories: E-Commerce
-
 
   val corruptionChance: Double = 0.03
 
@@ -30,7 +27,7 @@ object GenHelper {
 
 
   def getCountryProbabilities(dayPercent: Double, day: Int): List[Double] = {
-    List(chinaDaily(day)(dayPercent) * chinaScale, usDaily(day)(dayPercent) * usScale, spainDaily(day)(dayPercent) * spainScale)
+    List(chinaDaily(day)(dayPercent), usDaily(day)(dayPercent), spainDaily(day)(dayPercent))
   }
 
   def addCategory(poOpt: Option[ProductOrder], chinaProbs: List[Double], usProbs: List[Double], spainProbs: List[Double]): Option[ProductOrder] = {

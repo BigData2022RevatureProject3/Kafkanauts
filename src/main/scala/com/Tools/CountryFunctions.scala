@@ -4,7 +4,7 @@ import MathHelper.shiftTimezone
 import MathHelper._
 
 object CountryFunctions {
-  val globalScale: Double = 0.0001
+  val globalScale: Double = 0.15
 //  val globalScale: Double = 0.000001
   val chinaScale:  Double = 1047.0*2/3
   val usScale:     Double = 344
