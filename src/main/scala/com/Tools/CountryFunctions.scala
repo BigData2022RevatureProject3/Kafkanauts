@@ -124,32 +124,33 @@ object CountryFunctions {
   val spainMidtime: Double = (spainStartTime + spainEndTime) / 2
   val sVar = 0.1
   val sScale = 0.6
-  val sMinusScale = 0.2
+  val sminusVar = 0.1
+  val sMinusScale = 0.6
 
   val spainEcommerce: List[Double => Double] = (0 until 7)
-    .map(_ => getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale))
+    .map(_ => getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sminusVar, sMinusScale))
     .toList
 
   val spainGas: List[Double => Double]  = (0 until 7)
-    .map(_ => getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale))
+    .map(_ => getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sminusVar, sMinusScale))
     .toList
 
   val spainGroceries: List[Double => Double]  = List(
-    getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
+    getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sminusVar, sMinusScale),
     getSiestaFunction(spainStartTime, sVar, 2 * sScale, spainEndTime, sVar, 2 * sScale, spainMidtime, 0.05, 1),
-    getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale)
+    getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sminusVar, sMinusScale),
+    getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sminusVar, sMinusScale),
+    getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sminusVar, sMinusScale),
+    getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sminusVar, sMinusScale),
+    getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sminusVar, sMinusScale)
   )
 
   val spainMedicine: List[Double => Double]  = (0 until 7)
-    .map(_ => getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale))
+    .map(_ => getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sminusVar, sMinusScale))
     .toList
 
   val spainMusic: List[Double => Double]  = (0 until 7)
-    .map(_ => getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale))
+    .map(_ => getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sminusVar, sMinusScale))
     .toList
 
 

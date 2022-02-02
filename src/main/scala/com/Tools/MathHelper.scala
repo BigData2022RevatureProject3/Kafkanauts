@@ -106,7 +106,7 @@ object MathHelper {
                         midTime: Double, mvar: Double, mscale: Double): Double => Double = {
     subtractFunc(
       getBimodalFunc(startTime/24, var1, scale1, endTime/24, var2, scale2),
-      MathHelper.getNormalPDF(midTime, mvar, mscale))
+      MathHelper.getNormalPDF(midTime/24, mvar, mscale))
   }
 
   def minOfFunctions(functions: Double => Double*): Double => Double = {

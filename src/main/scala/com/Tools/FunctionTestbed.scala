@@ -9,8 +9,8 @@ object FunctionTestbed {
     //    testBimodal()
     //    testSkew()
     //    biSkew()
-    testCountry()
-//    graphCountryOutput()
+//    testCountry()
+    graphCountryOutput()
   }
 
 
@@ -33,22 +33,21 @@ object FunctionTestbed {
     val spainMidtime: Double = (spainStartTime + spainEndTime) / 2
     val sVar = 0.1
     val sScale = 0.6
-    val sMinusScale = 0.2
+    val sMinusScale = 0.6
 
-    val spain = getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale)
+    val spain = getSiestaFunction(spainStartTime, sVar, 2 * sScale, spainEndTime, sVar, 2 * sScale, spainMidtime, 0.1, sMinusScale)
     val spainShift = shiftTimezone(spain, 6)
 
     val china = getQuadModal(getNormalPDF(0, 0.1, 0.4), 12 - 4, 12 + 4)
 
 
-    getQuadModal(getNormalPDF(0, 0.1, 0.4), 12 - 4, 12 + 4)
     val chinaShift = shiftTimezone(china, 12)
 
     val us = getNormalPDF(0.5, 0.25)
 
-    val all = addFuncs(spain, us, china)
-    val allShift = addFuncs(spainShift, chinaShift, us)
-        functionsToString(24, 0, china, us, spain, all)
+//    val all = addFuncs(spain, us, china)
+//    val allShift = addFuncs(spainShift, chinaShift, us)
+//        functionsToString(24, 0, china, us, spain, all)
     println("//////////////////////////////////////////////////////////////////////")
     functionsToString(24, 0, china, us, spain, spainShift)
 
