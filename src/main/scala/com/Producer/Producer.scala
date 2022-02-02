@@ -18,7 +18,8 @@ object Producer{
     "org.apache.kafka.common.serialization.StringSerializer")
   props.put("acks","all")
   val producer = new KafkaProducer[String, String](props)
-  val topic = "team1"
+  // TODO: Change this to team2
+  val topic = "test_topic"
 
   def send(pStr:String) {
     try {

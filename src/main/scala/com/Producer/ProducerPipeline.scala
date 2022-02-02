@@ -16,18 +16,20 @@ import com.Tools.{CountryFunctions, DateHelper}
 object ProducerPipeline {
   val debugMode = true
   val useEC2 = false
-  val useKafka = false
+  val useKafka = true
 
   def main(args: Array[String]): Unit = {
     // get date, increments, delay, bool for produce/write from args?
-    val increment = 15
-    val days = 1440.0/increment * 7
-    startProducing("2022-01-31", increment, 1, 5*288*7*2)
+    val increment = 5
+    val daysWorth = 1440.0/increment
+    // 5*288*7*2
+    startProducing("2022-01-31", increment, 1, 288 * 1)
 
   }
 
   def startProducing(startDateStr: String, minuteIncrements: Long = 12*60, processDelay: Long = 5000, maxIterations: Int = Int.MaxValue): Unit = {
     val startDate = strToLocalDate(startDateStr).atStartOfDay()
+    var lastDay = DateHelper.getDayOfWeek(startDate)
 
     println(s"Starting Production at ${DateHelper.print(startDate)} with $minuteIncrements minute increments, delayed by $processDelay")
     (1 to maxIterations)
@@ -37,6 +39,12 @@ object ProducerPipeline {
         val dayOfWeek: Int = DateHelper.getDayOfWeek(batchDateTime)
         val countryProbs = GenHelper.getCountryProbabilities(dayPercentage, dayOfWeek)
         val batchSize: Int = Math.ceil(countryProbs.sum * globalScale).toInt
+
+        if (dayOfWeek != lastDay) {
+          println(s"New day: $batchDateTime")
+          lastDay = dayOfWeek
+        }
+
         println(batchSize)
         val chinaCats = CountryFunctions.getCategoryProbabilities("China", dayOfWeek, dayPercentage)
         val usCats    = CountryFunctions.getCategoryProbabilities("United States", dayOfWeek, dayPercentage)
@@ -51,8 +59,9 @@ object ProducerPipeline {
           .map(p => GenHelper.addTransactionInfo(p))
           .map(toFinalString).toList
 
-//        batchSize
+//        List(batchSize)
       })
+//    println("batch total", x)
       .foreach(pStrs => {
         if (useKafka)
           pStrs.foreach(Producer.send)

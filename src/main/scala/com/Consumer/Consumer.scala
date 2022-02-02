@@ -24,14 +24,15 @@ object Consumer extends App {
   props.put("enable.auto.commit", "true")
   props.put("auto.commit.interval.ms", "1000")
   val consumer = new KafkaConsumer(props)
-  val topics = List("team1")
+  val topics = List("test_topic")
+
   try {
     consumer.subscribe(topics.asJava)
     while (true) {
-      val records = consumer.poll(10000L)
+      val records = consumer.poll(2000L)
       val size = records.asScala.toList.length
-//      if (size != 0)
-//        println(size)
+      if (size != 0)
+        println(size)
       for(record <- records.asScala){
         os.write.append(os.pwd / RelPath("src/main/scala/com/Consumer/consumer_data.csv"),record.value.toString+"\n")
       }
