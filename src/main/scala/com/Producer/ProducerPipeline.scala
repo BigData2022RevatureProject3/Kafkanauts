@@ -23,8 +23,25 @@ object ProducerPipeline {
     val increment = 5
     val daysWorth = 1440.0/increment
     // 5*288*7*2
-    startProducing("2022-01-31", increment, 1, 288 * 1)
+    estimateTotal("2022-01-31", increment, 1, 288 * 7 * 2)
+    startProducing("2022-01-31", increment, 1, 288 * 7 * 2)
 
+  }
+
+  def estimateTotal(startDateStr: String, minuteIncrements: Long = 12*60, processDelay: Long = 5000, maxIterations: Int = Int.MaxValue): Unit = {
+    val startDate = strToLocalDate(startDateStr).atStartOfDay()
+
+    println(s"Starting Production at ${DateHelper.print(startDate)} with $minuteIncrements minute increments, delayed by $processDelay")
+    val total = (1 until maxIterations)
+      .map(i => {
+        val batchDateTime = startDate.plus(minuteIncrements * i, ChronoUnit.MINUTES)
+        val dayPercentage = getPercentThroughDay(batchDateTime)
+        val dayOfWeek: Int = DateHelper.getDayOfWeek(batchDateTime)
+        val countryProbs = GenHelper.getCountryProbabilities(dayPercentage, dayOfWeek)
+        val batchSize: Int = Math.ceil(countryProbs.sum * globalScale).toInt
+        batchSize
+      }).sum
+    println(s"This will create about $total records in total")
   }
 
   def startProducing(startDateStr: String, minuteIncrements: Long = 12*60, processDelay: Long = 5000, maxIterations: Int = Int.MaxValue): Unit = {
@@ -32,7 +49,7 @@ object ProducerPipeline {
     var lastDay = DateHelper.getDayOfWeek(startDate)
 
     println(s"Starting Production at ${DateHelper.print(startDate)} with $minuteIncrements minute increments, delayed by $processDelay")
-    (1 to maxIterations)
+    (1 until maxIterations)
       .map(i => {
         val batchDateTime = startDate.plus(minuteIncrements * i, ChronoUnit.MINUTES)
         val dayPercentage = getPercentThroughDay(batchDateTime)
@@ -45,7 +62,7 @@ object ProducerPipeline {
           lastDay = dayOfWeek
         }
 
-        println(batchSize)
+//        println(batchSize)
         val chinaCats = CountryFunctions.getCategoryProbabilities("China", dayOfWeek, dayPercentage)
         val usCats    = CountryFunctions.getCategoryProbabilities("United States", dayOfWeek, dayPercentage)
         val spainCats = CountryFunctions.getCategoryProbabilities("Spain", dayOfWeek, dayPercentage)
