@@ -34,7 +34,7 @@ object Consumer extends App {
       if (size != 0)
         println(size)
       for(record <- records.asScala){
-        os.write.append(os.pwd / RelPath("src/main/scala/com/Consumer/consumer_data.csv"),record.value.toString+"\n")
+        os.write.append(os.pwd / RelPath("team2/products.csv"),record.value.toString+"\n", createFolders = true)
       }
       //      for (record <- records.asScala) {
       //        println("Topic: " + record.topic() +
