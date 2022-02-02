@@ -10,7 +10,17 @@ object FunctionTestbed {
     //    testSkew()
     //    biSkew()
 //    testCountry()
-    graphCountryOutput()
+//    graphCountryOutput()
+    testProportion()
+  }
+  def testProportion(): Unit = {
+    val c = getChineseDaily()(1)
+    val u = getUSDaily()(1)
+    val s = getSpainDaily()(1)
+
+    val all = addFuncs(c,u,s)
+
+    functionsToString(24, 0, c,u,s,all)
   }
 
 
@@ -23,7 +33,10 @@ object FunctionTestbed {
       functionsToString(48, 0, us(d), china(d), spain(d))
       println("///////////////////////////////////////////")
     })
+
+
   }
+
 
 
   def testCountry(): Unit = {

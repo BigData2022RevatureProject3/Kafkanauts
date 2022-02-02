@@ -23,9 +23,9 @@ object ProducerPipeline {
     val increment = 5
     val daysWorth = 1440.0/increment
     // 5*288*7*2
-    estimateTotal("2022-01-31", increment, 1, 288 * 7 * 3)
+    estimateTotal("2022-01-31", increment, 1, 288 * 7 * 2)
     val start = FunctionTiming.start()
-    startProducing("2022-01-31", increment, 1, 288)
+    startProducing("2022-01-31", increment, 1, 288 * 7)
     FunctionTiming.end(start)
   }
 

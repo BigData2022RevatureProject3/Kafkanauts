@@ -5,6 +5,8 @@ null
 **.~lock**
 .bsp/
 metastore_db
+team2
+team1
 
 # Created by https://www.toptal.com/developers/gitignore/api/intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=intellij
