@@ -27,11 +27,11 @@ object Producer{
       val record = new ProducerRecord[String, String](topic, key, pStr)
 
       val metadata = producer.send(record)
-      printf(s"sent record(key=%s value=%s) " +
-        "meta(partition=%d, offset=%d)\n",
-        record.key(), record.value(),
-        metadata.get().partition(),
-        metadata.get().offset())
+//      printf(s"sent record(key=%s value=%s) " +
+//        "meta(partition=%d, offset=%d)\n",
+//        record.key(), record.value(),
+//        metadata.get().partition(),
+//        metadata.get().offset())
     } catch {
       case e: Exception => e.printStackTrace()
     } finally {
