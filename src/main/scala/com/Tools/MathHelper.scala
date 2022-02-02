@@ -105,7 +105,7 @@ object MathHelper {
                         endTime: Double, var2: Double, scale2: Double,
                         midTime: Double, mvar: Double, mscale: Double): Double => Double = {
     subtractFunc(
-      getBimodalFunc(startTime/24, var1, scale1, endTime, var2, scale2),
+      getBimodalFunc(startTime/24, var1, scale1, endTime/24, var2, scale2),
       MathHelper.getNormalPDF(midTime, mvar, mscale))
   }
 

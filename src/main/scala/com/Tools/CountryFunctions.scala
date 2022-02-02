@@ -10,6 +10,10 @@ object CountryFunctions {
   val spainScale:  Double = 1//47
   val tacoScale:   Double = 2.0
 
+  val categoryScale = List(1.3, 0.6, 0.7, 0.5, 0.2)
+  val dailyScale    = List(1.1, 0.6, 0.7, 0.8, 0.9, 1.2, 1.3)
+
+
   // Zips the nth element of each list together
   //  (List(1, 2, 3), List(10, 20, 30), List(100, 200, 300))
   //  => List(List(1, 10, 100), List(2, 20, 200), List(3, 30, 300))
@@ -39,18 +43,23 @@ object CountryFunctions {
     categoriesForWeek.map(_ (day)(dayPercent))
   }
 
+  def applyScales(countryCats: List[List[Double => Double]], countryScale: Double): List[List[Double => Double]] = {
+    countryCats
+      .map(cat => cat.zip(dailyScale).map{ case (day, scale) => scaleFunc(day, scale * countryScale)})
+  }
+
   def getChinaCategories(): List[List[Double => Double]] = {
-    List(chineseEcommerce, chineseGas, chineseGroceries, chineseMedicine, chineseMusic)
-      .map(_.map(shiftTimezone(_, chinaTimeDiff)))
+    applyScales(List(chineseEcommerce, chineseGas, chineseGroceries, chineseMedicine, chineseMusic)
+      .map(_.map(shiftTimezone(_, chinaTimeDiff))), chinaScale)
   }
 
   def getUSCategories(): List[List[Double => Double]] = {
-    List(usEcommerce, usGas, usGroceries, usMedicine, usMusic)
+    applyScales(List(usEcommerce, usGas, usGroceries, usMedicine, usMusic), usScale)
   }
 
   def getSpainCategories(): List[List[Double => Double]] = {
-    List(spainEcommerce, spainGas, spainGroceries, spainMedicine, spainMusic)
-      .map(_.map(shiftTimezone(_, spainTimeDiff)))
+    applyScales(List(spainEcommerce, spainGas, spainGroceries, spainMedicine, spainMusic)
+      .map(_.map(shiftTimezone(_, spainTimeDiff))), spainScale)
   }
 
   //////////////////////////////////////////
