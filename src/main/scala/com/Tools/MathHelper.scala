@@ -90,11 +90,11 @@ object MathHelper {
                      mean2: Double, var2: Double, scale2: Double): Double => Double = {
     x: Double => Math.max(getNormalPDF(mean1, var1, scale1)(x), getNormalPDF(mean2, var2, scale2)(x))
   }
-  def getQuadModal(f: Double => Double, startHour: Double, endHour: Double, endScale: Double = .5): Double => Double = {
+  def getQuadModal(f: Double => Double, startHour: Double, endHour: Double, endScale: Double = 1): Double => Double = {
     val start = startHour / 24.0
     val end = endHour / 24.0
     val scales = if (endScale == 1.0) List(1.0, 1.0, 1.0, 1.0) else (1.0 to endScale by (endScale - 1.0)/3)
-    (start to end by (end - start) / 4).zip(scales).foreach(println)
+//    (start to end by (end - start) / 4).zip(scales).foreach(println)
 
     val quadFuncs = (start to end by (end - start) / 4).zip(scales)
       .map(t => (x: Double) => f(x - t._1) * t._2)

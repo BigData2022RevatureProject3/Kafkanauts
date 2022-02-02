@@ -16,6 +16,7 @@ import com.Tools.{CountryFunctions, DateHelper}
 object ProducerPipeline {
   val debugMode = true
   val useEC2 = false
+  val useKafka = false
 
   def main(args: Array[String]): Unit = {
     // get date, increments, delay, bool for produce/write from args?
@@ -49,11 +50,10 @@ object ProducerPipeline {
           .map(toFinalString).toList
       })
       .foreach(pStrs => {
-        //        println(pStrs)
-        // TODO: Send to Producer
-        // TODO: Log events
-        //        Producer.send(pStrs.toString())  //Uncomment this line when run as producer or consumer
-        pStrs.map(Producer.send)
+        if (useKafka)
+          pStrs.foreach(Producer.send)
+        else
+          pStrs.foreach(println)
         Thread.sleep(processDelay)
       })
   }
