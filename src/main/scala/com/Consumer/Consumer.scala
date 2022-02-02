@@ -3,8 +3,10 @@ package com.Consumer
 import java.util.{Collections, Properties}
 import java.util.regex.Pattern
 import org.apache.kafka.clients.consumer.KafkaConsumer
+
 import scala.collection.JavaConverters._
 import com.Producer.ProducerPipeline.useEC2
+import os.RelPath
 
 object Consumer extends App {
 
@@ -31,7 +33,7 @@ object Consumer extends App {
 //      if (size != 0)
 //        println(size)
       for(record <- records.asScala){
-        os.write.append(os.pwd/"testdata.csv",record.value.toString+"\n")
+        os.write.append(os.pwd / RelPath("src/main/scala/com/Consumer/consumer_data.csv"),record.value.toString+"\n")
       }
       //      for (record <- records.asScala) {
       //        println("Topic: " + record.topic() +

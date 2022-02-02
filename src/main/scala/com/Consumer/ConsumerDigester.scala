@@ -2,6 +2,8 @@ package com.Consumer
 
 import com.ProductOrder
 import org.apache.kafka.clients.consumer.KafkaConsumer
+import os.RelPath
+
 import java.util.Properties
 
 
@@ -63,8 +65,7 @@ object ConsumerDigester {
       val values = List(order_id, customer_id, customer_name, product_id, product_name, product_category, payment_type, qty,
         price, datetime, country, city, ecommerce_website_name, payment_txn_id, payment_txn_success, failure_reason)
       if(values.exists(_.isEmpty)) {
-        // TODO append to invalid data path
-        //        os.write.over(o)
+        os.write.append(os.pwd / RelPath("src/main/scala/com/Consumer/consumer_data.csv"), productOrder)
         return None
       }
       // TODO Check with David to see if I should exclude failure_reason
