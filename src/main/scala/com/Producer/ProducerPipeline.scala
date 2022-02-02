@@ -15,7 +15,7 @@ import com.Tools.{CountryFunctions, DateHelper, FunctionTiming}
  */
 object ProducerPipeline {
   val debugMode = false
-  val useEC2 = false
+  val useEC2 = true
   val useKafka = true
 
   def main(args: Array[String]): Unit = {
