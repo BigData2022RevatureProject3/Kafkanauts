@@ -22,7 +22,7 @@ object FunctionTestbed {
     val sVar = 0.1
     val sScale = 0.6
 
-    val spain = getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2)
+    val spain = getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, 0.2)
     val spainShift = shiftTimezone(spain, 6)
 
     val china = getQuadModal(getNormalPDF(0, 0.1, 0.4), 12 - 4, 12 + 4)
@@ -67,7 +67,7 @@ object FunctionTestbed {
 
     val all = MathHelper.subtractFunc(bi, fminus)
     val biAll = MathHelper.shiftTimezone(all, 6)
-    val bimodalPlus = MathHelper.getExtraBimodalFunc(start, 0.1, 0.4, end, 0.1, 0.4, middle, 0.1, 0.2)
+    val bimodalPlus = MathHelper.getSiestaFunction(start, 0.1, 0.4, end, 0.1, 0.4, middle, 0.1, 0.2)
     MathHelper.functionsToString(24, 0, all, biAll, bimodalPlus)
 
   }

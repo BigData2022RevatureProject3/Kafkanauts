@@ -85,47 +85,34 @@ object CountryFunctions {
   }
 
   def getChinaCategories(): List[List[Double => Double]] = {
-    List(chineseEcommerce, chineseGas, chineseGroceries, chineseMedicine)
+    List(chineseEcommerce, chineseGas, chineseGroceries, chineseMedicine, chineseMusic)
       .map(_.map(shiftTimezone(_, chinaTimeDiff)))
   }
 
   def getUSCategories(): List[List[Double => Double]] = {
-    List(usEcommerce, usGas, usGroceries, usMedicine)
+    List(usEcommerce, usGas, usGroceries, usMedicine, usMusic)
   }
 
   def getSpainCategories(): List[List[Double => Double]] = {
-    List(spainEcommerce, spainGas, spainGroceries, spainMedicine)
+    List(spainEcommerce, spainGas, spainGroceries, spainMedicine, spainMusic)
       .map(_.map(shiftTimezone(_, spainTimeDiff)))
   }
 
   //////////////////////////////////////////
   val chinaTimeDiff = 12
-  val chinaStart = 12 - 4
-  val chinaEnd = 12 + 4
-  val chineseF = getNormalPDF(0, 0.1, 0.4)
-  val chinaFScale = 0.8
-//  val sVar = 0.1
-//  val sScale = 0.6
-//  val sMinusScale = 0.2
+  val chinaStart: Double = 12 - 4
+  val chinaEnd: Double = 12 + 4
+  val chineseF: Double => Double = getNormalPDF(0, 0.1, 0.4)
+  val chinaFScale = 0.85
 
-  val chineseEcommerce = List(
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-  )
-  val chineseGas = List(
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-  )
+  val chineseEcommerce: List[Double => Double]  = (0 until 7)
+    .map(_ => getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale * 1.3))
+    .toList
+
+  val chineseGas: List[Double => Double]  = (0 until 7)
+    .map(_ => getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale))
+    .toList
+
   val chineseGroceries = List(
     getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
     getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
@@ -155,36 +142,18 @@ object CountryFunctions {
   )
   /////////////////////////////////////////////
   val usVar = 0.25
-  val usEcommerce = List(
+
+  val usEcommerce: List[Double => Double]  = (0 until 7)
+    .map(_ => getNormalPDF(0.5, usVar))
+    .toList
+
+  val usGas: List[Double => Double]  = (0 until 7)
+    .map(_ => getNormalPDF(0.5, usVar))
+    .toList
+
+  val usGroceries: List[Double => Double]  = List(
     getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-  )
-  val usGas = List(
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-  )
-  val usGroceries = List(
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-  )
-  val usMedicine = List(
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
+    getNormalPDF(0.5, usVar, 2.0),
     getNormalPDF(0.5, usVar),
     getNormalPDF(0.5, usVar),
     getNormalPDF(0.5, usVar),
@@ -192,69 +161,46 @@ object CountryFunctions {
     getNormalPDF(0.5, usVar),
   )
 
-  val usMusic = List(
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-    getNormalPDF(0.5, usVar),
-  )
+  val usMedicine: List[Double => Double]  = (0 until 7)
+    .map(_ => getNormalPDF(0.5, usVar))
+    .toList
+
+  val usMusic: List[Double => Double]  = (0 until 7)
+    .map(_ => getNormalPDF(0.5, usVar))
+    .toList
   ///////////////////////////////////////////////
   val spainTimeDiff = 6
-  val spainStartTime: Double = 14 / 24.0
-  val spainEndTime: Double = 17 / 24.0
+  val spainStartTime: Double = 14
+  val spainEndTime: Double = 17
   val spainMidtime: Double = (spainStartTime + spainEndTime) / 2
   val sVar = 0.1
   val sScale = 0.6
   val sMinusScale = 0.2
 
-  val spainEcommerce = List(
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-  )
-  val spainGas = List(
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-  )
-  val spainGroceries = List(
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-  )
-  val spainMedicine = List(
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
+  val spainEcommerce: List[Double => Double] = (0 until 7)
+    .map(_ => getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale))
+    .toList
+
+  val spainGas: List[Double => Double]  = (0 until 7)
+    .map(_ => getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale))
+    .toList
+
+  val spainGroceries: List[Double => Double]  = List(
+    getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
+    getSiestaFunction(spainStartTime, sVar, 2 * sScale, spainEndTime, sVar, 2 * sScale, spainMidtime, 0.05, 1),
+    getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
+    getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
+    getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
+    getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
+    getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale)
   )
 
-  val spainMusic = List(
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-    getExtraBimodalFunc(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale),
-  )
+  val spainMedicine: List[Double => Double]  = (0 until 7)
+    .map(_ => getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale))
+    .toList
+
+  val spainMusic: List[Double => Double]  = (0 until 7)
+    .map(_ => getSiestaFunction(spainStartTime, sVar, sScale, spainEndTime, sVar, sScale, spainMidtime, sVar, sMinusScale))
+    .toList
 
 }
