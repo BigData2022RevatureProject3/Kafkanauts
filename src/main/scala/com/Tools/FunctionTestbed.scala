@@ -2,18 +2,29 @@ package com.Tools
 
 import org.apache.spark.sql.DataFrame
 import MathHelper._
+import CountryFunctions._
 
 object FunctionTestbed {
   def main(args: Array[String]): Unit = {
     //    testBimodal()
     //    testSkew()
     //    biSkew()
-    testCountry()
-    //    val f = getNormalPDF(0, 0.1, 0.1)
-    //
-    //    val quad = getQuadModal(getNormalPDF(0, 0.1, 0.1), 12 - 4, 12 + 4)
-    //    functionsToString(24, 0, f, quad)
+//    testCountry()
+    graphCountryOutput()
   }
+
+
+
+  def graphCountryOutput(): Unit = {
+    val us = getUSDaily()
+    val china = getChineseDaily()
+    val spain = getSpainDaily()
+    (0 until 7).foreach(d => {
+      functionsToString(48, 0, us(d), china(d), spain(d))
+      println("///////////////////////////////////////////")
+    })
+  }
+
 
   def testCountry(): Unit = {
     val spainStartTime: Double = 14 / 24.0

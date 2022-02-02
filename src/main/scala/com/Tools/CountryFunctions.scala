@@ -113,33 +113,18 @@ object CountryFunctions {
     .map(_ => getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale))
     .toList
 
-  val chineseGroceries = List(
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-  )
-  val chineseMedicine = List(
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-  )
-  val chineseMusic = List(
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-    getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale),
-  )
+  val chineseGroceries = (0 until 7)
+    .map(_ => getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale))
+    .toList
+
+  val chineseMedicine: List[Double => Double]  = (0 until 7)
+    .map(_ => getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale * 0.8))
+    .toList
+
+  val chineseMusic: List[Double => Double]  = (0 until 7)
+    .map(_ => getQuadModal(chineseF, chinaStart, chinaEnd, chinaFScale * 0.3))
+    .toList
+
   /////////////////////////////////////////////
   val usVar = 0.25
 
