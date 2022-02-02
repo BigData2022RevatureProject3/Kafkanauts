@@ -101,12 +101,12 @@ object MathHelper {
     maxOfFunctions(quadFuncs:_*)
   }
 
-  def getExtraBimodalFunc(mean1: Double, var1: Double, scale1: Double,
-                          mean2: Double, var2: Double, scale2: Double,
-                          mmean: Double, mvar: Double, mscale: Double): Double => Double = {
+  def getSiestaFunction(startTime: Double, var1: Double, scale1: Double,
+                        endTime: Double, var2: Double, scale2: Double,
+                        midTime: Double, mvar: Double, mscale: Double): Double => Double = {
     subtractFunc(
-      getBimodalFunc(mean1, var1, scale1, mean2, var2, scale2),
-      MathHelper.getNormalPDF(mmean, mvar, mscale))
+      getBimodalFunc(startTime/24, var1, scale1, endTime/24, var2, scale2),
+      MathHelper.getNormalPDF(midTime/24, mvar, mscale))
   }
 
   def minOfFunctions(functions: Double => Double*): Double => Double = {
