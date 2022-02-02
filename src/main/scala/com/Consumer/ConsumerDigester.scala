@@ -8,7 +8,7 @@ import java.util.Properties
 
 
 object ConsumerDigester {
-  val offlineConsumerData = os.pwd / "src" / "main" / "scala" / "com" / "Consumer" / "consumer_data.csv"
+  val offlineConsumerData = os.pwd / RelPath("team2/products.csv")
   def initializeSubscription(): (Properties, KafkaConsumer[Nothing, Nothing], List[String]) = {
     val props:Properties = new Properties()
     props.put("group.id", "test")
@@ -33,8 +33,10 @@ object ConsumerDigester {
 
     val validOrdersList = validData
       .map(parseProductOrder)
+      .filter(_.isDefined)
       .map(_.get)
       .toList
+
     val invalidOrdersList = invalidData.toList
 
     //    consumer.close()
@@ -54,7 +56,7 @@ object ConsumerDigester {
       val product_category = if(splitPO(5).nonEmpty) Some(splitPO(5)) else None
       val payment_type = if(splitPO(6).nonEmpty) Some(splitPO(6)) else None
       val qty = if(splitPO(7).matches("^[0-9]+$")) Some(splitPO(7).toLong) else None
-      val price = if(splitPO(8).matches("^[0-9]+$")) Some(splitPO(8).toDouble) else None
+      val price = if(splitPO(8).matches("^[0-9]+.[0-9]{2}$")) Some(splitPO(8).toDouble) else None
       val datetime = if(splitPO(9).nonEmpty) Some(splitPO(9)) else None
       val country = if(splitPO(10).nonEmpty) Some(splitPO(10)) else None
       val city = if(splitPO(11).nonEmpty) Some(splitPO(11)) else None
@@ -65,7 +67,7 @@ object ConsumerDigester {
       val values = List(order_id, customer_id, customer_name, product_id, product_name, product_category, payment_type, qty,
         price, datetime, country, city, ecommerce_website_name, payment_txn_id, payment_txn_success, failure_reason)
       if(values.exists(_.isEmpty)) {
-        os.write.append(os.pwd / RelPath("src/main/scala/com/Consumer/consumer_data.csv"), productOrder)
+        os.write.append(os.pwd / RelPath("team2/invalid_products.csv"), productOrder+"\n",createFolders = true)
         return None
       }
       // TODO Check with David to see if I should exclude failure_reason
@@ -80,7 +82,7 @@ object ConsumerDigester {
     val (valid, invalid) = startConsuming(consumer)
 
     println("------------------------VALID----------------------")
-    valid.foreach(ProductOrder.toString(_))
+    valid.foreach(x => println(ProductOrder.toString(x)))
     println("------------------------INVALID--------------------")
     invalid.foreach(println)
   }

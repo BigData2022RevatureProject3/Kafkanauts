@@ -62,6 +62,7 @@ object ECommGenerator {
     po.price = price
     po.product_name = name
     po.ecommerce_website_name = site
+    po.product_id = math.abs(name.hashCode)
 
     return po
 
