@@ -12,10 +12,10 @@ object MedicineGenerator {
     val rownum = Math.abs(ran.nextInt(medicineList.length))
     val row = medicineList(rownum).split("""\|""")
     val product = row(0)
-    val price = row(2).toDouble
-    val quantity = Math.abs(ran.nextInt(10))
+    val price = Math.max(row(2).toDouble, 0.49)
+    val quantity = Math.abs(ran.nextInt(10) + 1)
     val totalPrice = (math floor price * quantity * 100) / 100
-    po.product_id = Math.abs(product.hashCode())
+    po.product_id = Math.abs(product.hashCode() + 1)
     po.product_name = product
     po.product_category = "Medicine"
     po.price = Math.abs(totalPrice)

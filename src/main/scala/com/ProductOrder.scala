@@ -27,6 +27,9 @@ case class ProductOrder(
 
 
 object  ProductOrder {
+   def print(po: ProductOrder): Unit = {
+      println(ProductOrder.toString(po))
+   }
    def toString(po: ProductOrder): String = {
       List(po.order_id, po.customer_id, po.customer_name, po.product_id, po.product_name, po.product_category,
          po.payment_type, po.qty, po.price, po.datetime, po.country, po.city, po.ecommerce_website_name,

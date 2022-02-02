@@ -5,7 +5,6 @@ import MathHelper._
 
 object CountryFunctions {
   val globalScale: Double = 0.2
-//  val globalScale: Double = 0.000001
   val chinaScale:  Double = 1047.0*2/3
   val usScale:     Double = 300
   val spainScale:  Double = 250

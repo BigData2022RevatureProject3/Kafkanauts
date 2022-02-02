@@ -14,7 +14,7 @@ import com.Tools.{CountryFunctions, DateHelper, FunctionTiming}
  * It then sends it to a Kafka topic
  */
 object ProducerPipeline {
-  val debugMode = true
+  val debugMode = false
   val useEC2 = false
   val useKafka = true
 
@@ -25,7 +25,7 @@ object ProducerPipeline {
     // 5*288*7*2
     estimateTotal("2022-01-31", increment, 1, 288 * 7 * 2)
     val start = FunctionTiming.start()
-    startProducing("2022-01-31", increment, 1, 288 * 7)
+    startProducing("2022-01-31", increment, 1, 288 * 7 * 2)
     FunctionTiming.end(start)
   }
 
