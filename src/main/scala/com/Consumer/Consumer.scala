@@ -32,13 +32,16 @@ object Consumer extends App {
   try {
     consumer.subscribe(topics.asJava)
     while (true) {
-      val records = consumer.poll(2000L)
+      val records = consumer.poll(10000L)
       val size = records.asScala.toList.length
-      if (size != 0)
+      if (size != 0) {
         println(size)
-      for (record <- records.asScala) {
-        os.write.append(path, record.value.toString + "\n", createFolders = true)
       }
+      os.write.append(path, records.asScala.map(_.value.toString).mkString("\n"), createFolders = true)
+
+//      for (record <- records.asScala) {
+//        os.write.append(path, record.value.toString + "\n", createFolders = true)
+//      }
       //      for (record <- records.asScala) {
       //        println("Topic: " + record.topic() +
       //          ",Key: " + record.key() +

@@ -10,6 +10,7 @@ object Team2Consumer {
   val doubleRegex = "[0-9]+([.][0-9]|[.][0-9]{2})?"
   val longRex = "[0-9]+"
   val dateRegex = "[0-9]{4}[-](0[1-9]|1[0-2])[-](0[1-9]|1[0-9]|2[0-9]|3[0-1])[T][0-9]{2}[:][0-9]{2}[:][0-9]{2}"
+
   var failCounts = ListBuffer(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
   var failReason = 0
   var errorReason = 0
@@ -42,27 +43,34 @@ object Team2Consumer {
       .read
       .lines
       .stream(initialReadPath)
-//    List("01052160|80000779|Sabiha Whelan|800002|Astro A50|Electronics|299.99|6|Wallet|2022-01-10T11:50:25|France|Marseille|ingen.com|1052160|Y|")
       .map(parseProductOrder(_, invalidPath))
       .filter(_.isDefined)
       .map(_.get)
       .map(ProductOrder.toString)
-      .mkString("\n")
+
     failCounts.zipWithIndex.foreach(println)
-    println("fail: ", failReason)
-    println("null", nullCount)
-    println("eror: ", errorReason)
-    println("long ", longCount)
-    println("double ", doubleCount)
-    println(s"Ended validation, writing valid orders to $validPath")
+
+    os.write(validPath, validOrders.mkString("\n"), createFolders = true)
+
+    val validCnt = validOrders.toList.length
+    val invalidCnt = os.read.lines.stream(invalidPath).toList.length
+    println(s"Total Valid orders: ${validCnt}")
+    println(s"Total Invalid orders: ${invalidCnt}")
+    println(s"Corruption rate: ${invalidCnt / (validCnt + invalidCnt)}")
+
+    println("Fail: ", failReason)
+    println("Null", nullCount)
+    println("Error: ", errorReason)
+    println("Long ", longCount)
+    println("Double ", doubleCount)
     println("Total ", failCounts.sum + failReason + nullCount + errorReason + longCount + doubleCount + dateCount)
-    os.write(validPath, validOrders, createFolders = true)
+    println(s"\nEnded validation, writing valid orders to $validPath")
   }
 
   def parseProductOrder(po: String, invalidPath: os.pwd.ThisType): Option[ProductOrder] = {
     val splitPO = po.split("\\|")
-    if (!List(14, 15).contains(splitPO.length))
-      return writeInvalid(po, invalidPath)
+    if (!List(15, 16).contains(splitPO.length))
+      return writeInvalid(s"${splitPO.length} columns: " + po, invalidPath)
 
     try {
       val order_id = getLong(splitPO(0))
@@ -74,7 +82,7 @@ object Team2Consumer {
       val price = getPrice(splitPO(6))
       val qty = getLong(splitPO(7))
       val payment_type = getString(splitPO(8))
-      val datetime = getString(splitPO(9)) // TODO: Change to date
+      val datetime = getDate(splitPO(9))
       val country = getString(splitPO(10))
       val city = getString(splitPO(11))
       val ecommerce_website_name = getString(splitPO(12))
@@ -85,17 +93,14 @@ object Team2Consumer {
         price, datetime, country, city, ecommerce_website_name, payment_txn_id, payment_txn_success)
       if (values.exists(_.isEmpty)) {
         values.zipWithIndex.filter(_._1.isEmpty).map(_._2).foreach(i => failCounts(i) += 1)
-//        println(po)
-//        println(values.zipWithIndex.filter(_._1.isEmpty).mkString("|"))
-//        println(po)
-        return writeInvalid(po, invalidPath)
+        return writeInvalid("Missing/Wrong type: " + po, invalidPath)
 
       }
       if (payment_txn_success.get == "N") {
         failReason = failReason + 1
         failure_reason = getString(splitPO(15))
         if (failure_reason.isEmpty) {
-          return writeInvalid("", invalidPath)
+          return writeInvalid("Missing failure reason: " + po, invalidPath)
         }
       }
       return Some(ProductOrder(order_id.get, customer_id.get, customer_name.get, product_id.get, product_name.get, product_category.get,
@@ -103,7 +108,7 @@ object Team2Consumer {
     } catch {
       case e: Throwable =>
         errorReason = errorReason + 1
-        return writeInvalid("", invalidPath)
+        return writeInvalid(s"Error - ${e.toString}: " + po, invalidPath)
     }
   }
 
@@ -138,28 +143,6 @@ object Team2Consumer {
         None
     }
   }
-//  def getLong2(str: String): Option[Long] = {
-//    try {
-//      if (str.matches(longRex)) {
-//        val value = str.toLong
-//        if (value > 0)
-//          return Some(value)
-//      }
-//    } catch {
-//      case _: Throwable => return None
-//    }
-//    None
-//  }
-//  def getPrice2(str: String): Option[Double] = {
-//    try {
-//      if(str.matches(doubleRegex))
-//        Some(str.toDouble)
-//      else
-//        None
-//    } catch {
-//      case _: Throwable => None
-//    }
-//  }
 
   def getString(str: String): Option[String] = {
     if (str.nonEmpty) {
@@ -172,7 +155,7 @@ object Team2Consumer {
       None
   }
 
-  def isDate(str: String): Option[String] = {
+  def getDate(str: String): Option[String] = {
     val date = str.trim
     if(date.nonEmpty){
       if(str.matches(dateRegex))

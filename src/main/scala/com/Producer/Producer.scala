@@ -17,6 +17,7 @@ object Producer{
   props.put("value.serializer",
     "org.apache.kafka.common.serialization.StringSerializer")
   props.put("acks","all")
+//  props.put("batch.size", "5")
   val producer = new KafkaProducer[String, String](props)
   // TODO: Change this to team2
   val topic = "test_topic"
