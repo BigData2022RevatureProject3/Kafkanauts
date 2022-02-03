@@ -8,23 +8,11 @@ import java.util.Properties
 
 
 object ConsumerDigester {
-  val offlineConsumerData = os.pwd / RelPath("team2/products.csv")
-  def initializeSubscription(): (Properties, KafkaConsumer[Nothing, Nothing], List[String]) = {
-    val props:Properties = new Properties()
-    props.put("group.id", "test")
-    props.put("bootstrap.servers","[::1]:9092")
-    props.put("key.deserializer",
-      "org.apache.kafka.common.serialization.StringDeserializer")
-    props.put("value.deserializer",
-      "org.apache.kafka.common.serialization.StringDeserializer")
-    props.put("enable.auto.commit", "true")
-    props.put("auto.commit.interval.ms", "1000")
-    val consumer = new KafkaConsumer(props)
-    val topics = List("text_topic")
-    (props, consumer, topics)
-  }
+  val offlineConsumerData = os.pwd / RelPath("team2/tiffany.csv")
+  val validPath = os.pwd / RelPath("team2/valid_products.csv")
+  val invalidPath = os.pwd / RelPath("team2/invalid_products.csv")
 
-  def startConsuming(consumer: KafkaConsumer[Nothing, Nothing]): (List[ProductOrder], List[String]) = {
+  def startConsuming(): (List[ProductOrder], List[String]) = {
     //Read information from producer
     val (validData, invalidData) = os
       .read
@@ -37,7 +25,11 @@ object ConsumerDigester {
       .map(_.get)
       .toList
 
+    val poStrs = validOrdersList.map(ProductOrder.toString).mkString("\n")
+
     val invalidOrdersList = invalidData.toList
+    os.write.over(invalidPath, invalidOrdersList.mkString, createFolders = true)
+    os.write.over(validPath, poStrs, createFolders = true)
 
     //    consumer.close()
 
@@ -67,7 +59,7 @@ object ConsumerDigester {
       val values = List(order_id, customer_id, customer_name, product_id, product_name, product_category, payment_type, qty,
         price, datetime, country, city, ecommerce_website_name, payment_txn_id, payment_txn_success, failure_reason)
       if(values.exists(_.isEmpty)) {
-        os.write.append(os.pwd / RelPath("team2/invalid_products.csv"), productOrder+"\n",createFolders = true)
+        os.write.append(invalidPath, productOrder+"\n",createFolders = true)
         return None
       }
       // TODO Check with David to see if I should exclude failure_reason
@@ -78,11 +70,10 @@ object ConsumerDigester {
   }
 
   def main(args: Array[String]): Unit = {
-    val (props, consumer, topics) = initializeSubscription()
-    val (valid, invalid) = startConsuming(consumer)
+    val (valid, invalid) = startConsuming()
 
     println("------------------------VALID----------------------")
-    valid.foreach(x => println(ProductOrder.toString(x)))
+    valid.foreach(ProductOrder.print)
     println("------------------------INVALID--------------------")
     invalid.foreach(println)
   }
