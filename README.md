@@ -40,7 +40,14 @@ payment_txn_success | Payment Success or Failure (Y=Success. N=Failed)
 failure_reason | Reason for payment failure
 
 ## Technologies:
-- Kafka
-- Scala
-- EC2
-- Zeppelin
+- Java 1.8.0_311
+- Scala 2.12.10
+- Spark 3.1.2
+- Kafka 2.8.1 (for Scala 2.12)
+- HDFS
+- Zeppelin 0.10.0
+- Git/GitHub
+- IntelliJ 2021.3.1 Community Edition
+- JIRA
+- Google Drive (Doc, Slides)
+
