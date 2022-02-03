@@ -4,10 +4,19 @@ import com.ProductOrder
 import org.json4s.scalap.scalasig.ThisType
 import os.RelPath
 
+import scala.collection.mutable.ListBuffer
+
 object Team2Consumer {
   val doubleRegex = "[0-9]+([.][0-9]|[.][0-9]{2})?"
   val longRex = "[0-9]+"
   val dateRegex = "[0-9]{4}[-](0[1-9]|1[0-2])[-](0[1-9]|1[0-9]|2[0-9]|3[0-1])[T][0-9]{2}[:][0-9]{2}[:][0-9]{2}"
+  var failCounts = ListBuffer(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+  var failReason = 0
+  var errorReason = 0
+  var nullCount = 0
+  var longCount = 0
+  var doubleCount = 0
+  var dateCount = 0
 
   def main(args: Array[String]): Unit = {
     val filename  = "tiffany"
@@ -26,24 +35,33 @@ object Team2Consumer {
     if (os.exists(validPath))
       os.remove(validPath)
 
-    if (os.exists(validPath))
-      os.remove(validPath)
+    if (os.exists(invalidPath))
+      os.remove(invalidPath)
 
     val validOrders = os
       .read
-      .lines(initialReadPath)
+      .lines
+      .stream(initialReadPath)
+//    List("01052160|80000779|Sabiha Whelan|800002|Astro A50|Electronics|299.99|6|Wallet|2022-01-10T11:50:25|France|Marseille|ingen.com|1052160|Y|")
       .map(parseProductOrder(_, invalidPath))
       .filter(_.isDefined)
       .map(_.get)
       .map(ProductOrder.toString)
       .mkString("\n")
+    failCounts.zipWithIndex.foreach(println)
+    println("fail: ", failReason)
+    println("null", nullCount)
+    println("eror: ", errorReason)
+    println("long ", longCount)
+    println("double ", doubleCount)
     println(s"Ended validation, writing valid orders to $validPath")
+    println("Total ", failCounts.sum + failReason + nullCount + errorReason + longCount + doubleCount + dateCount)
     os.write(validPath, validOrders, createFolders = true)
   }
 
   def parseProductOrder(po: String, invalidPath: os.pwd.ThisType): Option[ProductOrder] = {
     val splitPO = po.split("\\|")
-    if (splitPO.length != 16)
+    if (!List(14, 15).contains(splitPO.length))
       return writeInvalid(po, invalidPath)
 
     try {
@@ -62,19 +80,30 @@ object Team2Consumer {
       val ecommerce_website_name = getString(splitPO(12))
       val payment_txn_id = getLong(splitPO(13))
       val payment_txn_success = getString(splitPO(14))
-      val failure_reason = getString(splitPO(15))
+      var failure_reason: Option[String] = Some("")
       val values = List(order_id, customer_id, customer_name, product_id, product_name, product_category, payment_type, qty,
         price, datetime, country, city, ecommerce_website_name, payment_txn_id, payment_txn_success)
-      if (values.exists(_.isEmpty))
+      if (values.exists(_.isEmpty)) {
+        values.zipWithIndex.filter(_._1.isEmpty).map(_._2).foreach(i => failCounts(i) += 1)
+//        println(po)
+//        println(values.zipWithIndex.filter(_._1.isEmpty).mkString("|"))
+//        println(po)
         return writeInvalid(po, invalidPath)
-      else if (payment_txn_success.get == "N" && failure_reason.isEmpty)
-        return writeInvalid(po, invalidPath)
-      else
-        return Some(ProductOrder(order_id.get, customer_id.get, customer_name.get, product_id.get, product_name.get, product_category.get,
-          payment_type.get, qty.get, price.get, datetime.get, country.get, city.get, ecommerce_website_name.get, payment_txn_id.get, payment_txn_success.get, failure_reason.getOrElse("")))
+
+      }
+      if (payment_txn_success.get == "N") {
+        failReason = failReason + 1
+        failure_reason = getString(splitPO(15))
+        if (failure_reason.isEmpty) {
+          return writeInvalid("", invalidPath)
+        }
+      }
+      return Some(ProductOrder(order_id.get, customer_id.get, customer_name.get, product_id.get, product_name.get, product_category.get,
+        payment_type.get, qty.get, price.get, datetime.get, country.get, city.get, ecommerce_website_name.get, payment_txn_id.get, payment_txn_success.get, failure_reason.getOrElse("")))
     } catch {
       case e: Throwable =>
-        return writeInvalid(po, invalidPath)
+        errorReason = errorReason + 1
+        return writeInvalid("", invalidPath)
     }
   }
 
@@ -84,6 +113,25 @@ object Team2Consumer {
   }
 
   def getLong(str: String): Option[Long] = {
+    try {
+      return Some(str.toLong)
+    } catch {
+      case _: Throwable =>
+        longCount += 1
+        return None
+    }
+    None
+  }
+  def getPrice(str: String): Option[Double] = {
+    try {
+      Some(str.toDouble)
+    } catch {
+      case _: Throwable =>
+        doubleCount += 1
+        None
+    }
+  }
+  def getLong2(str: String): Option[Long] = {
     try {
       if (str.matches(longRex)) {
         val value = str.toLong
@@ -95,7 +143,7 @@ object Team2Consumer {
     }
     None
   }
-  def getPrice(str: String): Option[Double] = {
+  def getPrice2(str: String): Option[Double] = {
     try {
       if(str.matches(doubleRegex))
         Some(str.toDouble)
@@ -107,9 +155,11 @@ object Team2Consumer {
   }
 
   def getString(str: String): Option[String] = {
-    if (str.nonEmpty)
+    if (str.nonEmpty) {
+      if (str == null)
+        nullCount = nullCount + 1
       Some(str)
-    else
+    } else
       None
   }
 
@@ -118,6 +168,8 @@ object Team2Consumer {
     if(date.nonEmpty){
       if(str.matches(dateRegex))
         return Some(date)
+      else
+        dateCount += 1
     }
     None
   }
