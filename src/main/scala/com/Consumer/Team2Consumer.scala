@@ -53,11 +53,11 @@ object Team2Consumer {
 
     os.write(validPath, validOrders.mkString("\n"), createFolders = true)
 
-    val validCnt = validOrders.length
-    val invalidCnt = os.read.lines.stream(invalidPath).toList.length
+    val validCnt = validOrders.length.toDouble
+    val invalidCnt = os.read.lines.stream(invalidPath).toList.length.toDouble
     println(s"Total Valid orders: ${validCnt}")
     println(s"Total Invalid orders: ${invalidCnt}")
-    println(s"Corruption rate: ${invalidCnt / (validCnt + invalidCnt)}")
+    println(s"Corruption rate: ${invalidCnt * 100.0 / (validCnt + invalidCnt)}")
 
     println("Fail: ", failReason)
     println("Null", nullCount)
@@ -65,6 +65,8 @@ object Team2Consumer {
     println("Long ", longCount)
     println("Double ", doubleCount)
     println("Total ", failCounts.sum + failReason + nullCount + errorReason + longCount + doubleCount + dateCount)
+
+    println(s"\nEnded validation, writing valid orders to $validPath")
 
   }
 
