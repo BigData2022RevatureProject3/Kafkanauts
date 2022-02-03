@@ -10,6 +10,8 @@ object Team2Consumer {
   val doubleRegex = "[0-9]+([.][0-9]|[.][0-9]{2})?"
   val longRex = "[0-9]+"
   val dateRegex = "[0-9]{4}[-](0[1-9]|1[0-2])[-](0[1-9]|1[0-9]|2[0-9]|3[0-1])[T][0-9]{2}[:][0-9]{2}[:][0-9]{2}"
+  val colNames = List("order_id", "customer_id", "customer_name", "product_id", "product_name", "product_category", "payment_type",
+    "qty", "price", "datetime", "country", "city", "ecommerce_website_name", "payment_txn_id", "payment_txn_success", "failure_reason")
 
   var failCounts = ListBuffer(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
   var failReason = 0
@@ -54,14 +56,19 @@ object Team2Consumer {
 
     val validCnt = validOrders.length.toDouble
     val invalidCnt = os.read.lines.stream(invalidPath).toList.length.toDouble
-    println(s"Total Valid orders: ${validCnt}")
+    println(s"\nTotal Valid orders: ${validCnt}")
     println(s"Total Invalid orders: ${invalidCnt}")
     println(s"Corruption rate: ${invalidCnt * 100.0 / (validCnt + invalidCnt)}")
 
-    println("Columns - Number times failed: ")
+    println("\nColumns - Number times failed: ")
     println("-------------------------------")
-    failCounts.zipWithIndex.foreach(c => println(s"${c._2} failed ${c._1} times"))
-    println("Fail: " + failReason)
+    failCounts.zip(colNames).foreach(f => {
+//      println(f"${product}%-20s ${productPrice}%-4f")
+      val cn = f._2
+      println(f"  ${cn}%-25s failed ${f._1}%-3d times")
+    })
+
+    println("\nFail: " + failReason)
     println("Null: " + nullCount)
     println("Error: " + errorReason)
     println("Long " + longCount)

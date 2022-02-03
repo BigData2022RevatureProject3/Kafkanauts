@@ -7,23 +7,23 @@ import java.time.LocalDateTime
 import scala.util.Random
 
 case class ProductOrder(
-                         var order_id: Long,
-                         var customer_id: Long,
-                         var customer_name: String,
-                         var product_id: Long,
-                         var product_name: String,
-                         var product_category: String,
-                         var payment_type: String,
-                         var qty: Long,
-                         var price: Double,
-                         var datetime: String,
-                         var country: String,
-                         var city: String,
-                         var ecommerce_website_name: String,
-                         var payment_txn_id: Long,
-                         var payment_txn_success: String,
-                         var failure_reason: String
-                       )
+    var order_id: Long,
+    var customer_id: Long,
+    var customer_name: String,
+    var product_id: Long,
+    var product_name: String,
+    var product_category: String,
+    var payment_type: String,
+    var qty: Long,
+    var price: Double,
+    var datetime: String,
+    var country: String,
+    var city: String,
+    var ecommerce_website_name: String,
+    var payment_txn_id: Long,
+    var payment_txn_success: String,
+    var failure_reason: String
+   )
 
 
 object  ProductOrder {
