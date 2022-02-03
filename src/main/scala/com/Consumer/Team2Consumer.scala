@@ -114,7 +114,11 @@ object Team2Consumer {
 
   def getLong(str: String): Option[Long] = {
     try {
-      return Some(str.toLong)
+      if (str.matches(longRex)) {
+        val value = str.toLong
+        if (value > 0)
+          return Some(value)
+      }
     } catch {
       case _: Throwable =>
         longCount += 1
@@ -124,41 +128,46 @@ object Team2Consumer {
   }
   def getPrice(str: String): Option[Double] = {
     try {
-      Some(str.toDouble)
+      if(str.matches(doubleRegex))
+        Some(str.toDouble)
+      else
+        None
     } catch {
       case _: Throwable =>
         doubleCount += 1
         None
     }
   }
-  def getLong2(str: String): Option[Long] = {
-    try {
-      if (str.matches(longRex)) {
-        val value = str.toLong
-        if (value > 0)
-          return Some(value)
-      }
-    } catch {
-      case _: Throwable => return None
-    }
-    None
-  }
-  def getPrice2(str: String): Option[Double] = {
-    try {
-      if(str.matches(doubleRegex))
-        Some(str.toDouble)
-      else
-        None
-    } catch {
-      case _: Throwable => None
-    }
-  }
+//  def getLong2(str: String): Option[Long] = {
+//    try {
+//      if (str.matches(longRex)) {
+//        val value = str.toLong
+//        if (value > 0)
+//          return Some(value)
+//      }
+//    } catch {
+//      case _: Throwable => return None
+//    }
+//    None
+//  }
+//  def getPrice2(str: String): Option[Double] = {
+//    try {
+//      if(str.matches(doubleRegex))
+//        Some(str.toDouble)
+//      else
+//        None
+//    } catch {
+//      case _: Throwable => None
+//    }
+//  }
 
   def getString(str: String): Option[String] = {
     if (str.nonEmpty) {
-      if (str == null)
-        nullCount = nullCount + 1
-      Some(str)
+      if (str == "null") {
+        nullCount += 1
+        return None
+      } else
+        return Some(str)
     } else
       None
   }
