@@ -18,6 +18,7 @@ object Team2Consumer {
   var longCount = 0
   var doubleCount = 0
   var dateCount = 0
+  var anyReason = 0
 
   def main(args: Array[String]): Unit = {
     val filename  = "tiffany"
@@ -60,12 +61,12 @@ object Team2Consumer {
     println("Columns - Number times failed: ")
     println("-------------------------------")
     failCounts.zipWithIndex.foreach(c => println(s"${c._2} failed ${c._1} times"))
-    println("Fail: ", failReason)
-    println("Null", nullCount)
-    println("Error: ", errorReason)
-    println("Long ", longCount)
-    println("Double ", doubleCount)
-    println("Total ", failCounts.sum + failReason + nullCount + errorReason + longCount + doubleCount + dateCount)
+    println("Fail: " + failReason)
+    println("Null: " + nullCount)
+    println("Error: " + errorReason)
+    println("Long " + longCount)
+    println("Double: ", + doubleCount)
+    println("Total for any reason: " + anyReason)
 
     println(s"\nEnded validation, writing valid orders to $validPath")
 
@@ -98,12 +99,11 @@ object Team2Consumer {
       if (values.exists(_.isEmpty)) {
         values.zipWithIndex.filter(_._1.isEmpty).map(_._2).foreach(i => failCounts(i) += 1)
         return writeInvalid("Missing/Wrong type: " + po, invalidPath)
-
       }
       if (payment_txn_success.get == "N") {
-        failReason += 1
         failure_reason = getString(splitPO(15))
         if (failure_reason.isEmpty) {
+          failReason += 1
           return writeInvalid("Missing failure reason: " + po, invalidPath)
         }
       }
@@ -117,6 +117,7 @@ object Team2Consumer {
   }
 
   def writeInvalid(po: String, invalidPath: os.pwd.ThisType): Option[ProductOrder] = {
+    anyReason += 1
     os.write.append(invalidPath, po + "\n", createFolders = true)
     None
   }
