@@ -49,8 +49,6 @@ object Team2Consumer {
       .map(ProductOrder.toString)
       .toList
 
-    failCounts.zipWithIndex.foreach(println)
-
     os.write(validPath, validOrders.mkString("\n"), createFolders = true)
 
     val validCnt = validOrders.length.toDouble
@@ -59,6 +57,9 @@ object Team2Consumer {
     println(s"Total Invalid orders: ${invalidCnt}")
     println(s"Corruption rate: ${invalidCnt * 100.0 / (validCnt + invalidCnt)}")
 
+    println("Columns - Number times failed: ")
+    println("-------------------------------")
+    failCounts.zipWithIndex.foreach(c => println(s"${c._2} failed ${c._1} times"))
     println("Fail: ", failReason)
     println("Null", nullCount)
     println("Error: ", errorReason)
@@ -100,7 +101,7 @@ object Team2Consumer {
 
       }
       if (payment_txn_success.get == "N") {
-        failReason = failReason + 1
+        failReason += 1
         failure_reason = getString(splitPO(15))
         if (failure_reason.isEmpty) {
           return writeInvalid("Missing failure reason: " + po, invalidPath)
@@ -110,7 +111,7 @@ object Team2Consumer {
         payment_type.get, qty.get, price.get, datetime.get, country.get, city.get, ecommerce_website_name.get, payment_txn_id.get, payment_txn_success.get, failure_reason.getOrElse("")))
     } catch {
       case e: Throwable =>
-        errorReason = errorReason + 1
+        errorReason += 1
         return writeInvalid(s"Error - ${e.toString}: " + po, invalidPath)
     }
   }
