@@ -47,12 +47,13 @@ object Team2Consumer {
       .filter(_.isDefined)
       .map(_.get)
       .map(ProductOrder.toString)
+      .toList
 
     failCounts.zipWithIndex.foreach(println)
 
     os.write(validPath, validOrders.mkString("\n"), createFolders = true)
 
-    val validCnt = validOrders.toList.length
+    val validCnt = validOrders.length
     val invalidCnt = os.read.lines.stream(invalidPath).toList.length
     println(s"Total Valid orders: ${validCnt}")
     println(s"Total Invalid orders: ${invalidCnt}")
@@ -64,7 +65,7 @@ object Team2Consumer {
     println("Long ", longCount)
     println("Double ", doubleCount)
     println("Total ", failCounts.sum + failReason + nullCount + errorReason + longCount + doubleCount + dateCount)
-    println(s"\nEnded validation, writing valid orders to $validPath")
+
   }
 
   def parseProductOrder(po: String, invalidPath: os.pwd.ThisType): Option[ProductOrder] = {
