@@ -19,15 +19,15 @@ object ConsumerDigesterTeam2 {
 //      .partition(ProductOrder.isValidOrder)
 
     println(validData.length, "Valid data")
-    val validOrdersList = validData
+    val (valPOOPT, invalPO) = validData
       .map(parseProductOrder)
-      .filter(_.isDefined)
-      .map(_.get)
-      .toList
+//      .filter(_.isDefined)
+      .partition(_.isDefined)
 
+    println("invalpo length", invalPO.length)
+    val valPO = valPOOPT.map(_.get)
 
-
-    val poStrs = validOrdersList.map(ProductOrder.toString).mkString("\n")
+    val poStrs = valPO.map(ProductOrder.toString).mkString("\n")
 
     val invalidOrdersList = invalidData.toList
     os.write.over(invalidPath, invalidOrdersList.mkString, createFolders = true)
@@ -35,7 +35,7 @@ object ConsumerDigesterTeam2 {
 
     //    consumer.close()
 
-    (validOrdersList, invalidOrdersList)
+    (valPO.toList, invalidOrdersList)
   }
 
   private def parseProductOrder(productOrder: String): Option[ProductOrder] = {
@@ -48,9 +48,9 @@ object ConsumerDigesterTeam2 {
       val product_id = if(splitPO(3).matches("^[0-9]+$")) Some(splitPO(3).toLong) else None
       val product_name = if(splitPO(4).nonEmpty) Some(splitPO(4)) else None
       val product_category = if(splitPO(5).nonEmpty) Some(splitPO(5)) else None
-      val price = if(splitPO(6).matches("^[0-9]+.[0-9]{2}$")) Some(splitPO(8).toDouble) else None
+      val price = if(splitPO(6).matches("^[0-9]+.[0-9]{2}$")) Some(splitPO(6).toDouble) else None
       val qty = if(splitPO(7).matches("^[0-9]+$")) Some(splitPO(7).toLong) else None
-      val payment_type = if(splitPO(8).nonEmpty) Some(splitPO(6)) else None
+      val payment_type = if(splitPO(8).nonEmpty) Some(splitPO(8)) else None
       val datetime = if(splitPO(9).nonEmpty) Some(splitPO(9)) else None
       val country = if(splitPO(10).nonEmpty) Some(splitPO(10)) else None
       val city = if(splitPO(11).nonEmpty) Some(splitPO(11)) else None
@@ -66,6 +66,8 @@ object ConsumerDigesterTeam2 {
         return None
       }
       if(values.exists(_.isEmpty)) {
+//        println(values.zipWithIndex.filter(_._1.isEmpty).mkString("|"))
+
         os.write.append(invalidPath, productOrder+"\n",createFolders = true)
         return None
       }
