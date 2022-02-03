@@ -85,10 +85,11 @@ object ProducerPipeline {
       })
 //    println("batch total", x)
       .foreach(pStrs => {
+        pStrs.foreach(println)
         if (useKafka)
           pStrs.foreach(Producer.send)
-        else
-          pStrs.foreach(println)
+//        else
+//          pStrs.foreach(println)
         Thread.sleep(processDelay)
       })
   }

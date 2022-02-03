@@ -17,7 +17,8 @@ object ConsumerDigester {
     val (validData, invalidData) = os
       .read
       .lines(offlineConsumerData)
-      .partition(ProductOrder.isValidOrder)
+      .partition(_ => true)
+//      .partition(ProductOrder.isValidOrder)
 
     val validOrdersList = validData
       .map(parseProductOrder)
