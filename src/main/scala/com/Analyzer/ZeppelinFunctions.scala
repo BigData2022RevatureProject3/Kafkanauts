@@ -37,4 +37,6 @@ SELECT SUBSTRING(datetime,1,10) as date,product_category,COUNT(product_id) AS to
   //Teddy SQL Code Portion
   //Tiffany SQL Code Portion
   //Steven SQL Code Portion
+  /*SELECT distinct product_category, COUNT(product_category) as Number_Of_Products FROM products Where product_category In ("Electronics", "Computers", "Food", "Entertainment", "Home") GROUP By product_category;
+   */
 }
