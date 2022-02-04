@@ -37,12 +37,12 @@ object TrashMaker5000 {
     }
 
     val str3 = new StringBuilder(splitFields.mkString("|"))
-    val randomTrash2 = r.nextInt(20)
-    val randomIndex2 = r.nextInt(str3.length)
-    randomTrash2 match {
-      case 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11| 12 | 13 | 14 | 15 | 16 | 17 | 18 =>
-      case 19 => str3(randomIndex2) = '|'
-    }
+//    val randomTrash2 = r.nextInt(20)
+//    val randomIndex2 = r.nextInt(str3.length)
+//    randomTrash2 match {
+//      case 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11| 12 | 13 | 14 | 15 | 16 | 17 | 18 =>
+//      case 19 => str3(randomIndex2) = '|'
+//    }
 
     return str3.toString()
   }

@@ -50,7 +50,7 @@ object GroceryGenerator {
     .map(line => line.split("\\|"))
     .map(splitArray => {
       val name = splitArray(1)
-      val price = splitArray(5).toDouble
+      val price = MathHelper.roundDouble(splitArray(2).toDouble)
       (name, price)
     })
     .toList

@@ -22,11 +22,7 @@ object TransactionInfoGenerator {
     PaymentTypeGenerator.genPaymentType(po)
 
     //   Assigns payment_txn_success status to po object.
-    val ran2 = r.nextInt(10)
-    ran2 match {
-      case 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 => po.payment_txn_success = "Y"
-      case _ => po.payment_txn_success = "N"
-    }
+    po.payment_txn_success = if(r.nextInt(10) == 9) "N" else "Y"
     //   Calls Bao's genFailReason function to assign failure reason to po object.
     FailureReasonGenerator.genFailReason(po)
 

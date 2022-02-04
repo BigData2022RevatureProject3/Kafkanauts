@@ -15,7 +15,7 @@ import os.RelPath
  * It then sends it to a Kafka topic
  */
 object ProducerPipeline {
-  val debugMode = false
+  val debugMode = true
   val useEC2 = false
   val useKafka = true
   val writeToFileNotHDFS = true
@@ -28,9 +28,9 @@ object ProducerPipeline {
   def main(args: Array[String]): Unit = {
 
     val increment = 5
-    estimateTotal("2022-01-31", increment, 5000, 288 * 7 * 2)
+    estimateTotal("2022-01-31", increment, 5000, 288 * 7)
     val start = FunctionTiming.start()
-    startProducing("2022-01-31", increment, 1, 288 * 7 * 2)
+    startProducing("2022-01-31", increment, 1, 288 * 7)
 //    startProducing("2022-01-31", increment, 1, 288 * 7 * 2) PLUS global = 0.2
     FunctionTiming.end(start)
   }
@@ -100,5 +100,8 @@ object ProducerPipeline {
 //      println("Sleeping...")
       Thread.sleep(processDelay)
     }
+
+    println("Total " + GenHelper.totalCnt)
+    println("Corrupt: " + GenHelper.totalCorrupt)
   }
 }

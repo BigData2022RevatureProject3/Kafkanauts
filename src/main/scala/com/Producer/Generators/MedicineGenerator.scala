@@ -2,6 +2,7 @@ package com.Producer.Generators
 
 import scala.util.Random
 import com.ProductOrder
+import com.Tools.MathHelper
 
 object MedicineGenerator {
   private final var medicineList = os.read.lines(os.pwd / "clean_data" /"medicine"/ "medicine_2021.txt").drop(1).toList
@@ -14,7 +15,7 @@ object MedicineGenerator {
     val product = row(0)
     val price = Math.max(row(2).toDouble, 0.49)
     val quantity = Math.abs(ran.nextInt(10) + 1)
-    val totalPrice = (math floor price * quantity * 100) / 100
+    val totalPrice = MathHelper.roundDouble(price * quantity)
     po.product_id = Math.abs(product.hashCode() + 1)
     po.product_name = product
     po.product_category = "Medicine"
