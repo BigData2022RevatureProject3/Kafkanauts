@@ -48,7 +48,7 @@ object  ProductOrder {
    }
 
    def getSampleOrder(): ProductOrder = {
-      ProductOrder(-1, 2, "Bob Burr", 3, "pname", "pcategory", "Card", 20, 9.99, "2004-05-23T14:25:10", "U.S", "Flagstaff", "google.com", 234, "Y", "")
+      ProductOrder(-1, 2, "Bob Burr", 3, "pname", "pcategory", "Card", 20, 9.99, "2004-05-23T14:25:10", "U.S", "Flagstaff", "google.com", 234, "Y", "null")
    }
 
    // TODO: Create a random order from any country/category, testing all generators

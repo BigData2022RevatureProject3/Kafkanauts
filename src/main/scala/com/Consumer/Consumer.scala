@@ -1,12 +1,19 @@
 package com.Consumer
 
+import com.Producer.ProducerPipeline
+
 import java.util.{Collections, Properties}
 import java.util.regex.Pattern
 import org.apache.kafka.clients.consumer.KafkaConsumer
 
 import scala.collection.JavaConverters._
 import com.Producer.ProducerPipeline.useEC2
+import com.Tools.SparkHelper
+import org.codehaus.jackson.map.ser.std.StaticListSerializerBase
 import os.RelPath
+
+import scala.collection.mutable.ListBuffer
+
 
 object Consumer extends App {
 
@@ -24,8 +31,12 @@ object Consumer extends App {
   props.put("enable.auto.commit", "true")
   props.put("auto.commit.interval.ms", "1000")
   val consumer = new KafkaConsumer(props)
-  val topics = List("team2")
-  val path = os.pwd / RelPath("team2/products.csv")
+  val topics = List(ProducerPipeline.readTopic)
+  val path = ProducerPipeline.consumerPath
+
+  val buffer: ListBuffer[String] = ListBuffer[String]()
+  val bufferLimit = 20
+
   println(s"Consumer reading from topic: ${topics.head}")
   println(s"Writing into ${path.toString()}")
 
@@ -36,19 +47,21 @@ object Consumer extends App {
       val size = records.asScala.toList.length
       if (size != 0) {
         println(size)
+        buffer ++= records.asScala.map(_.value.toString)
       }
-      os.write.append(path, records.asScala.map(_.value.toString).mkString("\n"), createFolders = true)
-
-//      for (record <- records.asScala) {
-//        os.write.append(path, record.value.toString + "\n", createFolders = true)
-//      }
-      //      for (record <- records.asScala) {
-      //        println("Topic: " + record.topic() +
-      //          ",Key: " + record.key() +
-      //          ",Value: " + record.value() +
-      //          ", Offset: " + record.offset() +
-      //          ", Partition: " + record.partition())
-      //      }
+      if (buffer.size > bufferLimit) {
+        val batch = buffer.toList
+        buffer.clear()
+//        batch.foreach(println)
+        if (ProducerPipeline.writeToFileNotHDFS)
+          os.write.append(path, records.asScala.map(_.value.toString).mkString("\n"), createFolders = true)
+        else {
+          val spark = SparkHelper.spark
+          import spark.implicits._
+          val dataset = Team2Consumer.parseIntoDataSet(batch, false)
+          dataset.show()
+        }
+      }
     }
   } catch {
     case e: Exception => e.printStackTrace()

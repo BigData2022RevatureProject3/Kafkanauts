@@ -6,7 +6,7 @@ object ZeppelinFunctions extends App{
   // Load data into dataframe in zeppelin
   """"
 
-    "val text = sc.textFile("hdfs://localhost:9000/user/steve_rev/valid_products.csv")
+    val text = sc.textFile("hdfs://localhost:9000/user/steve_rev/valid_products.csv")
     val data = text.toDF().select("*")
     val df2 = data.select(
     split(col("value"), "\\|").getItem(0).as("order_id").cast("long"),

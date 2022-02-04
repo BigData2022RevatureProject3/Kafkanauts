@@ -134,6 +134,10 @@ object MathHelper {
     (_: Double) => Random.nextGaussian() * variance + mean
   }
 
+  def roundDouble(double: Double): Double = {
+    Math.floor(double * 100) / 100
+  }
+
 
 
 }
