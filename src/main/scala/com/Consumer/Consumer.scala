@@ -47,14 +47,14 @@ object Consumer extends App {
       val size = records.asScala.toList.length
       if (size != 0) {
         println(size)
-        buffer ++= records.asScala.map(_.value.toString).map(_.replace("\n", ""))
+        buffer ++= records.asScala.map(_.value.toString)
       }
       if (buffer.size > bufferLimit) {
         val batch = buffer.toList
         buffer.clear()
         batch.foreach(println)
         if (ProducerPipeline.writeToFileNotHDFS)
-          os.write.append(path, batch.mkString("\n"), createFolders = true)
+          os.write.append(path, batch.map(_ + "\n"), createFolders = true)
         else {
           val spark = SparkHelper.spark
           import spark.implicits._

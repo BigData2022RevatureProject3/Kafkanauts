@@ -87,6 +87,7 @@ object ProducerPipeline {
         .map(p => GenHelper.addCustomerInfo(p, dayPercentage, dayOfWeek))
         .map(p => GenHelper.addTransactionInfo(p))
         .map(toFinalString)
+        .map(_.replace("\n", ""))
 
       if (verbose) {
         println("Starting send")

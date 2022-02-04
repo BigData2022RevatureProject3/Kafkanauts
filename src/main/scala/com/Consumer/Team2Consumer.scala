@@ -90,13 +90,16 @@ object Team2Consumer {
       .read
       .lines
       .stream(initialReadPath)
+      .filter(_.nonEmpty)
+      .map(_.trim)
+
       .map(parseTheirProductOrder(_, theirData, Some(invalidPath)))
       .filter(_.isDefined)
       .map(_.get)
       .map(ProductOrder.toString)
       .toList
-
-    os.write(validPath, validOrders.mkString("\n"), createFolders = true)
+//
+    os.write(validPath, validOrders.map(_ + "\n"), createFolders = true)
 
     val validCnt = validOrders.length.toDouble
     val invalidCnt = os.read.lines.stream(invalidPath).toList.length.toDouble
@@ -150,13 +153,16 @@ object Team2Consumer {
         values.zipWithIndex.filter(_._1.isEmpty).map(_._2).foreach(i => failCounts(i) += 1)
         return writeInvalid("Missing/Wrong type|" + po, invalidPath)
       }
-      if (payment_txn_success.get == "N") {
+
+      if (payment_txn_success.get == "N" && splitPO.length == 16) {
         failure_reason = getString(splitPO(15))
         if (failure_reason.isEmpty) {
           failReason += 1
           return writeInvalid("Missing failure reason|" + po, invalidPath)
         }
+
       }
+
       return Some(ProductOrder(order_id.get, customer_id.get, customer_name.get, product_id.get, product_name.get, product_category.get,
         payment_type.get, qty.get, price.get, datetime.get, country.get, city.get, ecommerce_website_name.get, payment_txn_id.get, payment_txn_success.get, failure_reason.getOrElse("")))
     } catch {
@@ -170,7 +176,7 @@ object Team2Consumer {
   def writeInvalid(po: String, invalidPath: Option[os.pwd.ThisType]): Option[ProductOrder] = {
     anyReason += 1
     if (invalidPath.isDefined)
-      os.write.append(invalidPath.get, po + "\n", createFolders = true)
+      os.write.append(invalidPath.get, po.replace("\n", "") + "\n", createFolders = true)
     None
   }
 
