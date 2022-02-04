@@ -21,7 +21,7 @@ object GenHelper {
   // TODO: Finish and make canonical
   val categories = List("E-Commerce", "Gas", "Groceries", "Medicine", "Music")
 
-  val corruptionChance: Double = 0.03
+  val corruptionChance: Double = -0.03
 
   var orderIDAccumulator = 1000 // A globally incremented value.
 
