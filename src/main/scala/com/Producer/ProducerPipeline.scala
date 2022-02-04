@@ -16,21 +16,21 @@ import os.RelPath
  */
 object ProducerPipeline {
   val debugMode = true
-  val useEC2 = false
+  val useEC2 = true
   val useKafka = true
   val writeToFileNotHDFS = true
   val verbose = false
 
-  val writeTopic = "test1"
-  val readTopic = "test1"
+  val writeTopic = "team1retry"
+  val readTopic = "team1retry"
   val consumerPath = os.pwd / RelPath("team1/test.csv")
 
   def main(args: Array[String]): Unit = {
 
     val increment = 5
-    estimateTotal("2022-01-31", increment, 5000, 288 * 7)
+    estimateTotal("2022-01-31", increment, 5000, 288 * 7 * 2)
     val start = FunctionTiming.start()
-    startProducing("2022-01-31", increment, 1, 288 * 7)
+//    startProducing("2022-01-31", increment, 1, 288 * 7 * 2)
 //    startProducing("2022-01-31", increment, 1, 288 * 7 * 2) PLUS global = 0.2
     FunctionTiming.end(start)
   }
