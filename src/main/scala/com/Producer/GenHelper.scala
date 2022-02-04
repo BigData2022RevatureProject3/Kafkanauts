@@ -15,7 +15,7 @@ object GenHelper {
   val countries = List("China", "United States", "Spain")
 
   val chinaDaily: List[Double => Double] = CountryFunctions.getChineseDaily()
-  val usDaily: List[Double => Double] = CountryFunctions.getUSDaily()
+  val usDaily: List[Double => Double]    = CountryFunctions.getUSDaily()
   val spainDaily: List[Double => Double] = CountryFunctions.getSpainDaily()
 
   // TODO: Finish and make canonical

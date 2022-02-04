@@ -30,7 +30,7 @@ object ProducerPipeline {
     val increment = 5
     estimateTotal("2022-01-31", increment, 5000, 288 * 7)
     val start = FunctionTiming.start()
-    startProducing("2022-01-31", increment, 1, 288 * 7)
+    startProducing("2022-01-31", increment, 1, 288)
 //    startProducing("2022-01-31", increment, 1, 288 * 7 * 2) PLUS global = 0.2
     FunctionTiming.end(start)
   }
@@ -60,7 +60,7 @@ object ProducerPipeline {
     }
 
     println(s"Starting Production at ${DateHelper.print(startDate)} with $minuteIncrements minute increments, delayed by $processDelay")
-    for(i <- (1 until maxIterations)) {
+    for (i <- (1 until maxIterations)) {
       val batchDateTime = startDate.plus(minuteIncrements * i, ChronoUnit.MINUTES)
       val dayPercentage = getPercentThroughDay(batchDateTime)
       val dayOfWeek: Int = DateHelper.getDayOfWeek(batchDateTime)
