@@ -49,7 +49,8 @@ object ZeppelinFunctions extends App{
   SELECT SUBSTRING(datetime,1,10) as date,product_category,COUNT(product_id) AS total_orders FROM products GROUP BY date, product_category HAVING product_category IN("Electronics","Entertainment","Computers","Food","Home")AND date NOT IN ("null") AND date = "2022-01-01" ORDER BY total_orders DESC;
   - Globally Which day of the week products are being purchased the most
   SELECT WEEKDAY(SUBSTRING(datetime,1,10)) as date,country,COUNT(product_id) AS total_orders FROM products GROUP BY date, country HAVING country NOT IN("null") AND date NOT IN ("null") ORDER BY total_orders DESC;
-
+  - Top 10 spender
+  SELECT customer_id,customer_name, city, country, round(sum(price),2) AS total_amount FROM products GROUP BY customer_name,customer_id,city,country ORDER BY total_amount DESC LIMIT 10;
   """
 
 
