@@ -41,9 +41,14 @@ object ZeppelinFunctions extends App{
 
   //Bao SQL Code Portion
   """
-
+  - Spikes in purchases by date globally / Total Orders Placed By Each Country and Date
   SELECT SUBSTRING(datetime,1,10) as date,country,COUNT(product_id) AS total_orders FROM products GROUP BY date, country HAVING country NOT IN("null") AND date NOT IN ("null") ORDER BY date,total_orders DESC;
+  - Orders Placed Globally By Each Category and Date
   SELECT SUBSTRING(datetime,1,10) as date,product_category,COUNT(product_id) AS total_orders FROM products GROUP BY date, product_category HAVING product_category IN("Electronics","Entertainment","Computers","Food","Home")AND date NOT IN ("null") ORDER BY date,total_orders DESC;
+  - Product Category being purchased the most on New Year 
+  SELECT SUBSTRING(datetime,1,10) as date,product_category,COUNT(product_id) AS total_orders FROM products GROUP BY date, product_category HAVING product_category IN("Electronics","Entertainment","Computers","Food","Home")AND date NOT IN ("null") AND date = "2022-01-01" ORDER BY total_orders DESC;
+  - Globally Which day of the week products are being purchased the most
+  SELECT WEEKDAY(SUBSTRING(datetime,1,10)) as date,country,COUNT(product_id) AS total_orders FROM products GROUP BY date, country HAVING country NOT IN("null") AND date NOT IN ("null") ORDER BY total_orders DESC;
 
   """
 
