@@ -57,17 +57,37 @@ object ZeppelinFunctions extends App{
   //Ben SQL Code Portion
   //Brady SQL Code Portion
   """
-    - Distinct categories.
-    SELECT DISTINCT product_category FROM products WHERE product_category IN ('Electronics','Computers','Food','Entertainment','Home','null');
+    -- Orders per hour. (Bar chart with hour as key, count(1) SUM as value.)
+    SELECT hour, COUNT(*) FROM products GROUP BY hour
+
+    -- Product categories
+    - Distinct product categories.
+      SELECT DISTINCT product_category FROM products WHERE product_category IN ('Electronics','Computers','Food','Entertainment','Home','null');
+    - Percentages of product categories within each country (not different, so this suggests the same product cateogory generation algorithm was used irrespective of country)
+      WITH countrytotals AS (SELECT Country, COUNT(*) AS countryCount FROM products WHERE product_category IN ('Electronics','Computers','Food','Entertainment','Home','null') GROUP BY Country),
+      countryCatTotals AS (SELECT Country, product_category, COUNT(*) AS catCount FROM products WHERE product_category IN ('Electronics','Computers','Food','Entertainment','Home','null') GROUP BY Country, product_category)
+      SELECT *, catCount/countryCount FROM countryCatTotals LEFT JOIN countrytotals ON countrycattotals.Country=countrytotals.Country
+
+    -- Successes vs failures: payment success rate is about 90% success across product categories and countries (and probably across the board).
+    - Success/fail percentages
+      WITH counts AS (SELECT payment_txn_success, COUNT(*) AS Count FROM products GROUP BY 1)
+      SELECT *, ROUND((Count / (SELECT SUM(Count) FROM counts) * 100),2) AS Percent FROM counts
+    - (Also ran queries for number of successes and failures for each country and for each product category.)
+
+    -- Failure reasons
+    - There are a lot of failure reasons to weed out. Are these actually correlated with failures? Or are they false failures?
+    - Failure reason percentages
 
     - Histogram of number of transactions per customer.
-    SELECT number_of_transactions AS Customers FROM (SELECT customer_id, number_of_transactions FROM (SELECT customer_id, COUNT(*) as number_of_transactions FROM products GROUP BY customer_id))
+      SELECT number_of_transactions AS Customers FROM (SELECT customer_id, number_of_transactions FROM (SELECT customer_id, COUNT(*) as number_of_transactions FROM products GROUP BY customer_id))
 
-    - Price histogram.
+    - Histogram of prices. (Use price as key, Frequency SUM as value.)
+      SELECT price, COUNT(*) as Frequency FROM products GROUP BY price ORDER BY 1
 
-    - Price distribution for each category.
+    - Histogram: price distribution for each category. (Use product_category as key, price as group, Frecuency(SUM) as value)
+      SELECT product_category, price, COUNT(*) as Frequency FROM products WHERE product_category IN ('Electronics','Computers','Food','Entertainment','Home','null') GROUP BY product_category, price ORDER BY price
 
-    - 
+    -
 
   """
 
@@ -76,6 +96,26 @@ object ZeppelinFunctions extends App{
   //Tiffany SQL Code Portion
 
   //Steven SQL Code Portion
+  // Ben, Tiffany, Brady SQL Code Portion
+  """
+  -- product category proportions for each country (e.g., what proportion of orders are electronics in China?)
+  WITH
+  countrytotals AS
+    (SELECT Country, COUNT(*) AS countryCount
+      FROM products
+      WHERE product_category IN ('Electronics','Computers','Food','Entertainment','Home','null')
+  GROUP BY Country),
+  countryCatTotals AS
+    (SELECT Country, product_category, COUNT(*) AS catCount
+      FROM products
+      WHERE product_category IN ('Electronics','Computers','Food','Entertainment','Home','null')
+  GROUP BY Country, product_category)
+
+  SELECT *, catCount/countryCount
+  FROM countryCatTotals
+    LEFT JOIN countrytotals ON countrycattotals.Country=countrytotals.Country
+  """
+
   """
 
   SELECT distinct product_category, COUNT(product_category) as Number_Of_Products FROM products Where product_category In ("Electronics", "Computers", "Food", "Entertainment", "Home") GROUP By product_category;
