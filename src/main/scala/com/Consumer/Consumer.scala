@@ -18,7 +18,7 @@ import scala.collection.mutable.ListBuffer
 object Consumer extends App {
 
   val props: Properties = new Properties()
-  props.put("group.id", "david")
+  props.put("group.id", ProducerPipeline.readerGroupID)
   if (useEC2)
     props.put("bootstrap.servers", "ec2-44-202-112-109.compute-1.amazonaws.com:9092")
   else
@@ -38,6 +38,7 @@ object Consumer extends App {
   val bufferLimit = 20
 
   println(s"Consumer reading from topic: ${topics.head}")
+  println(s"GroupID: ${ProducerPipeline.readerGroupID}")
   println(s"Writing into ${path.toString()}")
 
   try {

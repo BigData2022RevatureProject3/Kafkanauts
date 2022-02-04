@@ -72,6 +72,8 @@ object Team2Consumer {
 
 
   def startValidating(folder: String, fileName: String, fType: String, theirData: Boolean): Unit = {
+    val start = FunctionTiming.start()
+
     println("Starting validation")
     val path = s"$folder/$fileName$fType"
     val initialReadPath = os.pwd / RelPath(path)

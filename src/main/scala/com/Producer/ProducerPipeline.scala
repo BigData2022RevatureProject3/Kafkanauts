@@ -8,6 +8,8 @@ import com.Tools.CountryFunctions.globalScale
 import com.Tools.{CountryFunctions, DateHelper, FunctionTiming}
 import os.RelPath
 
+import scala.util.Random
+
 /**
  * This object deals with creating a burst of orders for blocks of time,
  * assigning a country of origin and product category for each order
@@ -16,11 +18,12 @@ import os.RelPath
  */
 object ProducerPipeline {
   val debugMode = true
-  val useEC2 = true
+  val useEC2 = false
   val useKafka = true
   val writeToFileNotHDFS = true
   val verbose = false
 
+  val readerGroupID = "Kafkanaut-" + Math.abs(Random.nextInt())
   val writeTopic = "team1retry"
   val readTopic = "team1retry"
   val consumerPath = os.pwd / RelPath("team1/test.csv")
@@ -31,7 +34,7 @@ object ProducerPipeline {
     estimateTotal("2022-01-31", increment, 5000, 288 * 7 * 2)
     val start = FunctionTiming.start()
 //    startProducing("2022-01-31", increment, 1, 288 * 7 * 2)
-//    startProducing("2022-01-31", increment, 1, 288 * 7 * 2) PLUS global = 0.2
+    startProducing("2022-01-31", increment, 1, 288 * 7 * 2)
     FunctionTiming.end(start)
   }
 
