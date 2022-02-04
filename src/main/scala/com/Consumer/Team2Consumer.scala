@@ -92,7 +92,6 @@ object Team2Consumer {
       .stream(initialReadPath)
       .filter(_.nonEmpty)
       .map(_.trim)
-
       .map(parseTheirProductOrder(_, theirData, Some(invalidPath)))
       .filter(_.isDefined)
       .map(_.get)
@@ -102,10 +101,13 @@ object Team2Consumer {
     os.write(validPath, validOrders.map(_ + "\n"), createFolders = true)
 
     val validCnt = validOrders.length.toDouble
-    val invalidCnt = os.read.lines.stream(invalidPath).toList.length.toDouble
     println(s"\nTotal Valid orders: ${validCnt}")
-    println(s"Total Invalid orders: ${invalidCnt}")
-    println(s"Corruption rate: ${invalidCnt * 100.0 / (validCnt + invalidCnt)}")
+    if (os.exists(invalidPath)) {
+      val invalidCnt = os.read.lines.stream(invalidPath).toList.length.toDouble
+      println(s"Total Invalid orders: ${invalidCnt}")
+      println(s"Corruption rate: ${invalidCnt * 100.0 / (validCnt + invalidCnt)}")
+    } else
+      println("Corruption rate: 0%!")
 
     println("\nColumns - Number times failed: ")
     println("-------------------------------")
