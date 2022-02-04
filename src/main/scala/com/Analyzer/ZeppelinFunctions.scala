@@ -118,7 +118,17 @@ object ZeppelinFunctions extends App{
 
   """
 
-  SELECT distinct product_category, COUNT(product_category) as Number_Of_Products FROM products Where product_category In ("Electronics", "Computers", "Food", "Entertainment", "Home") GROUP By product_category;
+  SELECT distinct product_category, COUNT(product_category) as Number_Of_Products
+    FROM products
+    Where product_category In ("Electronics", "Computers", "Food", "Entertainment", "Home")
+    GROUP By product_category;
+
+  SELECT  product_category, product_name, COUNT(product_name) AS amount
+    FROM products
+    GROUP BY product_category,product_name
+    HAVING product_category IN ("Electronics", "Computers", "Food", "Entertainment", "Home")
+    ORDER BY amount DESC;
+
 
   """
 }
