@@ -52,7 +52,7 @@ object Consumer extends App {
       if (buffer.size > bufferLimit) {
         val batch = buffer.toList
         buffer.clear()
-        batch.foreach(println)
+//        batch.foreach(println)
         if (ProducerPipeline.writeToFileNotHDFS)
           os.write.append(path, batch.map(_ + "\n"), createFolders = true)
         else {

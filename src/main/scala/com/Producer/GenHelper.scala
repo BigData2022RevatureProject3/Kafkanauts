@@ -21,7 +21,7 @@ object GenHelper {
   // TODO: Finish and make canonical
   val categories = List("E-Commerce", "Gas", "Groceries", "Medicine", "Music")
 
-  val corruptionChance: Double = -2.0//0.03
+  val corruptionChance: Double = 0.01
 
   var orderIDAccumulator = 1000 // A globally incremented value.
 
@@ -112,7 +112,6 @@ object GenHelper {
         if (Random.nextDouble() > GenHelper.corruptionChance) {
           return ProductOrder.toString(po)
         } else {
-          println("nope?")
           totalCorrupt += 1
           return TrashMaker5000.makeTrash(poOpt)
         }
