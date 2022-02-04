@@ -15,15 +15,18 @@ object GenHelper {
   val countries = List("China", "United States", "Spain")
 
   val chinaDaily: List[Double => Double] = CountryFunctions.getChineseDaily()
-  val usDaily: List[Double => Double] = CountryFunctions.getUSDaily()
+  val usDaily: List[Double => Double]    = CountryFunctions.getUSDaily()
   val spainDaily: List[Double => Double] = CountryFunctions.getSpainDaily()
 
   // TODO: Finish and make canonical
   val categories = List("E-Commerce", "Gas", "Groceries", "Medicine", "Music")
 
-  val corruptionChance: Double = 0.03
+  val corruptionChance: Double = -0.03
 
   var orderIDAccumulator = 1000 // A globally incremented value.
+
+  var totalCnt = 0
+  var totalCorrupt = 0
 
 
   def getCountryProbabilities(dayPercent: Double, day: Int): List[Double] = {
@@ -100,12 +103,20 @@ object GenHelper {
   }
 
   def toFinalString(poOpt: Option[ProductOrder]): String = {
+    totalCnt += 1
     try {
       if (poOpt.isDefined) {
         val po = poOpt.get
-        if (Random.nextDouble() > GenHelper.corruptionChance)
+        po.price = MathHelper.roundDouble(Math.abs(po.price) + 0.01)
+        po.qty = Math.max(1, Math.abs(po.qty))
+        if (Random.nextDouble() > GenHelper.corruptionChance) {
           return ProductOrder.toString(po)
+        } else {
+          totalCorrupt += 1
+          return TrashMaker5000.makeTrash(poOpt)
+        }
       }
+      totalCorrupt += 1
       return TrashMaker5000.makeTrash(poOpt)
     } catch {
       case e: Throwable  => if (debugMode) throw e else "as;lakdjsfla;sdfj;lkaj;lks| lkasdf|"

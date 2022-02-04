@@ -14,7 +14,7 @@ object GroceryGenerator {
     .map(line => line.split("\\|"))
     .map(splitArray => {
       val name = splitArray(1)
-      val price = splitArray(5).toDouble
+      val price = MathHelper.roundDouble(splitArray(5).toDouble)
       (name, price)
     })
     .toList
@@ -26,7 +26,7 @@ object GroceryGenerator {
     .map(line => line.split("\\|"))
     .map(splitArray => {
       val name = splitArray(1)
-      val price = splitArray(5).toDouble
+      val price = MathHelper.roundDouble(splitArray(5).toDouble)
       (name, price)
     })
     .toList
@@ -38,7 +38,7 @@ object GroceryGenerator {
     .map(line => line.split("\\|"))
     .map(splitArray => {
       val name = splitArray(1)
-      val price = splitArray(5).toDouble
+      val price = MathHelper.roundDouble(splitArray(5).toDouble)
       (name, price)
     })
     .toList
@@ -50,7 +50,7 @@ object GroceryGenerator {
     .map(line => line.split("\\|"))
     .map(splitArray => {
       val name = splitArray(1)
-      val price = splitArray(2).toDouble
+      val price = MathHelper.roundDouble(splitArray(2).toDouble)
       (name, price)
     })
     .toList
@@ -68,8 +68,7 @@ object GroceryGenerator {
     val quantity = Math.abs(Random.nextInt(10) + 1)
     po.product_name = name
     po.product_category = "Groceries"
-    po.price = math.floor(quantity * price * 100) / 100
-    po.qty = quantity
+    po.price = MathHelper.roundDouble(quantity * price)
     po.product_id = Math.abs(("name" + price.toString).hashCode())
     return po
   }
@@ -82,7 +81,7 @@ object GroceryGenerator {
       val (name, price) = MathHelper.chooseFromList(usGroceries)
       po.product_name = name
       po.product_category = "Groceries"
-      po.price = math.floor(quantity * price * 100) / 100
+      po.price = MathHelper.roundDouble(quantity * price)
       po.qty = quantity
       po.product_id = Math.abs(("name" + price.toString).hashCode())
     }
@@ -94,7 +93,7 @@ object GroceryGenerator {
     val quantity = Math.abs(Random.nextInt(10) + 1)
     po.product_name = name
     po.product_category = "Groceries"
-    po.price = math.floor(quantity * price * 100) / 100
+    po.price = MathHelper.roundDouble(quantity * price)
     po.qty = quantity
     po.product_id = Math.abs(("name" + price.toString).hashCode())
     return po
@@ -105,7 +104,7 @@ object GroceryGenerator {
     val quantity = Math.abs(Random.nextInt(10) + 1)
     po.product_name = name
     po.product_category = "Groceries"
-    po.price = math.floor(quantity * price * 100) / 100
+    po.price = MathHelper.roundDouble(quantity * price)
     po.qty = quantity
     po.product_id = Math.abs(("name" + price.toString).hashCode())
     return po
