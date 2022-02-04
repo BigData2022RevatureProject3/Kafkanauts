@@ -6,7 +6,9 @@ object ZeppelinFunctions extends App{
   // Load data into dataframe in zeppelin
   """"
 
-    "val text = sc.textFile("hdfs://localhost:9000/user/steve_rev/valid_products.csv")
+    "val SPARK_HOME = System.getenv("SPARK_HOME")
+
+    val text = sc.textFile("hdfs://localhost:9000/user/bdyson/Data/valid_products.csv")
     val data = text.toDF().select("*")
     val df2 = data.select(
     split(col("value"), "\\|").getItem(0).as("order_id").cast("long"),
@@ -18,15 +20,22 @@ object ZeppelinFunctions extends App{
     split(col("value"), "\\|").getItem(6).as("payment_type").cast("string"),
     split(col("value"), "\\|").getItem(7).as("qty").cast("long"),
     split(col("value"), "\\|").getItem(8).as("price").cast("double"),
-    split(col("value"), "\\|").getItem(9).as("datetime").cast("string"),
+    split(col("value"), "\\|").getItem(9).as("datetime").cast("Date"),
     split(col("value"), "\\|").getItem(10).as("country").cast("string"),
     split(col("value"), "\\|").getItem(11).as("city").cast("string"),
     split(col("value"), "\\|").getItem(12).as("ecommerce_website_name").cast("string"),
     split(col("value"), "\\|").getItem(13).as("payment_txn_id").cast("long"),
     split(col("value"), "\\|").getItem(14).as("payment_txn_success").cast("string"),
     split(col("value"), "\\|").getItem(15).as("failure_reason").cast("string")
-  ).drop("value")
-  df2.createOrReplaceTempView("products")
+    ).drop("value")
+
+
+    val df3 = df2.withColumn("datetime", date_format(col("datetime"),"dd/MM/yyyy"))
+
+    df3.show(1000)
+
+    df3.createOrReplaceTempView("products")
+
   """
 
 
@@ -41,6 +50,21 @@ object ZeppelinFunctions extends App{
 
   //Ben SQL Code Portion
   //Brady SQL Code Portion
+  """
+    - Distinct categories.
+    SELECT DISTINCT product_category FROM products WHERE product_category IN ('Electronics','Computers','Food','Entertainment','Home','null');
+
+    - Histogram of number of transactions per customer.
+    SELECT number_of_transactions AS Customers FROM (SELECT customer_id, number_of_transactions FROM (SELECT customer_id, COUNT(*) as number_of_transactions FROM products GROUP BY customer_id))
+
+    - Price histogram.
+
+    - Price distribution for each category.
+
+    - 
+
+  """
+
   //David SQL Code Portion
   //Teddy SQL Code Portion
   //Tiffany SQL Code Portion
