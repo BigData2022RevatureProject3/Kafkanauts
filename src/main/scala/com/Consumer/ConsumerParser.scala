@@ -6,6 +6,7 @@ import org.apache.spark.sql.Dataset
 import os.RelPath
 
 import scala.collection.mutable.ListBuffer
+import scala.util.Random
 
 object ConsumerParser {
   val doubleRegex = "[0-9]+([.][0-9]|[.][0-9]{2})?"
@@ -27,9 +28,28 @@ object ConsumerParser {
     val folder = "their_data"
     val filename  = "products"
     val fileType = ".csv"
+
     val start = FunctionTiming.start()
     startValidating(folder, filename, fileType, theirData = true)
     FunctionTiming.end(start)
+
+//    loadFile()
+  }
+
+  def loadFile(): Unit = {
+    val folder = "our_data"
+    val filename  = "products"
+    val fileType = ".csv"
+    val path: os.pwd.ThisType = os.pwd / folder / (filename + fileType)
+    val data = Random.shuffle(os
+      .read
+      .lines
+      .stream(path)
+      .filter(_.nonEmpty)
+      .toList)
+      .take(5)
+    val ds = parseIntoDataSet(data, isTheirData = false)
+    ds.show()
   }
 
   def parseIntoDataSet(rawData: Seq[String], isTheirData: Boolean): Dataset[ProductOrder] = {
@@ -95,7 +115,7 @@ object ConsumerParser {
     println("Null: " + nullCount)
     println("Error: " + errorReason)
     println("Long " + longCount)
-    println("Double: ", + doubleCount)
+    println("Double: " + doubleCount)
     println("Total for any reason: " + anyReason)
 
     println(s"\nEnded validation, writing valid orders to $validPath")
