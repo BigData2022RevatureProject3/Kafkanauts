@@ -3,12 +3,11 @@ package com.Consumer
 import com.ProductOrder
 import com.Tools.{FunctionTiming, SparkHelper}
 import org.apache.spark.sql.Dataset
-import org.json4s.scalap.scalasig.ThisType
 import os.RelPath
 
 import scala.collection.mutable.ListBuffer
 
-object Team2Consumer {
+object ConsumerParser {
   val doubleRegex = "[0-9]+([.][0-9]|[.][0-9]{2})?"
   val longRex = "[0-9]+"
   val dateRegex = "[0-9]{4}[-](0[1-9]|1[0-2])[-](0[1-9]|1[0-9]|2[0-9]|3[0-1])[T][0-9]{2}[:][0-9]{2}[:][0-9]{2}"
@@ -31,26 +30,6 @@ object Team2Consumer {
     val start = FunctionTiming.start()
     startValidating(folder, filename, fileType, theirData = false)
     FunctionTiming.end(start)
-//    val theirs = os
-//      .read
-//      .lines(os.pwd/"team2"/"tiffany.csv")
-//      .take(10000)
-//      .toSeq
-//
-//    val theirDS = parseIntoDataSet(theirs, true)
-//    println(theirDS.count())
-
-//    val ours = os
-//      .read
-//      .lines(os.pwd/"team1"/"test.csv")
-//      .take(10000)
-//      .toSeq
-//
-//    val ourDS = parseIntoDataSet(ours, false)
-//    println(ourDS.count())
-
-
-
   }
 
   def parseIntoDataSet(rawData: Seq[String], isTheirData: Boolean): Dataset[ProductOrder] = {
@@ -64,10 +43,6 @@ object Team2Consumer {
       .map(_.get)
 
     validOrders.toDS()
-//    validOrders.foreach(println)
-//    println("valid order: ", validOrders.head.split("\\|").length)
-//    println("valid: ", validOrders.head.length)
-//    spark.sparkContext.parallelize(validOrders).toDF(colNames:_*).as[ProductOrder]
   }
 
 
@@ -99,7 +74,7 @@ object Team2Consumer {
       .map(_.get)
       .map(ProductOrder.toString)
       .toList
-//
+
     os.write(validPath, validOrders.map(_ + "\n"), createFolders = true)
 
     val validCnt = validOrders.length.toDouble
@@ -123,7 +98,7 @@ object Team2Consumer {
     println("Total for any reason: " + anyReason)
 
     println(s"\nEnded validation, writing valid orders to $validPath")
-
+    FunctionTiming.end(start)
   }
 
   def parseTheirProductOrder(po: String, isTheirData: Boolean, invalidPath: Option[os.pwd.ThisType] = None): Option[ProductOrder] = {

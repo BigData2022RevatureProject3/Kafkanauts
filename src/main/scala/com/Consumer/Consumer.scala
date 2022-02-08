@@ -1,17 +1,12 @@
 package com.Consumer
 
 import com.Producer.ProducerPipeline
-
-import java.util.{Collections, Properties}
-import java.util.regex.Pattern
-import org.apache.kafka.clients.consumer.KafkaConsumer
-
-import scala.collection.JavaConverters._
 import com.Producer.ProducerPipeline.useEC2
 import com.Tools.SparkHelper
-import org.codehaus.jackson.map.ser.std.StaticListSerializerBase
-import os.RelPath
+import org.apache.kafka.clients.consumer.KafkaConsumer
 
+import java.util.Properties
+import scala.collection.JavaConverters._
 import scala.collection.mutable.ListBuffer
 
 
@@ -53,16 +48,12 @@ object Consumer extends App {
       if (buffer.size > bufferLimit) {
         val batch = buffer.toList
         buffer.clear()
-//        batch.foreach(println)
         if (ProducerPipeline.writeToFileNotHDFS)
           os.write.append(path, batch.map(_ + "\n"), createFolders = true)
         else {
           val spark = SparkHelper.spark
-          import spark.implicits._
-          val dataset = Team2Consumer.parseIntoDataSet(batch, false)
+          val dataset = ConsumerParser.parseIntoDataSet(batch, false)
           dataset.show()
-//          dataset.write.csv()
-//          if (it's the first batch we're adding, create)') else append
         }
       }
     }
