@@ -9,6 +9,8 @@ package com.Tools
 object FunctionTiming{
   def start(): Long = { System.currentTimeMillis() }
   def end(a:Long): Unit ={
-    println(s"Function ran for ${System.currentTimeMillis() - a} milliseconds")
+    val seconds = (System.currentTimeMillis() - a) / 1000.0
+    val minutes = seconds / 60.0
+    println(s"Function ran for ${System.currentTimeMillis() - a} milliseconds or $seconds seconds or $minutes minutes")
   }
 }

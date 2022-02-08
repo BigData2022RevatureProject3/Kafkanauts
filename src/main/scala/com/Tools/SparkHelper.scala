@@ -6,7 +6,7 @@ object SparkHelper {
 
   val spark: SparkSession = {
     suppressLogs(List("org", "akka", "org.apache.spark", "org.spark-project"))
-//    System.setProperty("hadoop.home.dir", "C:\\hadoop")
+    //    System.setProperty("hadoop.home.dir", "C:\\hadoop")
     val sparkSession = SparkSession
       .builder
       .appName("Spark Pipeline")

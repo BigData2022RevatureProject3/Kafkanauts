@@ -41,6 +41,7 @@ object MathHelper {
   def functionsToString(samples: Int, initialX: Double, funcs: Double => Double*): Unit = {
     val step = (1.0 - initialX) / samples
     val x = (initialX to 1.0 by step)
+
     println("%matplotlib inline")
     println("import matplotlib.pyplot as plt")
     println("plt.style.use('seaborn-whitegrid')")
@@ -52,10 +53,10 @@ object MathHelper {
     funcs
       .zipWithIndex.
       foreach(f => {
-      val y = x.map(f._1)
-      val i = f._2 + 1
-      println(s"y$i = (${y.mkString(", ")})")
-    })
+        val y = x.map(f._1)
+        val i = f._2 + 1
+        println(s"y$i = (${y.mkString(", ")})")
+      })
     println()
     funcs.zipWithIndex
       .foreach(f => println(s"ax.plot(x, y${f._2 + 1});"))
@@ -89,18 +90,23 @@ object MathHelper {
                      mean2: Double, var2: Double, scale2: Double): Double => Double = {
     x: Double => Math.max(getNormalPDF(mean1, var1, scale1)(x), getNormalPDF(mean2, var2, scale2)(x))
   }
-  def getQuadModal(f: Double => Double, startHour: Double, endHour: Double): Double => Double = {
-    val start = startHour / 24
-    val end = endHour / 24
-    maxOfFunctions((start to end by (start - end) / 4).map(t => shiftTimezone(f, t)):_*)
+  def getQuadModal(f: Double => Double, startHour: Double, endHour: Double, endScale: Double = 1): Double => Double = {
+    val start = startHour / 24.0
+    val end = endHour / 24.0
+    val scales = if (endScale == 1.0) List(1.0, 1.0, 1.0, 1.0) else (1.0 to endScale by (endScale - 1.0)/3)
+//    (start to end by (end - start) / 4).zip(scales).foreach(println)
+
+    val quadFuncs = (start to end by (end - start) / 4).zip(scales)
+      .map(t => (x: Double) => f(x - t._1) * t._2)
+    maxOfFunctions(quadFuncs:_*)
   }
 
-  def getExtraBimodalFunc(mean1: Double, var1: Double, scale1: Double,
-                          mean2: Double, var2: Double, scale2: Double,
-                          mmean: Double, mvar: Double, mscale: Double): Double => Double = {
+  def getSiestaFunction(startTime: Double, var1: Double, scale1: Double,
+                        endTime: Double, var2: Double, scale2: Double,
+                        midTime: Double, mvar: Double, mscale: Double): Double => Double = {
     subtractFunc(
-      getBimodalFunc(mean1, var1, scale1, mean2, var2, scale2),
-      MathHelper.getNormalPDF(mmean, mvar, mscale))
+      getBimodalFunc(startTime/24, var1, scale1, endTime/24, var2, scale2),
+      MathHelper.getNormalPDF(midTime/24, mvar, mscale))
   }
 
   def minOfFunctions(functions: Double => Double*): Double => Double = {
@@ -126,6 +132,10 @@ object MathHelper {
 
   def getGaussianFunc(mean: Double, variance: Double): Double => Double = {
     (_: Double) => Random.nextGaussian() * variance + mean
+  }
+
+  def roundDouble(double: Double): Double = {
+    Math.floor(double * 100) / 100
   }
 
 

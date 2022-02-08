@@ -4,6 +4,10 @@ null
 .idea
 **.~lock**
 .bsp/
+metastore_db
+team_data
+their_data
+our_data
 
 # Created by https://www.toptal.com/developers/gitignore/api/intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=intellij

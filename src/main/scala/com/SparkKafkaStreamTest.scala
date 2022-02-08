@@ -29,12 +29,12 @@ object SparkKafkaStreamTest extends App {
   try {
     val collStrings = coll.collect.map(_.getInt(2)).mkString(" ")
     val record = new ProducerRecord[String, String](topic, collStrings, collStrings)
-      val metadata = producer.send(record)
-      printf(s"sent record(key=%s value=%s) " +
-        "meta(partition=%d, offset=%d)\n",
-        record.key(), record.value(),
-        metadata.get().partition(),
-        metadata.get().offset())
+    val metadata = producer.send(record)
+    printf(s"sent record(key=%s value=%s) " +
+      "meta(partition=%d, offset=%d)\n",
+      record.key(), record.value(),
+      metadata.get().partition(),
+      metadata.get().offset())
   }catch{
     case e:Exception => e.printStackTrace()
   }finally {
@@ -59,12 +59,12 @@ object SparkKafkaStreamTest extends App {
 
 
 
-//  val df = spark.readStream
-//    .format("kafka")
-//    .option("kafka.bootstrap.servers", "[::1]:9092")
-//    .option("subscribe", "TOPICNAME")
-//    .option("startingOffsets", "from-beginning") // Starts reading messages from the beginning.
-//    .load()
+  //  val df = spark.readStream
+  //    .format("kafka")
+  //    .option("kafka.bootstrap.servers", "[::1]:9092")
+  //    .option("subscribe", "TOPICNAME")
+  //    .option("startingOffsets", "from-beginning") // Starts reading messages from the beginning.
+  //    .load()
 
   spark.close()
 
