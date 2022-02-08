@@ -75,6 +75,7 @@ object ConsumerParser {
       .map(ProductOrder.toString)
       .toList
 
+    println(s"Writing valid files to $validPath")
     os.write(validPath, validOrders.map(_ + "\n"), createFolders = true)
 
     val validCnt = validOrders.length.toDouble
