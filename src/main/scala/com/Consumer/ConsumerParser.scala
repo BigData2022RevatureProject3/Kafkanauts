@@ -24,11 +24,11 @@ object ConsumerParser {
   var anyReason = 0
 
   def main(args: Array[String]): Unit = {
-    val folder = "team1"
-    val filename  = "test"
+    val folder = "their_data"
+    val filename  = "products"
     val fileType = ".csv"
     val start = FunctionTiming.start()
-    startValidating(folder, filename, fileType, theirData = false)
+    startValidating(folder, filename, fileType, theirData = true)
     FunctionTiming.end(start)
   }
 
