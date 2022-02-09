@@ -30,7 +30,6 @@ object ProducerPipeline {
   val hdfsPath = "hdfs://localhost:9000/Kafkanauts/our-stream-data.csv" // "/Kafkanauts/our-stream-data.csv"
 
   def main(args: Array[String]): Unit = {
-
     val increment = 5
     estimateTotal("2022-01-31", increment, 1, 288 * 7 * 2)
     val start = FunctionTiming.start()

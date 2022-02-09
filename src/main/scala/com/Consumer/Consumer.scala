@@ -64,7 +64,7 @@ object Consumer extends App {
             .mode(mode)
             .option("header", "true")
             .option("delimiter", "|")
-            .csv("hdfs://localhost:9000/Kafkanauts/our-stream-data.csv")
+            .csv(ProducerPipeline.hdfsPath)
           isNewTable = false
         }
       }
