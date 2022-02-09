@@ -29,9 +29,8 @@ object ConsumerParser {
     val filename  = "products"
     val fileType = ".csv"
 
-    val start = FunctionTiming.start()
     startValidating(folder, filename, fileType, theirData = true)
-    FunctionTiming.end(start)
+
 
 //    loadFile()
   }
@@ -160,7 +159,13 @@ object ConsumerParser {
           failReason += 1
           return writeInvalid("Missing failure reason|" + po, invalidPath)
         }
-
+      }
+      if (payment_txn_success.get == "Y" && splitPO.length == 16) {
+        failure_reason = getString(splitPO(15))
+        if (failure_reason.nonEmpty && failure_reason.get.nonEmpty && failure_reason.get != "Payment Was Success") {
+          failReason += 1
+          return writeInvalid("Unnecessary Fail reason|" + po, invalidPath)
+        }
       }
 
       return Some(ProductOrder(order_id.get, customer_id.get, customer_name.get, product_id.get, product_name.get, product_category.get,
