@@ -30,7 +30,8 @@ object Consumer extends App {
   val path = ProducerPipeline.consumerPath
 
   val buffer: ListBuffer[String] = ListBuffer[String]()
-  val bufferLimit = 20
+  val bufferLimit = 50
+  var isNewTable = true
 
   println(s"Consumer reading from topic: ${topics.head}")
   println(s"GroupID: ${ProducerPipeline.readerGroupID}")
@@ -43,17 +44,28 @@ object Consumer extends App {
       val size = records.asScala.toList.length
       if (size != 0) {
         println(size)
+
         buffer ++= records.asScala.map(_.value.toString)
       }
       if (buffer.size > bufferLimit) {
         val batch = buffer.toList
+//        batch.foreach(println)
         buffer.clear()
         if (ProducerPipeline.writeToFileNotHDFS)
           os.write.append(path, batch.map(_ + "\n"), createFolders = true)
         else {
-          val spark = SparkHelper.spark
           val dataset = ConsumerParser.parseIntoDataSet(batch, false)
           dataset.show()
+          val mode = if (isNewTable) "overwrite" else "append"
+          val spark = SparkHelper.spark
+
+          dataset
+            .write
+            .mode(mode)
+            .option("header", "true")
+            .option("delimiter", "|")
+            .csv("hdfs://localhost:9000/Kafkanauts/our-stream-data.csv")
+          isNewTable = false
         }
       }
     }
