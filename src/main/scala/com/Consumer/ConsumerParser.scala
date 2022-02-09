@@ -204,7 +204,7 @@ object ConsumerParser {
       return Some(ProductOrder(order_id.get, customer_id.get, customer_name.get, product_id.get, product_name.get, product_category.get,
         payment_type.get, qty.get, price.get, datetime.get, country.get, city.get, ecommerce_website_name.get, payment_txn_id.get, payment_txn_success.get, failure_reason.getOrElse("")))
     } catch {
-      case e: Throwable =>
+      case e: Exception =>
         errorReason += 1
         return writeInvalid(s"Error - ${e.toString}|" + po, invalidPath)
     }
@@ -226,7 +226,7 @@ object ConsumerParser {
           return Some(value)
       }
     } catch {
-      case _: Throwable =>
+      case _: Exception =>
         longCount += 1
         return None
     }
@@ -239,7 +239,7 @@ object ConsumerParser {
       else
         None
     } catch {
-      case _: Throwable =>
+      case _: Exception =>
         doubleCount += 1
         None
     }
