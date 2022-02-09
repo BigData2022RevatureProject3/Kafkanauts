@@ -44,7 +44,6 @@ object Consumer extends App {
       val size = records.asScala.toList.length
       if (size != 0) {
         println(size)
-
         buffer ++= records.asScala.map(_.value.toString)
       }
       if (buffer.size > bufferLimit) {
@@ -54,10 +53,9 @@ object Consumer extends App {
         if (ProducerPipeline.writeToFileNotHDFS)
           os.write.append(path, batch.map(_ + "\n"), createFolders = true)
         else {
-          val dataset = ConsumerParser.parseIntoDataSet(batch, false)
+          val dataset = ConsumerParser.parseIntoDataSet(batch, ProducerPipeline.isTheirData)
           dataset.show()
           val mode = if (isNewTable) "overwrite" else "append"
-          val spark = SparkHelper.spark
 
           dataset
             .write

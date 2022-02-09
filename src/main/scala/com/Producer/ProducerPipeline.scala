@@ -27,7 +27,8 @@ object ProducerPipeline {
   val writeTopic = "teststream"
   val readTopic = "teststream"
   val consumerPath = os.pwd / RelPath("team1/teststream.csv")
-  val hdfsPath = "hdfs://localhost:9000/Kafkanauts/our-stream-data.csv" // "/Kafkanauts/our-stream-data.csv"
+  val hdfsPath = "hdfs://localhost:9000/Kafkanauts/their-stream-data.csv" // "/Kafkanauts/our-stream-data.csv"
+  val isTheirData = false
 
   def main(args: Array[String]): Unit = {
     val increment = 5
