@@ -1,5 +1,6 @@
 package com.Consumer
 
+import com.Producer.ProducerPipeline
 import com.ProductOrder
 import com.Tools.{FunctionTiming, SparkHelper}
 import org.apache.spark.sql.Dataset
@@ -25,14 +26,43 @@ object ConsumerParser {
   var anyReason = 0
 
   def main(args: Array[String]): Unit = {
-    val folder = "their_data"
-    val filename  = "products"
-    val fileType = ".csv"
+//    val folder = "their_data"
+//    val filename  = "products"
+//    val fileType = ".csv"
 
-    startValidating(folder, filename, fileType, theirData = true)
+    startValidating("their_data", "products", ".csv", theirData = true)
+    startValidating("our_data", "products", ".csv", theirData = false)
 
 
-//    loadFile()
+//    outputToHDFS()
+
+
+  }
+
+  def outputToHDFS(): Unit = {
+    val theirPath = "hdfs://localhost:9000/Kafkanauts/their-stream-data.csv"
+    println("Outputting to " + theirPath)
+    val theirData = os.read.lines(os.pwd / "their_data" / "products.csv").filter(_.nonEmpty)
+    val theirDF = parseIntoDataSet(theirData, isTheirData = true)
+    theirDF
+      .write
+      .mode("overwrite")
+      .option("header", "true")
+      .option("delimiter", "|")
+      .csv(theirPath)
+    println("Their valid data length: " + theirDF.count())
+
+    val ourPath = "hdfs://localhost:9000/Kafkanauts/our-stream-data.csv"
+    println("Outputting to " + ourPath)
+    val ourData = os.read.lines(os.pwd / "our_data" / "products.csv").filter(_.nonEmpty)
+    val ourDf = parseIntoDataSet(ourData, isTheirData = false)
+    ourDf
+      .write
+      .mode("overwrite")
+      .option("header", "true")
+      .option("delimiter", "|")
+      .csv(ourPath)
+    println("Our valid data length: " + ourDf.count())
   }
 
   def loadFile(): Unit = {
@@ -50,6 +80,7 @@ object ConsumerParser {
     val ds = parseIntoDataSet(data, isTheirData = false)
     ds.show()
   }
+
 
   def parseIntoDataSet(rawData: Seq[String], isTheirData: Boolean): Dataset[ProductOrder] = {
     val spark = SparkHelper.spark
@@ -135,10 +166,11 @@ object ConsumerParser {
       val product_category = getString(splitPO(5))
       // 6 7
 
-      val (priceIdx, qtyIdx) = if (isTheirData) (6,7) else (8,7)
+      val (paymentTypeIdx, priceIdx, qtyIdx) = if (isTheirData) (8,6,7) else (6,8,7)
       val price = getPrice(splitPO(priceIdx))
       val qty = getLong(splitPO(qtyIdx))
-      val payment_type = getString(splitPO(8))
+      val payment_type = getString(splitPO(paymentTypeIdx))
+
       val datetime = getDate(splitPO(9))
       val country = getString(splitPO(10))
       val city = getString(splitPO(11))
@@ -152,6 +184,12 @@ object ConsumerParser {
         values.zipWithIndex.filter(_._1.isEmpty).map(_._2).foreach(i => failCounts(i) += 1)
         return writeInvalid("Missing/Wrong type|" + po, invalidPath)
       }
+
+      if (!List("E-Commerce", "Gas", "Groceries", "Medicine", "Music", "Electronics", "Entertainment", "Computers", "Food", "Home").contains(product_category.get.trim))
+        return writeInvalid("Invalid product category|" + po, invalidPath)
+
+      if (!List("Wallet", "Card", "Internet Banking", "UPI").contains(payment_type.get.trim))
+        return writeInvalid("Invalid payment type|" + po, invalidPath)
 
       if (payment_txn_success.get == "N" && splitPO.length == 16) {
         failure_reason = getString(splitPO(15))
