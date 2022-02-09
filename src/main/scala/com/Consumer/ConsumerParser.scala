@@ -26,21 +26,15 @@ object ConsumerParser {
   var anyReason = 0
 
   def main(args: Array[String]): Unit = {
-//    val folder = "their_data"
-//    val filename  = "products"
-//    val fileType = ".csv"
+//    startValidating("their_data", "products", ".csv", theirData = true)
+//    startValidating("our_data", "products", ".csv", theirData = false)
 
-    startValidating("their_data", "products", ".csv", theirData = true)
-    startValidating("our_data", "products", ".csv", theirData = false)
-
-
-//    outputToHDFS()
-
-
+//    outputTheirsToHDFS()
+    outputOursToHDFS()
   }
 
-  def outputToHDFS(): Unit = {
-    val theirPath = "hdfs://localhost:9000/Kafkanauts/their-stream-data.csv"
+  def outputTheirsToHDFS(): Unit = {
+    val theirPath = "hdfs://localhost:9000/Kafkanauts/their-data.csv"
     println("Outputting to " + theirPath)
     val theirData = os.read.lines(os.pwd / "their_data" / "products.csv").filter(_.nonEmpty)
     val theirDF = parseIntoDataSet(theirData, isTheirData = true)
@@ -51,8 +45,9 @@ object ConsumerParser {
       .option("delimiter", "|")
       .csv(theirPath)
     println("Their valid data length: " + theirDF.count())
-
-    val ourPath = "hdfs://localhost:9000/Kafkanauts/our-stream-data.csv"
+  }
+  def outputOursToHDFS(): Unit = {
+    val ourPath = "hdfs://localhost:9000/Kafkanauts/our-data.csv"
     println("Outputting to " + ourPath)
     val ourData = os.read.lines(os.pwd / "our_data" / "products.csv").filter(_.nonEmpty)
     val ourDf = parseIntoDataSet(ourData, isTheirData = false)
