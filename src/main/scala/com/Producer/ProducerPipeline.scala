@@ -17,24 +17,24 @@ import scala.util.Random
  * It then sends it to a Kafka topic
  */
 object ProducerPipeline {
-  val debugMode = true
+  val debugMode = false
   val useEC2 = false
   val useKafka = true
-  val writeToFileNotHDFS = true
+  val writeToFileNotHDFS = false
   val verbose = false
 
-  val readerGroupID = "Kafkanaut-" + Math.abs(Random.nextInt())
-  val writeTopic = "team1retry"
-  val readTopic = "team1retry"
-  val consumerPath = os.pwd / RelPath("team1/test.csv")
+  val readerGroupID = "Kafkanaut-" // + Math.abs(Random.nextInt())
+  val writeTopic = "teststream"
+  val readTopic = "teststream"
+  val consumerPath = os.pwd / RelPath("team1/teststream.csv")
+  val hdfsPath = "hdfs://localhost:9000/Kafkanauts/their-stream-data.csv" // "/Kafkanauts/our-stream-data.csv"
+  val isTheirData = true
 
   def main(args: Array[String]): Unit = {
-
     val increment = 5
-    estimateTotal("2022-01-31", increment, 5000, 288 * 7 * 2)
+    estimateTotal("2022-01-31", increment, 1, 288 * 7 * 2)
     val start = FunctionTiming.start()
-//    startProducing("2022-01-31", increment, 1, 288 * 7 * 2)
-    startProducing("2022-01-31", increment, 1, 288 * 7 * 2)
+    startProducing("2022-01-31", increment, 5000, 288 * 7 * 2)
     FunctionTiming.end(start)
   }
 

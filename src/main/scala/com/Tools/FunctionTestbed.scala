@@ -20,7 +20,7 @@ object FunctionTestbed {
 
     val all = addFuncs(c,u,s)
 
-    functionsToString(24, 0, c,u,s,all)
+    functionsToString(24, 0.0, c,u,s,all)
   }
 
 

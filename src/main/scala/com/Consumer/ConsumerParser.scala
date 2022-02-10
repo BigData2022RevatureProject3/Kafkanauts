@@ -1,11 +1,13 @@
 package com.Consumer
 
+import com.Producer.ProducerPipeline
 import com.ProductOrder
 import com.Tools.{FunctionTiming, SparkHelper}
 import org.apache.spark.sql.Dataset
 import os.RelPath
 
 import scala.collection.mutable.ListBuffer
+import scala.util.Random
 
 object ConsumerParser {
   val doubleRegex = "[0-9]+([.][0-9]|[.][0-9]{2})?"
@@ -24,13 +26,56 @@ object ConsumerParser {
   var anyReason = 0
 
   def main(args: Array[String]): Unit = {
-    val folder = "their_data"
+//    startValidating("their_data", "products", ".csv", theirData = true)
+//    startValidating("our_data", "products", ".csv", theirData = false)
+
+//    outputTheirsToHDFS()
+    outputOursToHDFS()
+  }
+
+  def outputTheirsToHDFS(): Unit = {
+    val theirPath = "hdfs://localhost:9000/Kafkanauts/their-data.csv"
+    println("Outputting to " + theirPath)
+    val theirData = os.read.lines(os.pwd / "their_data" / "products.csv").filter(_.nonEmpty)
+    val theirDF = parseIntoDataSet(theirData, isTheirData = true)
+    theirDF
+      .write
+      .mode("overwrite")
+      .option("header", "true")
+      .option("delimiter", "|")
+      .csv(theirPath)
+    println("Their valid data length: " + theirDF.count())
+  }
+  def outputOursToHDFS(): Unit = {
+    val ourPath = "hdfs://localhost:9000/Kafkanauts/our-data.csv"
+    println("Outputting to " + ourPath)
+    val ourData = os.read.lines(os.pwd / "our_data" / "products.csv").filter(_.nonEmpty)
+    val ourDf = parseIntoDataSet(ourData, isTheirData = false)
+    ourDf
+      .write
+      .mode("overwrite")
+      .option("header", "true")
+      .option("delimiter", "|")
+      .csv(ourPath)
+    println("Our valid data length: " + ourDf.count())
+  }
+
+  def loadFile(): Unit = {
+    val folder = "our_data"
     val filename  = "products"
     val fileType = ".csv"
-    val start = FunctionTiming.start()
-    startValidating(folder, filename, fileType, theirData = true)
-    FunctionTiming.end(start)
+    val path: os.pwd.ThisType = os.pwd / folder / (filename + fileType)
+    val data = Random.shuffle(os
+      .read
+      .lines
+      .stream(path)
+      .filter(_.nonEmpty)
+      .toList)
+      .take(5)
+    val ds = parseIntoDataSet(data, isTheirData = false)
+    ds.show()
   }
+
 
   def parseIntoDataSet(rawData: Seq[String], isTheirData: Boolean): Dataset[ProductOrder] = {
     val spark = SparkHelper.spark
@@ -95,7 +140,7 @@ object ConsumerParser {
     println("Null: " + nullCount)
     println("Error: " + errorReason)
     println("Long " + longCount)
-    println("Double: ", + doubleCount)
+    println("Double: " + doubleCount)
     println("Total for any reason: " + anyReason)
 
     println(s"\nEnded validation, writing valid orders to $validPath")
@@ -116,10 +161,11 @@ object ConsumerParser {
       val product_category = getString(splitPO(5))
       // 6 7
 
-      val (priceIdx, qtyIdx) = if (isTheirData) (6,7) else (8,7)
+      val (paymentTypeIdx, priceIdx, qtyIdx) = if (isTheirData) (8,6,7) else (6,8,7)
       val price = getPrice(splitPO(priceIdx))
       val qty = getLong(splitPO(qtyIdx))
-      val payment_type = getString(splitPO(8))
+      val payment_type = getString(splitPO(paymentTypeIdx))
+
       val datetime = getDate(splitPO(9))
       val country = getString(splitPO(10))
       val city = getString(splitPO(11))
@@ -134,19 +180,31 @@ object ConsumerParser {
         return writeInvalid("Missing/Wrong type|" + po, invalidPath)
       }
 
+      if (!List("E-Commerce", "Gas", "Groceries", "Medicine", "Music", "Electronics", "Entertainment", "Computers", "Food", "Home").contains(product_category.get.trim))
+        return writeInvalid("Invalid product category|" + po, invalidPath)
+
+      if (!List("Wallet", "Card", "Internet Banking", "UPI").contains(payment_type.get.trim))
+        return writeInvalid("Invalid payment type|" + po, invalidPath)
+
       if (payment_txn_success.get == "N" && splitPO.length == 16) {
         failure_reason = getString(splitPO(15))
         if (failure_reason.isEmpty) {
           failReason += 1
           return writeInvalid("Missing failure reason|" + po, invalidPath)
         }
-
+      }
+      if (payment_txn_success.get == "Y" && splitPO.length == 16) {
+        failure_reason = getString(splitPO(15))
+        if (failure_reason.nonEmpty && failure_reason.get.nonEmpty && failure_reason.get != "Payment Was Success") {
+          failReason += 1
+          return writeInvalid("Unnecessary Fail reason|" + po, invalidPath)
+        }
       }
 
       return Some(ProductOrder(order_id.get, customer_id.get, customer_name.get, product_id.get, product_name.get, product_category.get,
         payment_type.get, qty.get, price.get, datetime.get, country.get, city.get, ecommerce_website_name.get, payment_txn_id.get, payment_txn_success.get, failure_reason.getOrElse("")))
     } catch {
-      case e: Throwable =>
+      case e: Exception =>
         errorReason += 1
         return writeInvalid(s"Error - ${e.toString}|" + po, invalidPath)
     }
@@ -168,7 +226,7 @@ object ConsumerParser {
           return Some(value)
       }
     } catch {
-      case _: Throwable =>
+      case _: Exception =>
         longCount += 1
         return None
     }
@@ -181,7 +239,7 @@ object ConsumerParser {
       else
         None
     } catch {
-      case _: Throwable =>
+      case _: Exception =>
         doubleCount += 1
         None
     }
